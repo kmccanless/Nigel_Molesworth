@@ -85,16 +85,27 @@
 <div data-bind="template: { name: 'workspace-template', foreach: workspaces }"></div>
  
 <script type="text/html" id="workspace-template">
-    <h1 data-bind="text: id"></h3>
-    <div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+     <!-- ko if: id.length < 5 -->
+     <div id="top">
+        <span data-bind="text: id"></span></p>
+        <div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+     </div>
+     <!-- /ko -->
+     <p/>
+      <!-- ko if: id.length < 5 -->
+     <div id="bottom">
+        <span data-bind="text: id"></span></p>
+        <div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+     </div>
+     <!-- /ko -->
 </script>
 <script type="text/html" id="KPI-template">
-    <h2 data-bind="text: title"></h1>
-    <h3 data-bind="text: type"></h1>
-    <h3 data-bind="text: units"></h1>
-    <h3 data-bind="text: target"></h1>
-    <h3 data-bind="text: firstWarn"></h1>
-    <h3 data-bind="text: secondWarn"></h1>
+    <span data-bind="text: title"></span></p>
+    <span data-bind="text: type"></span></p>
+    <span data-bind="text: units"></span></p>
+    <span data-bind="text: target"></span></p>
+    <span data-bind="text: firstWarn"></span></p>
+    <span data-bind="text: secondWarn"></h1span></p>
 </script>
 </body>
 </html>
