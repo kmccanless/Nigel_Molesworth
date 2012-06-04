@@ -1,6 +1,0 @@
-C:\Users\kmccanless\Nigel_Molesworth\OptimizationDashboard\OptimizationDashboard\bin\OptimizationDashboard.dll
-C:\Users\kmccanless\Nigel_Molesworth\OptimizationDashboard\OptimizationDashboard\bin\OptimizationDashboard.pdb
-C:\Users\kmccanless\Nigel_Molesworth\OptimizationDashboard\OptimizationDashboard\bin\Elmah.dll
-C:\Users\kmccanless\Nigel_Molesworth\OptimizationDashboard\OptimizationDashboard\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\kmccanless\Nigel_Molesworth\OptimizationDashboard\OptimizationDashboard\obj\Debug\OptimizationDashboard.dll
-C:\Users\kmccanless\Nigel_Molesworth\OptimizationDashboard\OptimizationDashboard\obj\Debug\OptimizationDashboard.pdb

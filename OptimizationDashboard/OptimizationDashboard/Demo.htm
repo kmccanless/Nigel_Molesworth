@@ -13,6 +13,10 @@
 
 
     <script type="text/javascript">
+        var params = $.deparam.querystring();
+        var user = JSON.stringify( params, null, 2 )
+        console.log(user);
+
         var viewModel = function () {
             var self = this;
             self.userName = ko.observable("");
@@ -22,27 +26,39 @@
         }
         var vm = new viewModel();
 
+        amplify.request.define("DataService", "ajax", {
+            url: "/DataService.aspx?userName={userName}",
+            type: "GET"
+        })
         amplify.request.define("MockService", function (settings) {
             settings.success(KPI_JSON);
         });
 
         $(document).ready(function () {
-            var user = $.deparam.querystring(true);
-            console.log(user);
-            amplify.request({
-                resourceId: "MockService",
-                success: function (data) {
-                    vm.userName(data.userName);
-                    vm.roleName(data.roleName);
-                    vm.locations(data.locations);
-                    vm.workspaces(data.workspaces);
+//            amplify.request({
+//                resourceId: "MockService",
+//                success: function (data) {
+//                    vm.userName(data.userName);
+//                    vm.roleName(data.roleName);
+//                    vm.locations(data.locations);
+//                    vm.workspaces(data.workspaces);
 
+//                },
+//                error: function (message, level) {
+//                    alert(message + " " + level);
+//                }
+//            });
+
+            
+            amplify.request("DataService",
+                {
+                    userName: ' + user + ',
                 },
-                error: function (message, level) {
-                    alert(message + " " + level);
+                function (data) {
+                    //do something with data here
+                    alert(data);
                 }
-            });
-
+            );
             ko.applyBindings(vm);
 
         });

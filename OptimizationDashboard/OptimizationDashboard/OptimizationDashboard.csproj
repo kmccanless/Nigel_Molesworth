@@ -65,13 +65,13 @@
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
-    <Content Include="Scripts\jquery.mockjax.js" />
+    <Content Include="Scripts\jquery-bbq.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Styles\Site.css" />
-    <Content Include="KPI_Service.aspx" />
+    <Content Include="DataService.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -82,12 +82,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KPI_Service.aspx.cs">
-      <DependentUpon>KPI_Service.aspx</DependentUpon>
+    <Compile Include="DataService.aspx.cs">
+      <DependentUpon>DataService.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="KPI_Service.aspx.designer.cs">
-      <DependentUpon>KPI_Service.aspx</DependentUpon>
+    <Compile Include="DataService.aspx.designer.cs">
+      <DependentUpon>DataService.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
