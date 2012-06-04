@@ -14,8 +14,6 @@
 
     <script type="text/javascript">
         var params = $.deparam.querystring();
-        var user = JSON.stringify( params, null, 2 )
-        console.log(user);
 
         var viewModel = function () {
             var self = this;
@@ -27,39 +25,49 @@
         var vm = new viewModel();
 
         amplify.request.define("DataService", "ajax", {
-            url: "/DataService.aspx?userName={userName}",
+            url: "/DataService.aspx?userName={userName}&location={location}",
             type: "GET"
         })
         amplify.request.define("MockService", function (settings) {
             settings.success(KPI_JSON);
         });
 
-        $(document).ready(function () {
-//            amplify.request({
-//                resourceId: "MockService",
-//                success: function (data) {
-//                    vm.userName(data.userName);
-//                    vm.roleName(data.roleName);
-//                    vm.locations(data.locations);
-//                    vm.workspaces(data.workspaces);
+        function callMockService() {
+            amplify.request({
+                resourceId: "MockService",
+                success: function (data) {
+                    vm.userName(data.userName);
+                    vm.roleName(data.roleName);
+                    vm.locations(data.locations);
+                    vm.workspaces(data.workspaces);
 
-//                },
-//                error: function (message, level) {
-//                    alert(message + " " + level);
-//                }
-//            });
-
-            
-            amplify.request("DataService",
-                {
-                    userName: ' + user + ',
                 },
+                error: function (message, level) {
+                    alert(message + " " + level);
+                }
+            });
+        }
+
+        function callDataService(values) {
+            amplify.request("DataService",
+                values,
                 function (data) {
                     //do something with data here
-                    alert(data);
                 }
             );
+        }
+        $(document).ready(function () {
+
             ko.applyBindings(vm);
+
+            //callDataService(params);
+            params.location = "All";
+            callMockService();
+
+            $('#selLocations').change(function () {
+                params.location = $('#selLocations').val();
+                callDataService(params);
+            });
 
         });
    </script>
@@ -69,7 +77,7 @@
 <div id="header">
 <p>User Name: <span data-bind="text: userName" /></p>
 <p>Role: <span data-bind="text: roleName" /></p>
-<p>Select Plant: <select data-bind="options: locations"></select></p>
+<p>Select Plant: <select id="selLocations" data-bind="options: locations"></select></p>
 </div>
 <div data-bind="template: { name: 'workspace-template', foreach: workspaces }"></div>
  
