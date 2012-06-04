@@ -1,6 +1,7 @@
 ﻿var KPI_JSON =  {
     userName : "Joe User",
-    roleName : "some role",
+    roleName: "some role",
+    activeLocation: "ALL",
     locations: [
         1,
         3,

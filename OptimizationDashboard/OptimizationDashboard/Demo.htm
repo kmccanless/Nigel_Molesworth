@@ -20,6 +20,7 @@
             self.userName = ko.observable("");
             self.roleName = ko.observable("");
             self.locations = ko.observableArray([]);
+            self.activeLocation = ko.observable("");
             self.workspaces = ko.observableArray([]);
         }
         var vm = new viewModel();
@@ -39,6 +40,7 @@
                     vm.userName(data.userName);
                     vm.roleName(data.roleName);
                     vm.locations(data.locations);
+                    vm.activeLocation(data.activeLocation);
                     vm.workspaces(data.workspaces);
 
                 },
@@ -77,6 +79,7 @@
 <div id="header">
 <p>User Name: <span data-bind="text: userName" /></p>
 <p>Role: <span data-bind="text: roleName" /></p>
+<p>Current Location: <span data-bind="text: activeLocation" /></p>
 <p>Select Plant: <select id="selLocations" data-bind="options: locations"></select></p>
 </div>
 <div data-bind="template: { name: 'workspace-template', foreach: workspaces }"></div>
