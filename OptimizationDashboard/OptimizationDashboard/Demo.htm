@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Demo</title>
+    
+    <script type="text/javascript" src="./Scripts/demo-json.js"></script>
+    <script type="text/javascript" src="./Scripts/data-service.js"></script>
+    <script type="text/javascript" src="./Scripts/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="./Scripts/jquery-bbq.js"></script>
+    <script type="text/javascript" src="./Scripts/knockout-2.1.0.debug.js"></script>
+    <script type="text/javascript" src="./Scripts/knockout.mapping-latest.debug.js"></script>
+    <script type="text/javascript" src="./Scripts/amplify.js"></script>
+
+
+    <script type="text/javascript">
+        var viewModel = function () {
+            var self = this;
+            self.userName = ko.observable("");
+            self.roleName = ko.observable("");
+            self.locations = ko.observableArray([]);
+            self.workspaces = ko.observableArray([]);
+        }
+        var vm = new viewModel();
+
+        amplify.request.define("MockService", function (settings) {
+            settings.success(KPI_JSON);
+        });
+
+        $(document).ready(function () {
+            var user = $.deparam.querystring(true);
+            console.log(user);
+            amplify.request({
+                resourceId: "MockService",
+                success: function (data) {
+                    vm.userName(data.userName);
+                    vm.roleName(data.roleName);
+                    vm.locations(data.locations);
+                    vm.workspaces(data.workspaces);
+
+                },
+                error: function (message, level) {
+                    alert(message + " " + level);
+                }
+            });
+
+            ko.applyBindings(vm);
+
+        });
+   </script>
+
+</head>
+<body>
+<div id="header">
+<p>User Name: <span data-bind="text: userName" /></p>
+<p>Role: <span data-bind="text: roleName" /></p>
+<p>Select Plant: <select data-bind="options: locations"></select></p>
+</div>
+<div data-bind="template: { name: 'workspace-template', foreach: workspaces }"></div>
+ 
+<script type="text/html" id="workspace-template">
+    <h1 data-bind="text: id"></h3>
+    <div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+</script>
+<script type="text/html" id="KPI-template">
+    <h2 data-bind="text: title"></h1>
+    <h3 data-bind="text: type"></h1>
+    <h3 data-bind="text: units"></h1>
+    <h3 data-bind="text: target"></h1>
+    <h3 data-bind="text: firstWarn"></h1>
+    <h3 data-bind="text: secondWarn"></h1>
+</script>
+</body>
+</html>
