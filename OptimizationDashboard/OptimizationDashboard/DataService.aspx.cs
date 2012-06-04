@@ -11,6 +11,8 @@ namespace OptimizationDashboard
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Console.Write(Request["userName"]);
+            Response.Write("Nigel Molesworth");
 
         }
     }
