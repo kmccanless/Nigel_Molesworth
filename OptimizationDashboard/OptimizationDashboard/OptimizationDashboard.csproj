@@ -37,10 +37,14 @@
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -89,6 +93,19 @@
     <Compile Include="DataService.aspx.designer.cs">
       <DependentUpon>DataService.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DataService\Database\DatabaseFactory.cs" />
+    <Compile Include="DataService\Database\IDatabaseFactory.cs" />
+    <Compile Include="DataService\KPIDataService.cs" />
+    <Compile Include="DataService\Models\KPI.cs" />
+    <Compile Include="DataService\Models\KPI_JSON.cs" />
+    <Compile Include="DataService\Models\User.cs" />
+    <Compile Include="DataService\Models\Workspace.cs" />
+    <Compile Include="DataService\Repositories\FileKPIRepository.cs" />
+    <Compile Include="DataService\Repositories\IKPIRepository.cs" />
+    <Compile Include="DataService\Repositories\DatabaseKPIRepository.cs" />
+    <Compile Include="DataService\Repositories\RandomKPIRepository.cs" />
+    <Compile Include="DataService\Repositories\RepositoryConfiguration.cs" />
+    <Compile Include="DataService\Repositories\RepositoryFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -97,6 +114,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
