@@ -53,7 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OptimizationDashboard\OptimizationDashboard\OptimizationDashboard.csproj">
+    <ProjectReference Include="..\OptimizationDashboard\OptimizationDashboard.csproj">
       <Project>{C67778B4-38D5-4AEE-BE74-CAC97BF2FE31}</Project>
       <Name>OptimizationDashboard</Name>
     </ProjectReference>

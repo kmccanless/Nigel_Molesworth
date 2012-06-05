@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptimizationDashboard", "OptimizationDashboard\OptimizationDashboard.csproj", "{C67778B4-38D5-4AEE-BE74-CAC97BF2FE31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{9F59FE79-255E-4F20-9A7E-D8DEB5719734}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9F59FE79-255E-4F20-9A7E-D8DEB5719734}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
