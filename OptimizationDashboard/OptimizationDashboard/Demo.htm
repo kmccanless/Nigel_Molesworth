@@ -2,8 +2,54 @@
 <html>
 <head>
     <title>Dashboard Demo</title>
+    <style>
+    body 
+    {
+         display : inline
+    }
+    .workspace
+    {
+        margin-left:auto;
+        margin-right:auto;
+        width : 95%;
+        
+    }
+    .kpi 
+    {
+        float:left;
+		margin: 0 2% 0 0;
+		padding: .2em 0;
+		border-style: solid;
+		border-width: 1px;
+    }
+    .divider
+    {
+        clear : both;
+        height : 50px;
+    }
+    .one
+    {
+    }
+     .two
+    {
+        width:47.4%;
+    }
+     .three
+    {
+        width:31%;
+    }
+     .four
+    {
+        width:23%;
+    }
+     .five
+    {
+        width:17.5%;
+    }
     
-    <script type="text/javascript" src="./Scripts/demo-json.js"></script>
+    </style>
+    <script type="text/javascript" src="./Scripts/demo-json-3-2.js"></script>
+    <script type="text/javascript" src="./Scripts/demo-json-5-5.js"></script>
     <script type="text/javascript" src="./Scripts/data-service.js"></script>
     <script type="text/javascript" src="./Scripts/jquery-1.7.2.js"></script>
     <script type="text/javascript" src="./Scripts/jquery-bbq.js"></script>
@@ -13,6 +59,7 @@
 
 
     <script type="text/javascript">
+        var timer;
         var params = $.deparam.querystring();
 
         var viewModel = function () {
@@ -30,10 +77,11 @@
             type: "GET"
         })
         amplify.request.define("MockService", function (settings) {
-            settings.success(KPI_JSON);
+            settings.success(KPI_JSON_3_2);
         });
 
         function callMockService() {
+            console.log("calling mock service");
             amplify.request({
                 resourceId: "MockService",
                 success: function (data) {
@@ -42,12 +90,14 @@
                     vm.locations(data.locations);
                     vm.activeLocation(data.activeLocation);
                     vm.workspaces(data.workspaces);
+                    timer = setTimeout('callMockService()', 10000);
 
                 },
                 error: function (message, level) {
                     alert(message + " " + level);
                 }
             });
+
         }
 
         function callDataService(values) {
@@ -58,6 +108,7 @@
                 }
             );
         }
+
         $(document).ready(function () {
 
             ko.applyBindings(vm);
@@ -67,13 +118,13 @@
             callMockService();
 
             $('#selLocations').change(function () {
+                //add the location variable to the params object before making call to data service
                 params.location = $('#selLocations').val();
                 callDataService(params);
             });
 
         });
    </script>
-
 </head>
 <body>
 <div id="header">
@@ -82,30 +133,33 @@
 <p>Current Location: <span data-bind="text: activeLocation" /></p>
 <p>Select Plant: <select id="selLocations" data-bind="options: locations"></select></p>
 </div>
-<div data-bind="template: { name: 'workspace-template', foreach: workspaces }"></div>
+<div class="workspace" data-bind="template: { name: 'workspace-1-template', foreach: workspaces }"></div>
+<div class="divider">&nbsp;</div>
+<div class="workspace" data-bind="template: { name: 'workspace-2-template', foreach: workspaces }"></div>
  
-<script type="text/html" id="workspace-template">
-     <!-- ko if: id.length < 5 -->
+<script type="text/html" id="workspace-1-template">
+     <!-- ko if: id == 1 -->
      <div id="top">
-        <span data-bind="text: id"></span></p>
         <div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
      </div>
      <!-- /ko -->
-     <p/>
-      <!-- ko if: id.length < 5 -->
+</script>
+<script type="text/html" id="workspace-2-template">
+     <!-- ko if: id == 2 -->
      <div id="bottom">
-        <span data-bind="text: id"></span></p>
         <div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
      </div>
      <!-- /ko -->
 </script>
 <script type="text/html" id="KPI-template">
-    <span data-bind="text: title"></span></p>
-    <span data-bind="text: type"></span></p>
-    <span data-bind="text: units"></span></p>
-    <span data-bind="text: target"></span></p>
-    <span data-bind="text: firstWarn"></span></p>
-    <span data-bind="text: secondWarn"></h1span></p>
+    <div data-bind="css: {kpi : true, one : $parent.KPIs.length === 1,two : $parent.KPIs.length === 2,three : $parent.KPIs.length === 3,four : $parent.KPIs.length === 4,five : $parent.KPIs.length === 5}">
+        <span data-bind="text: title"></span></p>
+        <span data-bind="text: type"></span></p>
+        <span data-bind="text: units"></span></p>
+        <span data-bind="text: target"></span></p>
+        <span data-bind="text: firstWarn"></span></p>
+        <span data-bind="text: secondWarn"></span></p>
+    </div>
 </script>
 </body>
 </html>
