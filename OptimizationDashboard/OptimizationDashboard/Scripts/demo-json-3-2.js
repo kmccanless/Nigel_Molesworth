@@ -1,7 +1,7 @@
-﻿var KPI_JSON =  {
+﻿var KPI_JSON_3_2 =  {
     userName : "Joe User",
     roleName: "some role",
-    activeLocation: "ALL",
+    activeLocation: "3",
     locations: [
         1,
         3,
@@ -11,7 +11,7 @@
     ],
     workspaces: [
         {
-            id: "Top Row",
+            id: 1,
             KPIs: [
                 {
                     title: "KPI1",
@@ -43,7 +43,7 @@
             ]
         },
         {
-            id: "Bottom Row",
+            id: 2,
             KPIs: [
                 {
                     title: "KPI4",
