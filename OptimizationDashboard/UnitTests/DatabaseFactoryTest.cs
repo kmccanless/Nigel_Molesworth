@@ -72,11 +72,8 @@ namespace Data
         [Test]
         public void Create_OdbcFromAsn_SqlServer()
         {
-			string dir = AppDomain.CurrentDomain.BaseDirectory;
-			string testfolderpath = dir.Substring(0, dir.IndexOf("bin\\Debug"));
-		
 			IDatabaseFactory f = new DatabaseFactory("System.IO.File",
-													System.IO.Path.Combine(testfolderpath, "cmdserie.mssql.asn"));
+                                                    System.IO.Path.Combine(this.TestFolderPath, "cmdserie.mssql.asn"));
 			Assert.IsNotNull(f, "failed to create factory");
 			Assert.IsTrue(f.IsSqlServerProvider, "failed to create factory");
 			Assert.IsFalse(f.IsOracleProvider, "failed to create factory");
@@ -95,11 +92,9 @@ namespace Data
         [Test]
         public void Create_OdbcFromAsn_Oracle()
         {
-			string dir = AppDomain.CurrentDomain.BaseDirectory;
-			string testfolderpath = dir.Substring(0, dir.IndexOf("bin\\Debug"));
 		
 			IDatabaseFactory f = new DatabaseFactory("System.IO.File",
-													System.IO.Path.Combine(testfolderpath, "cmdserie.ora.asn"));
+                                                    System.IO.Path.Combine(this.TestFolderPath, "cmdserie.ora.asn"));
 			Assert.IsNotNull(f, "failed to create factory");
 			Assert.IsFalse(f.IsSqlServerProvider, "failed to create factory");
 			Assert.IsTrue(f.IsOracleProvider, "failed to create factory");
@@ -113,6 +108,17 @@ namespace Data
                     Assert.IsNotNull(p, "failed to create odbc command parameter");
                 }
             }
-        }		
+        }
+
+        private string TestFolderPath
+        {
+            get
+            {
+    			string dir = //AppDomain.CurrentDomain.BaseDirectory;
+                    System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase.Substring("file:///".Length));
+
+                return dir.Substring(0, dir.IndexOf("bin\\Debug"));
+            }
+        }
     }
 }
