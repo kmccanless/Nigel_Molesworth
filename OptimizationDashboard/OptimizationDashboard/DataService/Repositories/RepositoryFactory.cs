@@ -16,6 +16,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
         {
             _config = config;
         }
+
         #region IRepositoryFactory Members
 
         public IKPIRepository GetRepository()
@@ -23,17 +24,9 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
             string reposTypeName = this.GetType().Namespace + "." + _config.RepositoryType;  
             Type repostype = Assembly.GetExecutingAssembly().GetType(reposTypeName, true);
 
-            /*
-            ConstructorInfo[] constructors = repostype.GetConstructors();
-            if (constructors == null || constructors.Length < 1)
-                throw new Exception(string.Format("Constructor not found for Repository type named [{0}]", reposTypeName));
-              
-            IKPIRepository repos =  //a.CreateInstance (reposType              
-            */
-            
             if (repostype.Equals(typeof(DatabaseKPIRepository)))
             {
-                ConnectionStringSettings connection = this.Connection;
+                ConnectionStringSettings connection = this.Connection;                
 
                 return new DatabaseKPIRepository(new DatabaseFactory(connection.ProviderName, connection.ConnectionString));
             }

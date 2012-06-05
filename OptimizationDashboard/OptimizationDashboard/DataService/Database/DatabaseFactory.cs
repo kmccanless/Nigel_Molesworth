@@ -2,6 +2,8 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.OracleClient;
+using System.Data.Odbc;
+using System.IO;
 
 namespace CAI.COMMANDoptimize.KPI.Database
 {
@@ -19,33 +21,11 @@ namespace CAI.COMMANDoptimize.KPI.Database
         public DatabaseFactory(string provider, string connectionString)
         {
             _provider = provider;
-            if (IsOracleProvider)
-            {
-                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(connectionString);
-                connectionString = string.Format("Data Source={0};user id={1};password={2}", cs.DataSource, cs.UserID, cs.Password);
-            }
+			if (IsAsnProvider)
+                connectionString = ParseAsnFile(connectionString);
             _connectionString = connectionString;
         }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="provider"></param>
-        /// <param name="datasource"></param>
-        /// <param name="databasename"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        public DatabaseFactory(string provider, string datasource, string databasename, string username, string password)
-            : this(provider, null)
-        {
-            _connectionString = MakeConnectionString(provider, datasource, databasename, username, password);
-        }
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public DatabaseFactory()
-        {
-        }
         #endregion
 
         #region IDatabaseFactory
@@ -55,14 +35,41 @@ namespace CAI.COMMANDoptimize.KPI.Database
         /// </summary>
 		public bool IsSqlServerProvider
         {
-			get{return _IsSqlServerProvider(_provider);}
+			get	
+			{
+				return 
+					_IsSqlServerProvider(_provider) 
+					||
+					(_IsOdbcProvider(_provider) && _IsSqlServerProvider(_odbcprovider));
+			}
         }
         /// <summary>
         /// IsOracleProvider
         /// </summary>
 		public bool IsOracleProvider
         {
-			get{return _IsOracleProvider(_provider);}
+			get
+			{
+				return 
+					_IsOracleProvider(_provider)
+					||
+					(_IsOdbcProvider(_provider) && _IsOracleProvider(_odbcprovider));
+			}
+        }
+        /// <summary>
+        /// IsOdbcProvider
+        /// </summary>
+        public bool IsOdbcProvider
+        {
+            get { return _IsOdbcProvider(_provider); }
+        }
+		
+        /// <summary>
+        /// IsAsnProvider
+        /// </summary>
+        public bool IsAsnProvider
+        {
+            get { return _IsFileProvider(_provider); }
         }
 		
         /// <summary>
@@ -70,20 +77,20 @@ namespace CAI.COMMANDoptimize.KPI.Database
         /// </summary>
         /// <returns>IDbConnection reference to a specific provider connection object</returns>
         public IDbConnection Create()
-        {            
-			return MakeConnection(_connectionString);
+        {          
+            IDbConnection connection = null;
+			if (_IsSqlServerProvider(_provider))
+				connection = new SqlConnection(_connectionString);
+			else if (_IsOracleProvider(_provider))
+				connection = new OracleConnection(_connectionString);
+			else if (_IsOdbcProvider(_provider))
+				connection = new OdbcConnection(_connectionString);
+			else
+            	throw new Exception("Unknown Database Provider: " + _provider);
+				
+            return connection;
         }
 
-        /// <summary>
-        /// Create a database connection
-        /// </summary>
-        /// <param name="databasename"></param>
-        /// <returns>IDbConnection reference to a specific provider connection object</returns>
-        public IDbConnection Create(string databasename)
-        {   
-			return MakeConnection(MakeConnectionString(_provider, _connectionString, databasename));
-        }
-		
         /// <summary>
         /// Add a Parameter to a Command
         /// </summary>
@@ -113,165 +120,60 @@ namespace CAI.COMMANDoptimize.KPI.Database
             return param;
         }
 		
-        /// <summary>
-        /// Make a database connection string
-        /// </summary>
-        /// <param name="providerName"></param>
-        /// <param name="datasource"></param>
-        /// <param name="databasename"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public string MakeConnectionString(string providerName, string datasource, string databasename, string username, string password)
-        {
-            if (_IsSqlServerProvider(providerName))
-            {
-                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder();
-
-                cs.DataSource = datasource;
-                cs.InitialCatalog = databasename;
-                if (!string.IsNullOrEmpty(username))
-                {
-                    cs.IntegratedSecurity = false;
-                    cs.UserID = username;
-                    cs.Password = password;
-                }
-                else
-                {
-                    cs.IntegratedSecurity = true;
-                    cs.UserID = null;
-                    cs.Password = null;
-                }
-                cs.Pooling = false;
-                cs.PersistSecurityInfo = false;
-
-                return cs.ConnectionString;
-            }			
-            else if (_IsOracleProvider(providerName))
-            {            
-                /*  
-                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder();
-
-                cs.DataSource = datasource;
-                cs.InitialCatalog = databasename;
-                if (!string.IsNullOrEmpty(username))
-                {
-                    cs.IntegratedSecurity = false;
-                    cs.UserID = username;
-                    cs.Password = password;
-                }
-                else
-                {
-                    cs.IntegratedSecurity = true;
-                    cs.UserID = null;
-                    cs.Password = null;
-                }
-                cs.Pooling = false;
-                cs.PersistSecurityInfo = false;
-
-                return cs.ConnectionString;
-                */                
-
-                return string.Format("Data Source={0};user id={1};password={2}", datasource, username, password);
-            }
-
-            return null;
-        }
-        
-        /// <summary>
-        /// Break a connection string into its parts
-        /// </summary>
-        /// <param name="providerName"></param>
-        /// <param name="connstring"></param>
-        /// <param name="datasource"></param>
-        /// <param name="databasename"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        public void BreakConnectionString(string providerName, string connstring, 
-                                            out string datasource, out string databasename, 
-                                            out string username, out string password)
-        {
-            if (_IsSqlServerProvider(providerName))
-            {
-                System.Data.SqlClient.SqlConnectionStringBuilder cs = new System.Data.SqlClient.SqlConnectionStringBuilder(connstring);
-                datasource = cs.DataSource;
-                databasename = cs.InitialCatalog;
-                username = cs.UserID;
-                password = cs.Password;							
-            }
-            else if (_IsOracleProvider(providerName))
-            {
-                System.Data.SqlClient.SqlConnectionStringBuilder cs = new System.Data.SqlClient.SqlConnectionStringBuilder(connstring);
-                datasource = cs.DataSource;
-                databasename = cs.InitialCatalog;
-                username = cs.UserID;
-                password = cs.Password;
-            }
-            else
-            {
-                datasource = string.Empty;
-                databasename = string.Empty;
-                username = string.Empty;
-                password = string.Empty;
-            }
-        }
-		
-        /// <summary>
-        /// Test a Provider Connection
-        /// </summary>
-        /// <param name="providerName"></param>
-        /// <param name="datasource"></param>
-        /// <param name="databasename"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns>True if connection is successful</returns>
-        public bool TestConnection(string providerName, string datasource, string databasename, string username, string password)
-		{
-			IDatabaseFactory dbf = new DatabaseFactory(providerName, datasource, databasename, username, password);
-            using (IDbConnection db = dbf.Create())
-            {
-                db.Open();
-                return true;
-            }
-		}
-		
         #endregion
 
         #region Implementation
-		private IDbConnection MakeConnection(string connectionstring)
-        {            
-            IDbConnection connection = null;
-			if (IsSqlServerProvider)
-				connection = new SqlConnection(connectionstring);
-			else if (IsOracleProvider)
-				connection = new OracleConnection(connectionstring);
-			else
-            	throw new Exception("Unknown Database Provider: " + _provider);
-				
-            return connection;
-        }
-		
-        private string MakeConnectionString(string providerName, string connectionstring, string databasename)
-        {
-            if (_IsSqlServerProvider(providerName))
-            {
-                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(connectionstring);
-				cs.InitialCatalog = databasename;
-
-                return cs.ConnectionString;
-            }
-            else if (_IsOracleProvider(providerName))
-            {                              
-                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(connectionstring);
-                //cs.InitialCatalog = databasename;
-				
-                //return cs.ConnectionString;                
-
-                return string.Format("Data Source={0};user id={1};password={2}", cs.DataSource, cs.UserID, cs.Password);
-            }
-
-            return null;
-        }
+		private string ParseAsnFile(string filepath)
+		{
+			if (!File.Exists(filepath))
+				throw new FileNotFoundException(filepath);
+			
+			using (StreamReader sr = new StreamReader(filepath))
+			{
+                while (sr.Peek() >= 0)
+                {
+                    string line = sr.ReadLine();
+					if (line.StartsWith("[paths]"))
+					{
+						line = sr.ReadLine();	// next line is the db connection info
+						// format: 
+						//	token=providertype:dsn:databasename|username|password
+						//		OR
+						//	token=providertype:dsn|username|password
+						string[] parts = line.Split('=');
+						if (parts.Length < 2)
+							throw new ArgumentException("Invalid database connection information found in the ASN file: [" + line + "]");
+						
+						parts = parts[1].Split(':');
+						if (parts.Length < 2)
+							throw new ArgumentException("Invalid database connection information found in the ASN file: [" + line + "]");
+							
+						_provider = cOdbcProviderNameAlt;
+						
+						string provider = parts[0];
+						if (provider.Equals("mss", StringComparison.InvariantCultureIgnoreCase))
+							_odbcprovider = cSQLProviderNameAlt;
+						else if (provider.Equals("ora", StringComparison.InvariantCultureIgnoreCase))
+							_odbcprovider = cOracleProviderNameAlt;
+						else
+							_odbcprovider = "unknown";
+							
+						
+						string[] dbparts = (parts.Length > 2 ? parts[2] : parts[1]).Split('|');
+						
+						int index = 0;
+						string dsn = parts.Length > 2 ? parts[1] : dbparts[index++];
+						string databasename = parts.Length > 2 ? dbparts[index++] : string.Empty;
+						string username = dbparts[index++];
+						string password = dbparts[index];
+						
+						return string.Format("DSN={0};user id={1};password={2}", dsn, username, password);
+					}
+                }
+			}
+			
+			return string.Empty;
+		}
 		
         private bool _IsSqlServerProvider(string providerName)
         {
@@ -285,17 +187,21 @@ namespace CAI.COMMANDoptimize.KPI.Database
 				_IsProvider(cOracleProviderNameAlt, providerName);
         }
 				
+        private bool _IsOdbcProvider(string providerName)
+        {
+            return _IsProvider(cOdbcProviderName, providerName) ||
+				_IsProvider(cOdbcProviderNameAlt, providerName);
+        }
+		
+        private bool _IsFileProvider(string providerName)
+        {
+            return _IsProvider(cFileProviderName, providerName) ||
+				_IsProvider(cFileProviderNameAlt, providerName);
+        }
+				
         private bool _IsProvider(string provider, string providerName)
         {
             return (string.Compare(provider, providerName, true) == 0);
-        }
-		
-        private string ExtractCSPart(string cspart)
-        {
-            int spos = cspart.IndexOf("=");
-            if (spos > -1)            
-                return cspart.Substring(spos + 1, cspart.Length - spos - 1);            
-            return string.Empty;
         }
 		
         #endregion
@@ -305,9 +211,14 @@ namespace CAI.COMMANDoptimize.KPI.Database
         private const string cSQLProviderNameAlt = "System.Data.SqlClient";
         private const string cOracleProviderName = "ORACLE";
         private const string cOracleProviderNameAlt = "System.Data.OracleClient";
+        private const string cOdbcProviderName = "ODBC";
+        private const string cOdbcProviderNameAlt = "System.Data.Odbc";
+        private const string cFileProviderName = "FILE";
+        private const string cFileProviderNameAlt = "System.IO.File";
 		
-        string _provider;
-        string _connectionString;
+        private string _provider;
+		private string _odbcprovider;
+        private string _connectionString;
         #endregion
 	}
 }

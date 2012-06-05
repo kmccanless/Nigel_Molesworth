@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 
 using CAI.COMMANDoptimize.KPI.Models;
 
@@ -10,13 +10,18 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
         public FileKPIRepository(string provider, string connectionstring)
         {
             _provider = provider;
-            _connectionstring = connectionstring;
+            _filepath = connectionstring;
         }
 
         #region IKPIRepository Members
 
         public User GetUser(string username)
         {
+			if (!File.Exists(_filepath))
+				throw new FileNotFoundException(_filepath);
+			
+			
+			
             throw new NotImplementedException();
         }
 
@@ -29,7 +34,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
 
         #region Private
         private string _provider;
-        private string _connectionstring;
+        private string _filepath;
         #endregion
     }
 }

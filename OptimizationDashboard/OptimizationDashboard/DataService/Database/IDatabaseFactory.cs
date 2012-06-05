@@ -16,19 +16,12 @@ namespace CAI.COMMANDoptimize.KPI.Database
         /// IsOracleProvider
         /// </summary>
 		bool IsOracleProvider {get;}
-			
+	
         /// <summary>
         /// Create a database connection
         /// </summary>
         /// <returns>IDbConnection reference to a specific provider connection object</returns>
         IDbConnection Create();
-
-        /// <summary>
-        /// Create a database connection
-        /// </summary>
-        /// <param name="databasename"></param>
-        /// <returns>IDbConnection reference to a specific provider connection object</returns>
-        IDbConnection Create(string databasename);
 
         /// <summary>
         /// Add a Parameter to a Command
@@ -40,40 +33,5 @@ namespace CAI.COMMANDoptimize.KPI.Database
         /// <param name="value">Value to assign to the parameter</param>
         /// <returns>Returns the parameter object</returns>
         IDbDataParameter AddCommandParameter(IDbCommand cmd, string name, DbType type, ParameterDirection direction, Object value);
-
-        /// <summary>
-        /// Make a database connection string
-        /// </summary>
-        /// <param name="providerName"></param>
-        /// <param name="datasource"></param>
-        /// <param name="databasename"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        string MakeConnectionString(string providerName, string datasource, string databasename, string username, string password);
-		
-        /// <summary>
-        /// Break a connection string into its parts
-        /// </summary>
-        /// <param name="providerName"></param>
-        /// <param name="connstring"></param>
-        /// <param name="datasource"></param>
-        /// <param name="databasename"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        void BreakConnectionString(string providerName, string connstring,
-                                            out string datasource, out string databasename,
-                                            out string username, out string password);
-		
-        /// <summary>
-        /// Test a Provider Connection
-        /// </summary>
-        /// <param name="providerName"></param>
-        /// <param name="datasource"></param>
-        /// <param name="databasename"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns>True if connection is successful</returns>
-        bool TestConnection(string providerName, string datasource, string databasename, string username, string password);
 	}
 }
