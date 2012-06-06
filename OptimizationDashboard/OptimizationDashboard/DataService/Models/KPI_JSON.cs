@@ -72,7 +72,7 @@ namespace CAI.COMMANDoptimize.KPI.Models
                 KPI_JSON[] kpis = new KPI_JSON[_workspace.KPIs.Length];
                 for (int i = 0; i < kpis.Length; i++)
                 {
-                    kpis[i] = new KPI_JSON(_workspace.KPIs[i], i+1);
+                    kpis[i] = new KPI_JSON(_workspace.KPIs[i]);
                 }
 
                 return kpis;
@@ -82,22 +82,16 @@ namespace CAI.COMMANDoptimize.KPI.Models
 
     public class KPI_JSON
     {
-        private KPI _kpi;
-        private int _ordinal;
+        private KPI _kpi;        
 
-        public KPI_JSON(KPI kpi, int ordinal)
+        public KPI_JSON(KPI kpi)
         {
-            _kpi = kpi;
-            _ordinal = ordinal;
+            _kpi = kpi;            
         }
 
         public string title
         {
             get { return _kpi.Description; }
-        }
-        public int ordinal
-        {
-            get { return _ordinal; }
         }
         public string type
         {

@@ -10,7 +10,6 @@ namespace Data
     [TestFixture]
     public class DatabaseFactoryTest
     {
-
         [Test]
         public void Create_SqlServer()
         {
@@ -114,10 +113,12 @@ namespace Data
         {
             get
             {
-    			string dir = //AppDomain.CurrentDomain.BaseDirectory;
-                    System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase.Substring("file:///".Length));
-
-                return dir.Substring(0, dir.IndexOf("bin\\Debug"));
+    			string dir = AppDomain.CurrentDomain.BaseDirectory;
+                    //System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase.Substring("file:///".Length));
+                int idx = dir.IndexOf("bin\\Debug");
+                if (idx > 0)
+                    return dir.Substring(0, idx);
+                return dir;
             }
         }
     }
