@@ -65,7 +65,8 @@
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
     <Content Include="Scripts\data-service.js" />
-    <Content Include="Scripts\demo-json.js" />
+    <Content Include="MockData\demo-json-3-2.js" />
+    <Content Include="MockData\demo-json-5-5.js" />
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
