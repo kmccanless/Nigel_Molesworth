@@ -9,7 +9,7 @@ using CAI.COMMANDoptimize.KPI.Repositories;
 namespace Repositories
 {
     [TestFixture]
-    public class MockRandomKPIRepositoryTest
+    public class RandomKPIRepositoryTest
     {
         private const string cUser = "username";
         private const string cRole = "Shipper";
@@ -72,8 +72,7 @@ namespace Repositories
 			
             Assert.AreEqual("005", kpis[0].KPIs[0].Code, "failed to retrieve KPI");
             Assert.AreEqual("Total Compliance", kpis[0].KPIs[0].Description, "failed to retrieve KPI");
-            Assert.AreEqual("02", kpis[0].KPIs[0].Category, "failed to retrieve KPI");
-            Assert.AreEqual(1, kpis[0].KPIs[0].Ordinal, "failed to retrieve KPI");
+            Assert.AreEqual("02", kpis[0].KPIs[0].Category, "failed to retrieve KPI");            
             Assert.AreEqual(181, kpis[0].KPIs[0].Actual, "failed to retrieve KPI");
             Assert.AreEqual(230, kpis[0].KPIs[0].Units, "failed to retrieve KPI");
             Assert.AreEqual(207, kpis[0].KPIs[0].Target, "failed to retrieve KPI");
@@ -82,8 +81,7 @@ namespace Repositories
 			
             Assert.AreEqual("006", kpis[0].KPIs[1].Code, "failed to retrieve KPI");
             Assert.AreEqual("Locked Loads", kpis[0].KPIs[1].Description, "failed to retrieve KPI");
-            Assert.AreEqual("02", kpis[0].KPIs[1].Category, "failed to retrieve KPI");
-            Assert.AreEqual(2, kpis[0].KPIs[1].Ordinal, "failed to retrieve KPI");
+            Assert.AreEqual("02", kpis[0].KPIs[1].Category, "failed to retrieve KPI");            
             Assert.AreEqual(22, kpis[0].KPIs[1].Actual, "failed to retrieve KPI");
             Assert.AreEqual(228, kpis[0].KPIs[1].Units, "failed to retrieve KPI");
             Assert.AreEqual(11.4M, kpis[0].KPIs[1].Target, "failed to retrieve KPI");
@@ -97,8 +95,7 @@ namespace Repositories
             Assert.AreEqual(3, kpis[1].KPIs.Length, "failed to retrieve KPI");
             Assert.AreEqual("001", kpis[1].KPIs[0].Code, "failed to retrieve KPI");
             Assert.AreEqual("First Load", kpis[1].KPIs[0].Description, "failed to retrieve KPI");
-            Assert.AreEqual("01", kpis[1].KPIs[0].Category, "failed to retrieve KPI");
-            Assert.AreEqual(1, kpis[1].KPIs[0].Ordinal, "failed to retrieve KPI");
+            Assert.AreEqual("01", kpis[1].KPIs[0].Category, "failed to retrieve KPI");            
             Assert.AreEqual(885, kpis[1].KPIs[0].Actual, "failed to retrieve KPI");
             Assert.AreEqual(36, kpis[1].KPIs[0].Units, "failed to retrieve KPI");
             Assert.AreEqual(370, kpis[1].KPIs[0].Target, "failed to retrieve KPI");
@@ -107,8 +104,7 @@ namespace Repositories
 
             Assert.AreEqual("002", kpis[1].KPIs[1].Code, "failed to retrieve KPI");
             Assert.AreEqual("Job Wait", kpis[1].KPIs[1].Description, "failed to retrieve KPI");
-            Assert.AreEqual("01", kpis[1].KPIs[1].Category, "failed to retrieve KPI");
-            Assert.AreEqual(2, kpis[1].KPIs[1].Ordinal, "failed to retrieve KPI");
+            Assert.AreEqual("01", kpis[1].KPIs[1].Category, "failed to retrieve KPI");            
             Assert.AreEqual(835, kpis[1].KPIs[1].Actual, "failed to retrieve KPI");
             Assert.AreEqual(40, kpis[1].KPIs[1].Units, "failed to retrieve KPI");
             Assert.AreEqual(416, kpis[1].KPIs[1].Target, "failed to retrieve KPI");
@@ -117,8 +113,7 @@ namespace Repositories
 
             Assert.AreEqual("003", kpis[1].KPIs[2].Code, "failed to retrieve KPI");
             Assert.AreEqual("Yard Time", kpis[1].KPIs[2].Description, "failed to retrieve KPI");
-            Assert.AreEqual("01", kpis[1].KPIs[2].Category, "failed to retrieve KPI");
-            Assert.AreEqual(3, kpis[1].KPIs[2].Ordinal, "failed to retrieve KPI");
+            Assert.AreEqual("01", kpis[1].KPIs[2].Category, "failed to retrieve KPI");            
             Assert.AreEqual(860, kpis[1].KPIs[2].Actual, "failed to retrieve KPI");
             Assert.AreEqual(40, kpis[1].KPIs[2].Units, "failed to retrieve KPI");
             Assert.AreEqual(600, kpis[1].KPIs[2].Target, "failed to retrieve KPI");
@@ -129,7 +124,7 @@ namespace Repositories
         [Test]
         public void GetKPIs_Random()
         {
-            IKPIRepository r = new RandomKPIRepository(10, 10);
+            IKPIRepository r = new RandomKPIRepository(5, 10);
             Assert.IsNotNull(r, "failed to create repository");
 
             Workspace[] kpis = r.GetKPIs(cUser, cAllLocations);
@@ -146,8 +141,6 @@ namespace Repositories
             	Assert.IsNotEmpty(kpi.Code, "failed to retrieve KPI");
             	Assert.IsNotEmpty(kpi.Description, "failed to retrieve KPI");
             	Assert.IsNotEmpty(kpi.Category, "failed to retrieve KPI");
-            	Assert.Greater(kpi.Ordinal, 0, "failed to retrieve KPI");
-	            Assert.LessOrEqual(kpi.Ordinal, kpis[0].KPIs.Length, "failed to retrieve KPI");
 				
             	Assert.Greater(kpi.Actual, 0, "failed to retrieve KPI");
 	            Assert.LessOrEqual(kpi.Actual, 10000, "failed to retrieve KPI");
@@ -176,8 +169,6 @@ namespace Repositories
             	Assert.IsNotEmpty(kpi.Code, "failed to retrieve KPI");
             	Assert.IsNotEmpty(kpi.Description, "failed to retrieve KPI");
             	Assert.IsNotEmpty(kpi.Category, "failed to retrieve KPI");
-            	Assert.Greater(kpi.Ordinal, 0, "failed to retrieve KPI");
-	            Assert.LessOrEqual(kpi.Ordinal, kpis[0].KPIs.Length, "failed to retrieve KPI");
 				
             	Assert.Greater(kpi.Actual, 0, "failed to retrieve KPI");
 	            Assert.LessOrEqual(kpi.Actual, 10000, "failed to retrieve KPI");
@@ -196,6 +187,23 @@ namespace Repositories
 			}
 			
 			
+            // ensure that A != B
+            for (int i=0; i<kpis[0].KPIs.Length && i<kpis[1].KPIs.Length; i++)            
+            {
+                CAI.COMMANDoptimize.KPI.Models.KPI kpiA = kpis[0].KPIs[i];
+                CAI.COMMANDoptimize.KPI.Models.KPI kpiB = kpis[1].KPIs[i];
+                
+                Assert.AreNotSame(kpiA, kpiB, "failed to retrieve KPI");
+                Assert.AreNotEqual(kpiA.Code, kpiB.Code, "failed to retrieve KPI");
+                Assert.AreNotEqual(kpiA.Description, kpiB.Description, "failed to retrieve KPI");
+                //Assert.AreNotEqual(kpiA.Category, kpiB.Category, "failed to retrieve KPI");
+                Assert.AreNotEqual(kpiA.Actual, kpiB.Actual, "failed to retrieve KPI");
+                Assert.AreNotEqual(kpiA.Units, kpiB.Units, "failed to retrieve KPI");
+                Assert.AreNotEqual(kpiA.Target, kpiB.Target, "failed to retrieve KPI");
+                Assert.AreNotEqual(kpiA.Level1, kpiB.Level1, "failed to retrieve KPI");
+                Assert.AreNotEqual(kpiA.Level2, kpiB.Level2, "failed to retrieve KPI");
+            }
+
 		}
     }
 }

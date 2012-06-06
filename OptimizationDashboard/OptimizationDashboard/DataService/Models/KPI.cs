@@ -9,8 +9,7 @@ namespace CAI.COMMANDoptimize.KPI.Models
     {
         public string Code { get; set; }
         public string Description { get; set; }
-        public string Category { get; set; }
-        public int Ordinal { get; set; }
+        public string Category { get; set; }        
         public decimal Actual { get; set; }
         public decimal Units { get; set; }
         public decimal Target { get; set; }

@@ -24,22 +24,20 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
             string reposTypeName = this.GetType().Namespace + "." + _config.RepositoryType;  
             Type repostype = Assembly.GetExecutingAssembly().GetType(reposTypeName, true);
 
+            ConnectionStringSettings connection = this.Connection;
+
             if (repostype.Equals(typeof(DatabaseKPIRepository)))
             {
-                ConnectionStringSettings connection = this.Connection;                
-
                 return new DatabaseKPIRepository(new DatabaseFactory(connection.ProviderName, connection.ConnectionString));
             }
             
             if (repostype.Equals(typeof(RandomKPIRepository)))
-            {
-                return new RandomKPIRepository();
+            {                
+                return new RandomKPIRepository(connection.ProviderName, connection.ConnectionString);
             }
             
             if (repostype.Equals(typeof(FileKPIRepository)))            
             {
-                ConnectionStringSettings connection = this.Connection;
-
                 return new FileKPIRepository(connection.ProviderName, connection.ConnectionString);
             }
 

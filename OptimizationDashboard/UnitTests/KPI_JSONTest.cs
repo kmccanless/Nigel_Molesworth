@@ -49,8 +49,7 @@ namespace Models
                             new CAI.COMMANDoptimize.KPI.Models.KPI {
 						        Code = "005",
 						        Description = "Total Compliance",
-						        Category = "02",
-						        Ordinal = 1,
+						        Category = "02",						        
 						        Actual = 181,
 						        Units = 230,
 						        Target = 207,
@@ -60,8 +59,7 @@ namespace Models
                             new CAI.COMMANDoptimize.KPI.Models.KPI {
 						        Code = "006",
 						        Description = "Locked Loads",
-						        Category = "02",
-						        Ordinal = 2,
+						        Category = "02",						        
 						        Actual = 22,
 						        Units = 228,
 						        Target = 11.4M,
@@ -78,8 +76,7 @@ namespace Models
                             new CAI.COMMANDoptimize.KPI.Models.KPI {
 						        Code = "001",
 						        Description = "First Load",
-						        Category = "01",
-						        Ordinal = 1,
+						        Category = "01",						        
 						        Actual = 885,
 						        Units = 36,
 						        Target = 370,
@@ -90,8 +87,7 @@ namespace Models
                             new CAI.COMMANDoptimize.KPI.Models.KPI {
 						        Code = "002",
 						        Description = "Job Wait",
-						        Category = "01",
-						        Ordinal = 2,
+						        Category = "01",						        
 						        Actual = 835,
 						        Units = 40,
 						        Target = 416,
@@ -102,8 +98,7 @@ namespace Models
                             new CAI.COMMANDoptimize.KPI.Models.KPI {
 						        Code = "003",
 						        Description = "Yard Time",
-						        Category = "01",
-						        Ordinal = 3,
+						        Category = "01",						        
 						        Actual = 860,
 						        Units = 40,
 						        Target = 600,

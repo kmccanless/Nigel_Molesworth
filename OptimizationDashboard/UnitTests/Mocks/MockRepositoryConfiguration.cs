@@ -19,12 +19,12 @@ namespace Mocks
 
         public string ConnectionName
         {
-            get { return string.Empty; }
+            get { return "RandomData"; }
         }
 
         public ConnectionStringSettings Connection
         {
-            get { throw new NotImplementedException(); }
+            get { return new ConnectionStringSettings(this.ConnectionName, "-1", "-1"); }
         }
 
         #endregion

@@ -11,6 +11,11 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
         {
             _numlocations = numlocations;
             _numkpi = numkpi;
+            _r = new Random();
+        }
+        public RandomKPIRepository(string numlocations, string numkpi)
+            : this(Convert.ToInt32(numlocations), Convert.ToInt32(numkpi))
+        {
         }
         public RandomKPIRepository()
             : this(-1, -1)
@@ -27,16 +32,29 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
                 Locations = new string[] {}
             };
             if (_numlocations > 0)
-            {                
-                Random r = new Random();
-
+            {
                 string[] roles = new string[] {"Shipper", "Operator", "Manager"};
-                user.Role = roles[r.Next(0, roles.Length)];
+                user.Role = roles[_r.Next(0, roles.Length)];
 
-                int count = r.Next(1, _numlocations);
-                user.Locations = new string[count];
-                for (int i=0; i<count; i++)
-                    user.Locations[i] = r.Next(1, _numlocations+1).ToString();                
+                int count = _r.Next(1, _numlocations);
+                IList<string> locations = new List<string>();
+                for (int i = 0; i < 50; i++)
+                    locations.Add((i + 1).ToString());
+                SortedList<int, string> randomlocations = new SortedList<int, string>();
+                
+                for (int i = 0; i < count; i++)
+                {
+                    string loc = locations[_r.Next(0, locations.Count)];
+                    randomlocations.Add(Convert.ToInt32(loc), loc);                    
+                    locations.Remove(loc);
+                }
+
+                user.Locations = new string[randomlocations.Count];
+                int j = 0;
+                foreach (KeyValuePair<int, string> kvp in randomlocations)
+                {
+                    user.Locations[j++] = kvp.Value;
+                }
             }
             else
             {
@@ -63,8 +81,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
                     new CAI.COMMANDoptimize.KPI.Models.KPI {
 						Code = "005",
 						Description = "Total Compliance",
-						Category = "02",
-						Ordinal = 1,
+						Category = "02",						
 						Actual = 181,
 						Units = 230,
 						Target = 207,
@@ -74,8 +91,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
                     new CAI.COMMANDoptimize.KPI.Models.KPI {
 						Code = "006",
 						Description = "Locked Loads",
-						Category = "02",
-						Ordinal = 2,
+						Category = "02",						
 						Actual = 22,
 						Units = 228,
 						Target = 11.4M,
@@ -100,8 +116,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
                     new CAI.COMMANDoptimize.KPI.Models.KPI {
 						Code = "001",
 						Description = "First Load",
-						Category = "01",
-						Ordinal = 1,
+						Category = "01",						
 						Actual = 885,
 						Units = 36,
 						Target = 370,
@@ -112,8 +127,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
                     new CAI.COMMANDoptimize.KPI.Models.KPI {
 						Code = "002",
 						Description = "Job Wait",
-						Category = "01",
-						Ordinal = 2,
+						Category = "01",						
 						Actual = 835,
 						Units = 40,
 						Target = 416,
@@ -124,8 +138,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
                     new CAI.COMMANDoptimize.KPI.Models.KPI {
 						Code = "003",
 						Description = "Yard Time",
-						Category = "01",
-						Ordinal = 3,
+						Category = "01",						
 						Actual = 860,
 						Units = 40,
 						Target = 600,
@@ -142,9 +155,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
 
         #region Private
 		private CAI.COMMANDoptimize.KPI.Models.KPI[] GenerateKPI(string location)
-		{
-            Random r = new Random();
-            
+		{            
             int factor = (!string.IsNullOrEmpty(location) && !location.Equals("all", StringComparison.InvariantCultureIgnoreCase)) ? 1
                     : (_numlocations > 0 ? _numlocations : 5);
 
@@ -221,21 +232,20 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
 				}
 			};
 			
-            int count = r.Next(1, _numkpi);
+            int count = _r.Next(0, _numkpi+1);
 			CAI.COMMANDoptimize.KPI.Models.KPI[] kpis = new CAI.COMMANDoptimize.KPI.Models.KPI[count];
             for (int i=0; i<count; i++)
 			{	
-				KPIType kpi = kpitypes[r.Next(1, kpitypes.Length)];
+				KPIType kpi = kpitypes[_r.Next(0, kpitypes.Length)];
                 kpis[i] = new CAI.COMMANDoptimize.KPI.Models.KPI {
 					Code = kpi.Code,
 					Description = kpi.Description,
-					Category = kpi.Category,
-					Ordinal = i+1,
-					Actual = r.Next(kpi.Min, kpi.Max),
-					Units = r.Next(kpi.Min, kpi.Max),
-					Target = r.Next(kpi.Min, kpi.Max),
-					Level1 = r.Next(kpi.Min, kpi.Max),
-					Level2 = r.Next(kpi.Min, kpi.Max)
+					Category = kpi.Category,					
+					Actual = _r.Next(kpi.Min, kpi.Max + 1),
+                    Units = _r.Next(kpi.Min, kpi.Max + 1),
+                    Target = _r.Next(kpi.Min, kpi.Max + 1),
+                    Level1 = _r.Next(kpi.Min, kpi.Max + 1),
+                    Level2 = _r.Next(kpi.Min, kpi.Max + 1)
                 };
 			}
 			return kpis;
@@ -252,6 +262,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
 		
         private int _numlocations;
         private int _numkpi;
+        private Random _r;
         #endregion
     }
 }
