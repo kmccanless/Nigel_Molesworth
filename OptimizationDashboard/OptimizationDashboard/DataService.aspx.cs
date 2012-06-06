@@ -25,7 +25,7 @@ namespace OptimizationDashboard
 
                 string json = ds.GetKPI(username, location);
 
-                Response.ContentType = "text/json";
+                //Response.ContentType = "text/json";
                 Response.Write(json);
             }
             else
