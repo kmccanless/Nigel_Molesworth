@@ -16,34 +16,24 @@
             type: "GET"
         })
     },
-    callMockService: function () {
+    callMockService: function (callback) {
         console.log("calling mock service");
         amplify.request({
             resourceId: "MockService",
             success: function (data) {
-                vm.userName(data.userName);
-                vm.roleName(data.roleName);
-                vm.locations(data.locations);
-                vm.activeLocation(data.activeLocation);
-                vm.workspaces(data.workspaces);
-                timer = setTimeout('dataService.callMockService()', 5000);
-
+                callback(data);
             },
             error: function (message, level) {
                 alert(message + " " + level);
             }
         })
     },
-    callDataService: function () {
+    callDataService: function (callback) {
+        console.log("calling data service");
         amplify.request("DataService",
 				self.values,
 				function (data) {
-				    vm.userName(data.userName);
-				    vm.roleName(data.roleName);
-				    vm.locations(data.locations);
-				    vm.activeLocation(data.activeLocation);
-				    vm.workspaces(data.workspaces);
-				    timer = setTimeout('dataService.callDataService(self.values)', 5000);
+				    callback(data);
 				})
     }
 }
