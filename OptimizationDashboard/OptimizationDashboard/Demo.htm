@@ -52,8 +52,6 @@
 	}
 	
 	</style>
-<!--	<script type="text/javascript" src="./Scripts/demo-json-3-2.js"></script>
-	<script type="text/javascript" src="./Scripts/demo-json-5-5.js"></script>-->
 	<script type="text/javascript" src="./Scripts/jquery-1.7.2.js"></script>
 	<script type="text/javascript" src="./Scripts/jquery-bbq.js"></script>
 	<script type="text/javascript" src="./Scripts/knockout-2.1.0.debug.js"></script>
@@ -66,31 +64,41 @@
 		var timer;
 		var activeDataService;
 		var params = $.deparam.querystring();
+
 		var viewModel = function () {
 			var self = this;
 			self.userName = ko.observable("");
 			self.roleName = ko.observable("");
-			self.locations = ko.observableArray([]);
+			self.locations = [];
 			self.activeLocation = ko.observable("");
 			self.workspaces = ko.observableArray([]);
 		}
+
 		var vm = new viewModel();
+
+
 		var bindModel = function (data) {
 		    //clear this out or else the list will grow when updated from the server.
-		    vm.locations = ko.observableArray([]);
+		    if ($.inArray("All", data.locations) === -1) {
+		        data.locations.push("All");
+		    }
 		    vm.userName(data.userName);
 		    vm.roleName(data.roleName);
-		    vm.locations(data.locations);
-		    vm.locations.push("All");
+		    vm.locations = data.locations;
 		    vm.activeLocation(data.activeLocation);
 		    vm.workspaces(data.workspaces);
+
+		    refreshTimer();
+
 		}
+
 		var refreshTimer = function () {
-		    timer = setTimeout('refreshData()', 30000);
-		}
+			timer = setTimeout('refreshData()', 500000);
+}
+
 		var refreshData = function () {
-		    activeDataService();
-		    refreshTimer()
+			activeDataService();
+			refreshTimer()
 		}
 		if (params.debug === "true") {
 
@@ -111,27 +119,30 @@
 			dataService.defineDataService();
 			params.location = "All";
 			dataService.setValues(params);
-			activeDataService = function () { dataService.callDataService.call(this, bindModel) };
+			activeDataService = function () {
+			    dataService.callDataService.call(this, bindModel);
+			};
 		}
 
 
 		$(document).ready(function () {
-		    ko.applyBindings(vm);
-		    console.log("adding location to the param object");
 
-            //do not actually call the service until you are sure the DOM is ready for binding
-		    if (!params.debug) {
-		        activeDataService();
-		    }
+			ko.applyBindings(vm);
 
-		    $('#selLocations').change(function () {
-		        //add the location variable to the params object before making call to data service
-		        params.location = $('#selLocations').val();
-		        activeDataService();
-		        refreshTimer();
-		    });
+			console.log("adding location to the param object");
 
-		    refreshTimer();
+			//do not actually call the service until you are sure the DOM is ready for binding
+			if (!params.debug) {
+				activeDataService();
+			}
+
+			$('#selLocations').change(function () {
+                clearTimeout(timer);
+				//add the location variable to the params object before making call to data service
+				params.location = $('#selLocations').val();
+				activeDataService();
+	
+			});
 
 		});
    </script>
@@ -167,6 +178,7 @@
 		<span class="label">Type</span><span id="kpi_type" data-bind="text: type"></span></p>
 		<span class="label">Units</span><span id="kpi_units" data-bind="text: units"></span></p>
 		<span class="label">Target</span><span id="kpi_target" data-bind="text: target"></span></p>
+		<span class="label">Value</span><span id="kpi_value" data-bind="text: value"></span></p>
 		<span class="label">First Warn</span><span id="kpi_firstWarn" data-bind="text: firstWarn"></span></p>
 		<span class="label">Second Warn</span><span id="kpi_secondWarn" data-bind="text: secondWarn"></span></p>
 	</div>
