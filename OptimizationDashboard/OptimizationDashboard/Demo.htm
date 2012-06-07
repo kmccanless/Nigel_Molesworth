@@ -78,32 +78,35 @@
 
 
 		var bindModel = function (data) {
-			//clear this out or else the list will grow when updated from the server.
-			if ($.inArray("All", data.locations) === -1) {
-				data.locations.push("All");
-			}
-			for (var i = 0; i < data.workspaces.length; i++) {
-				for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
-//		            //var workspace = data.workspaces[i];
-					if (data.workspaces[i].KPIs[j].type === "Minutes") {
-						//var kpi = workspace.KPIs[j];
-						data.workspaces[i].KPIs[j]["formattedValue"] = data.workspaces[i].KPIs[j].value / data.workspaces[i].KPIs[j].units;
-						data.workspaces[i].KPIs[j]["formattedTarget"] = data.workspaces[i].KPIs[j].target / data.workspaces[i].KPIs[j].units;
-					}
-					else {
-						data.workspaces[i].KPIs[j]["formattedValue"] = 1;
-						data.workspaces[i].KPIs[j]["formattedTarget"] = 1;
-					}
+		    //clear this out or else the list will grow when updated from the server.
+		    if ($.inArray("All", data.locations) === -1) {
+		        data.locations.push("All");
+		    }
+		    for (var i = 0; i < data.workspaces.length; i++) {
+		        for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
 
-				  
-				}
-			}
-			vm.userName(data.userName);
-			vm.roleName(data.roleName);
-			vm.locations = data.locations;
-			vm.activeLocation(data.activeLocation);
-			vm.workspaces(data.workspaces);
-			refreshTimer();
+		            var workspace = data.workspaces[i].KPIs[j];
+		            var targetTemp;
+		            var valueTemp;
+
+		            valueTemp = workspace.value / workspace.units;
+		            targetTemp = workspace.target / workspace.units;
+
+		            if (data.workspaces[i].KPIs[j].type === "Percentage") {
+		                valueTemp = valueTemp * 100;
+		                targetTemp = targetTemp * 100;
+		            }
+
+		            data.workspaces[i].KPIs[j]["formattedValue"] = valueTemp.toFixed(0);
+		            data.workspaces[i].KPIs[j]["formattedTarget"] = targetTemp.toFixed(0);
+		        }
+		    }
+		    vm.userName(data.userName);
+		    vm.roleName(data.roleName);
+		    vm.locations = data.locations;
+		    vm.activeLocation(data.activeLocation);
+		    vm.workspaces(data.workspaces);
+		    refreshTimer();
 
 		}
 
