@@ -61,6 +61,9 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Dashboard.htm" />
     <Content Include="Demo.htm" />
+    <Content Include="MockData\demo-json-2-3_5.js" />
+    <Content Include="MockData\demo-json-5-5_3.js" />
+    <Content Include="MockData\demo-json-5-5_all.js" />
     <Content Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
@@ -78,6 +81,10 @@
     <Content Include="Styles\Site.css" />
     <Content Include="DataService.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Tests\dashboard-tests.htm" />
+    <Content Include="Tests\dashboard-tests.js" />
+    <Content Include="Tests\Scripts\funcunit.js" />
+    <Content Include="Tests\Styles\qunit.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
