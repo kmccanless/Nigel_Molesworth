@@ -14,7 +14,7 @@
             KPIs: [
                 {
                     title: "KPI1",
-                    type: "percentage",
+                    type: "Percentage",
                     target: "80",
                     value: 170,
                     units: "15",
@@ -23,16 +23,16 @@
                 },
                 {
                     title: "KPI2",
-                    type: "computed",
-                    target: "130",
-                    value: 120,
-                    units: "10",
-                    firstWarn: "120",
-                    secondWarn: "125"
+                    type: "Minutes",
+                    target: 150,
+                    value: 245,
+                    units: 15,
+                    firstWarn: 300,
+                    secondWarn: 450
                 },
                 {
                     title: "KPI3",
-                    type: "subtraction",
+                    type: "Amount",
                     target: "225",
                     value: 120,
                     units: "25",
@@ -46,7 +46,7 @@
             KPIs: [
                 {
                     title: "KPI4",
-                    type: "addition",
+                    type: "Quantity",
                     target: "200",
                     value: 180,
                     units: "20",
