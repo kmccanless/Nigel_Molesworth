@@ -1,0 +1,365 @@
+<<<<<<< HEAD
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard Demo</title>
+	<style>
+	body 
+	{
+		 display : inline
+	}
+	.workspace
+	{
+		margin-left:auto;
+		margin-right:auto;
+		width : 95%;
+		
+	}
+	.kpi 
+	{
+		float:left;
+		margin: 0 2% 0 0;
+		padding: .2em 0;
+		border-style: solid;
+		border-width: 1px;
+	}
+	.divider
+	{
+		clear : both;
+		height : 50px;
+	}
+	.one
+	{
+	}
+	 .two
+	{
+		width:47.4%;
+	}
+	 .three
+	{
+		width:31%;
+	}
+	 .four
+	{
+		width:23%;
+	}
+	 .five
+	{
+		width:17.5%;
+	}
+	.label
+	{
+		padding-right :10px;
+	}
+	
+	</style>
+	<script type="text/javascript" src="./Scripts/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="./Scripts/jquery-bbq.js"></script>
+	<script type="text/javascript" src="./Scripts/knockout-2.1.0.debug.js"></script>
+	<script type="text/javascript" src="./Scripts/knockout.mapping-latest.debug.js"></script>
+	<script type="text/javascript" src="./Scripts/amplify.min.js"></script>
+	<script type="text/javascript" src="./Scripts/data-service.js"></script>
+
+
+	<script type="text/javascript">
+		var timer;
+		var activeDataService;
+		var params = $.deparam.querystring();
+
+		var viewModel = function () {
+			var self = this;
+			self.userName = ko.observable("");
+			self.roleName = ko.observable("");
+			self.locations = [];
+			self.activeLocation = ko.observable("");
+			self.workspaces = ko.observableArray([]);
+		}
+
+		var vm = new viewModel();
+
+
+		var bindModel = function (data) {
+		    //clear this out or else the list will grow when updated from the server.
+		    if ($.inArray("All", data.locations) === -1) {
+		        data.locations.push("All");
+		    }
+		    vm.userName(data.userName);
+		    vm.roleName(data.roleName);
+		    vm.locations = data.locations;
+		    vm.activeLocation(data.activeLocation);
+		    vm.workspaces(data.workspaces);
+
+		    refreshTimer();
+
+		}
+
+		var refreshTimer = function () {
+			timer = setTimeout('refreshData()', 500000);
+}
+
+		var refreshData = function () {
+			activeDataService();
+			refreshTimer()
+		}
+		if (params.debug === "true") {
+
+			$.getScript("MockData/" + params.script + ".js")
+				.done(function (script, textStatus) {
+					console.log('Loaded test script');
+					dataService.defineMockService(KPI_JSON);
+					activeDataService = function () { dataService.callMockService.call(this,bindModel) };
+					activeDataService();
+				   
+				})
+				.fail(function (jqxhr, settings, exception) {
+					alert("Could not load the test data");
+				});  
+
+		} 
+		else {
+			dataService.defineDataService();
+			params.location = "All";
+			dataService.setValues(params);
+			activeDataService = function () {
+			    dataService.callDataService.call(this, bindModel);
+			};
+		}
+
+
+		$(document).ready(function () {
+
+			ko.applyBindings(vm);
+
+			console.log("adding location to the param object");
+
+			//do not actually call the service until you are sure the DOM is ready for binding
+			if (!params.debug) {
+				activeDataService();
+			}
+
+			$('#selLocations').change(function () {
+                clearTimeout(timer);
+				//add the location variable to the params object before making call to data service
+				params.location = $('#selLocations').val();
+				activeDataService();
+	
+			});
+
+		});
+   </script>
+</head>
+<body>
+<div id="header">
+<p>User Name: <span id="userName" data-bind="text: userName" /></p>
+<p>Role: <span id="role" data-bind="text: roleName" /></p>
+<p>Current Location: <span id="currentLocation" data-bind="text: activeLocation" /></p>
+<p>Select Plant: <select id="selLocations" data-bind="options: locations, value : activeLocation"></select></p>
+</div>
+<div class="workspace" data-bind="template: { name: 'workspace-1-template', foreach: workspaces }"></div>
+<div class="divider">&nbsp;</div>
+<div class="workspace" data-bind="template: { name: 'workspace-2-template', foreach: workspaces }"></div>
+ 
+<script type="text/html" id="workspace-1-template">
+	 <!-- ko if: id == 1 -->
+	 <div id="workspace_1">
+		<div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+	 </div>
+	 <!-- /ko -->
+</script>
+<script type="text/html" id="workspace-2-template">
+	 <!-- ko if: id == 2 -->
+	 <div id="workspace_2">
+		<div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+	 </div>
+	 <!-- /ko -->
+</script>
+<script type="text/html" id="KPI-template">
+	<div data-bind="css: {kpi : true, one : $parent.KPIs.length === 1,two : $parent.KPIs.length === 2,three : $parent.KPIs.length === 3,four : $parent.KPIs.length === 4,all : $parent.KPIs.length === 5}, attr : {id : 'id_' + ($parentContext.$index() + 1) + '_' + ($index() + 1)}">
+		<span class="label">Title</span><span id="kpi_title" data-bind="text: title"></span></p>
+		<span class="label">Type</span><span id="kpi_type" data-bind="text: type"></span></p>
+		<span class="label">Units</span><span id="kpi_units" data-bind="text: units"></span></p>
+		<span class="label">Target</span><span id="kpi_target" data-bind="text: target"></span></p>
+		<span class="label">Value</span><span id="kpi_value" data-bind="text: value"></span></p>
+		<span class="label">First Warn</span><span id="kpi_firstWarn" data-bind="text: firstWarn"></span></p>
+		<span class="label">Second Warn</span><span id="kpi_secondWarn" data-bind="text: secondWarn"></span></p>
+	</div>
+</script>
+</body>
+</html>
+=======
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard Demo</title>
+	<style>
+	body 
+	{
+		 display : inline
+	}
+	.workspace
+	{
+		margin-left:auto;
+		margin-right:auto;
+		width : 95%;
+		
+	}
+	.kpi 
+	{
+		float:left;
+		margin: 0 2% 0 0;
+		padding: .2em 0;
+		border-style: solid;
+		border-width: 1px;
+	}
+	.divider
+	{
+		clear : both;
+		height : 50px;
+	}
+	.one
+	{
+	}
+	 .two
+	{
+		width:47.4%;
+	}
+	 .three
+	{
+		width:31%;
+	}
+	 .four
+	{
+		width:23%;
+	}
+	 .five
+	{
+		width:17.5%;
+	}
+	.label
+	{
+		padding-right :10px;
+	}
+	
+	</style>
+<!--	<script type="text/javascript" src="./Scripts/demo-json-3-2.js"></script>
+	<script type="text/javascript" src="./Scripts/demo-json-5-5.js"></script>-->
+	<script type="text/javascript" src="./Scripts/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="./Scripts/jquery-bbq.js"></script>
+	<script type="text/javascript" src="./Scripts/knockout-2.1.0.debug.js"></script>
+	<script type="text/javascript" src="./Scripts/knockout.mapping-latest.debug.js"></script>
+	<script type="text/javascript" src="./Scripts/amplify.min.js"></script>
+	<script type="text/javascript" src="./Scripts/data-service.js"></script>
+
+
+	<script type="text/javascript">
+		var timer;
+		var activeDataService;
+		var params = $.deparam.querystring();
+		var viewModel = function () {
+			var self = this;
+			self.userName = ko.observable("");
+			self.roleName = ko.observable("");
+			self.locations = ko.observableArray([]);
+			self.activeLocation = ko.observable("");
+			self.workspaces = ko.observableArray([]);
+		}
+		var vm = new viewModel();
+		var bindModel = function (data) {
+		    //clear this out or else the list will grow when updated from the server.
+		    vm.locations = ko.observableArray([]);
+		    vm.userName(data.userName);
+		    vm.roleName(data.roleName);
+		    vm.locations(data.locations);
+		    vm.locations.push("All");
+		    vm.activeLocation(data.activeLocation);
+		    vm.workspaces(data.workspaces);
+		}
+		var refreshTimer = function () {
+		    timer = setTimeout('refreshData()', 30000);
+		}
+		var refreshData = function () {
+		    activeDataService();
+		    refreshTimer()
+		}
+		if (params.debug === "true") {
+
+			$.getScript("MockData/" + params.script + ".js")
+				.done(function (script, textStatus) {
+					console.log('Loaded test script');
+					dataService.defineMockService(KPI_JSON);
+					activeDataService = function () { dataService.callMockService.call(this,bindModel) };
+					activeDataService();
+				   
+				})
+				.fail(function (jqxhr, settings, exception) {
+					alert("Could not load the test data");
+				});  
+
+		} 
+		else {
+			dataService.defineDataService();
+			params.location = "All";
+			dataService.setValues(params);
+			activeDataService = function () { dataService.callDataService.call(this, bindModel) };
+		}
+
+
+		$(document).ready(function () {
+		    ko.applyBindings(vm);
+		    console.log("adding location to the param object");
+
+            //do not actually call the service until you are sure the DOM is ready for binding
+		    if (!params.debug) {
+		        activeDataService();
+		    }
+
+		    $('#selLocations').change(function () {
+		        //add the location variable to the params object before making call to data service
+		        params.location = $('#selLocations').val();
+		        activeDataService();
+		        refreshTimer();
+		    });
+
+		    refreshTimer();
+
+		});
+   </script>
+</head>
+<body>
+<div id="header">
+<p>User Name: <span id="userName" data-bind="text: userName" /></p>
+<p>Role: <span id="role" data-bind="text: roleName" /></p>
+<p>Current Location: <span id="currentLocation" data-bind="text: activeLocation" /></p>
+<p>Select Plant: <select id="selLocations" data-bind="options: locations, value : activeLocation"></select></p>
+</div>
+<div class="workspace" data-bind="template: { name: 'workspace-1-template', foreach: workspaces }"></div>
+<div class="divider">&nbsp;</div>
+<div class="workspace" data-bind="template: { name: 'workspace-2-template', foreach: workspaces }"></div>
+ 
+<script type="text/html" id="workspace-1-template">
+	 <!-- ko if: id == 1 -->
+	 <div id="workspace_1">
+		<div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+	 </div>
+	 <!-- /ko -->
+</script>
+<script type="text/html" id="workspace-2-template">
+	 <!-- ko if: id == 2 -->
+	 <div id="workspace_2">
+		<div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+	 </div>
+	 <!-- /ko -->
+</script>
+<script type="text/html" id="KPI-template">
+	<div data-bind="css: {kpi : true, one : $parent.KPIs.length === 1,two : $parent.KPIs.length === 2,three : $parent.KPIs.length === 3,four : $parent.KPIs.length === 4,all : $parent.KPIs.length === 5}, attr : {id : 'id_' + ($parentContext.$index() + 1) + '_' + ($index() + 1)}">
+		<span class="label">Title</span><span id="kpi_title" data-bind="text: title"></span></p>
+		<span class="label">Type</span><span id="kpi_type" data-bind="text: type"></span></p>
+		<span class="label">Units</span><span id="kpi_units" data-bind="text: units"></span></p>
+		<span class="label">Target</span><span id="kpi_target" data-bind="text: target"></span></p>
+		<span class="label">First Warn</span><span id="kpi_firstWarn" data-bind="text: firstWarn"></span></p>
+		<span class="label">Second Warn</span><span id="kpi_secondWarn" data-bind="text: secondWarn"></span></p>
+	</div>
+</script>
+</body>
+</html>
+>>>>>>> 04ed25548d249746e16ddd588b7265fe98a3b399
