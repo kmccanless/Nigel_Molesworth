@@ -78,17 +78,32 @@
 
 
 		var bindModel = function (data) {
-		    //clear this out or else the list will grow when updated from the server.
-		    if ($.inArray("All", data.locations) === -1) {
-		        data.locations.push("All");
-		    }
-		    vm.userName(data.userName);
-		    vm.roleName(data.roleName);
-		    vm.locations = data.locations;
-		    vm.activeLocation(data.activeLocation);
-		    vm.workspaces(data.workspaces);
+			//clear this out or else the list will grow when updated from the server.
+			if ($.inArray("All", data.locations) === -1) {
+				data.locations.push("All");
+			}
+			for (var i = 0; i < data.workspaces.length; i++) {
+				for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
+//		            //var workspace = data.workspaces[i];
+					if (data.workspaces[i].KPIs[j].type === "Minutes") {
+						//var kpi = workspace.KPIs[j];
+						data.workspaces[i].KPIs[j]["formattedValue"] = data.workspaces[i].KPIs[j].value / data.workspaces[i].KPIs[j].units;
+						data.workspaces[i].KPIs[j]["formattedTarget"] = data.workspaces[i].KPIs[j].target / data.workspaces[i].KPIs[j].units;
+					}
+					else {
+						data.workspaces[i].KPIs[j]["formattedValue"] = 1;
+						data.workspaces[i].KPIs[j]["formattedTarget"] = 1;
+					}
 
-		    refreshTimer();
+				  
+				}
+			}
+			vm.userName(data.userName);
+			vm.roleName(data.roleName);
+			vm.locations = data.locations;
+			vm.activeLocation(data.activeLocation);
+			vm.workspaces(data.workspaces);
+			refreshTimer();
 
 		}
 
@@ -120,7 +135,7 @@
 			params.location = "All";
 			dataService.setValues(params);
 			activeDataService = function () {
-			    dataService.callDataService.call(this, bindModel);
+				dataService.callDataService.call(this, bindModel);
 			};
 		}
 
@@ -137,7 +152,7 @@
 			}
 
 			$('#selLocations').change(function () {
-                clearTimeout(timer);
+				clearTimeout(timer);
 				//add the location variable to the params object before making call to data service
 				params.location = $('#selLocations').val();
 				activeDataService();
@@ -179,6 +194,8 @@
 		<span class="label">Units</span><span id="kpi_units" data-bind="text: units"></span></p>
 		<span class="label">Target</span><span id="kpi_target" data-bind="text: target"></span></p>
 		<span class="label">Value</span><span id="kpi_value" data-bind="text: value"></span></p>
+		<span class="label">Formatted Value</span><span id="kpi_formatted_value" data-bind="text: formattedValue"></span></p>
+		<span class="label">Formatted Target</span><span id="kpi_formatted_value" data-bind="text: formattedTarget"></span></p>
 		<span class="label">First Warn</span><span id="kpi_firstWarn" data-bind="text: firstWarn"></span></p>
 		<span class="label">Second Warn</span><span id="kpi_secondWarn" data-bind="text: secondWarn"></span></p>
 	</div>
