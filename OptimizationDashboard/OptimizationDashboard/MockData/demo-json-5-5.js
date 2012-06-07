@@ -14,10 +14,10 @@
             KPIs: [
                 {
                     title: "KPI1",
-                    type: "percentage",
-                    target: "80",
-                    value: 160,
-                    units: "15",
+                    type: "Percentage",
+                    target: 80,
+                    value: 10,
+                    units: 15,
                     firstWarn: "60",
                     secondWarn: "90"
                 },
