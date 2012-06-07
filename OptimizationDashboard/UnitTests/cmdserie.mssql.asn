@@ -1,0 +1,67 @@
+; ***
+; *** Created by the Assignment File Wizard 3/25/2011 at 1:46 PM
+; *** Copyright © Command Alkon Inc. 2002
+; ***
+
+[driver_settings]
+MSS    U4.0
+usys$mss_params=gran=row,hs=on,oc=400,os=400,recsize=8000,step=10,checks=on,ents=lower,ids=quoted,iso=rc,locktime=-1,logtime=10,mapping=2,nls=off,pra=off,procs=on,ri=uniface
+
+[USER_3GL]
+..\bin\cmdnet32.dll
+..\bin\cmdutl32.dll
+..\bin\cmdwid32.dll
+..\bin\cmdout32.dll
+..\bin\cmdtra32.dll
+..\bin\cmdtrb32.dll
+..\bin\cmdasy32.dll
+..\bin\cmdvba32.dll
+..\bin\umsw.dll
+..\bin\irtl.dll
+..\bin\hhctrl.ocx
+
+[settings]
+$LICENSE_OPTIONS=LM_LICENSE_FILE=..\bin\LICENSE.xml
+$language=USA
+$variation=USER
+$keyboard=TRN_STD101
+$enhanced_edit=all
+$search_object=file_only
+$search_descriptor=file_only
+$no_valrep_check
+$stop_on_div_by_zero=false
+$putmess_logfile=msgframe.log
+$store_booleans_as_false
+$NEWLINE=CR
+$ALLOW_FOREIGN_THREADS=1
+
+[paths]
+$mss=mss:cslab:cmdseries|cmdseries|cmdseries
+$def=$mss
+$idf=$mss
+$sys=$mss
+$uuu=$mss
+
+[files]
+usys:*.frm=usys:*.frm
+usys:*.dol=..\usys\*.dol
+usys:*.urr=..\usys\*.urr
+*.aps=..\*.aps
+*.frm=..\*.frm
+*.svc=..\*.svc
+*.sql=..\utils\*.sql
+*.exe=..\bin\*.exe
+*.ico=..\icons\*.ico
+*.esv=..\*.esv
+*.prt=..\reports\*.*
+*.txt=..\import
+*.out=..\out
+*.dot=..\doc
+
+[entities]
+
+[logicals]
+CALLER_ID=
+MSS_TIMEOUT=0
+MSS_WAITTIME=250	
+MAXLOCKWAIT=1
