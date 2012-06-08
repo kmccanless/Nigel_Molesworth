@@ -1,12 +1,12 @@
-﻿module("Dashboard tests against demo-jso-5-5_all.js", {
+﻿module("Dashboard tests against demo-json-2-3_5.js", {
     setup: function () {
         // opens the page you want to test
-        S.open("http://localhost:49331/demo.htm?userName=nmolesworth&debug=true&script=demo-json-5-5_all");
+        S.open("http://localhost:49331/demo.htm?userName=nmolesworth&debug=true&script=demo-json-2-3_5");
     }
     //,
-//    teardown: function () {
-//        S._window.close();
-//    }
+    //    teardown: function () {
+    //        S._window.close();
+    //    }
 });
 
 //1.
@@ -17,17 +17,17 @@ test("Page has content", function () {
 //2.
 
 test("Displays correct user name", function () {
-    equal(S('#userName').text(), "John Doe", "User name is correct")
+    equal(S('#userName').text(), "Jane Doe", "User name is correct")
 });
 
 //3.
 test("Displays correct role", function () {
-    equal(S('#role').text(), "Shipper", "Role is correct")
+    equal(S('#role').text(), "Plant Manager", "Role is correct")
 });
 
 //4.
-test("Location defaults to All", function () {
-    equal(S('#selLocations option:selected').val(), "All", "Dropdown did defaulted to All");
+test("Location defaults to 5", function () {
+    equal(S('#selLocations option:selected').val(), "5", "Dropdown did defaulted to 5");
 });
 
 test("Location drop down contains correct locations", function () {
@@ -39,13 +39,13 @@ test("Location drop down contains correct locations", function () {
         currNode = currNode.next();
         correct = correct + currNode.val();
     }
-    equal(correct, "3567All", "Testing dropdown has currect locations");
+    equal(correct, "356All", "Testing dropdown has currect locations");
 });
 
 
 //6.
-test("Location defaults to All", function () {
-    equal(S('#selLocations option:selected').val(), "All", "Dropdown did defaulted to All");
+test("Location defaults to 5", function () {
+    equal(S('#selLocations option:selected').val(), "5", "Dropdown did defaulted to 5");
 });
 
 //7.
@@ -54,27 +54,27 @@ test("Two workspaces present", function () {
 });
 
 //8.
-test("5 KPIs under Top workspace", function () {
+test("2 KPIs under Top workspace", function () {
     var kpis = S('#workspace_1  .kpi').size();
-    equal(kpis, 5, "Correct number of KPI");
+    equal(kpis, 2, "Correct number of KPI");
 });
 
 //9.
-test("5 KPIs under Bottom workspace", function () {
+test("3 KPIs under Bottom workspace", function () {
     var kpis = S('#workspace_2  .kpi').size();
-    equal(kpis, 5, "Correct number of KPI");
+    equal(kpis, 3, "Correct number of KPI");
 });
 
 
 //10.
 test("Data correct in 1st KPI of top row", function () {
-    equal(S('#id_1_1 #kpi_title').text(), "FIRST LOAD", "Title Test");
+    equal(S('#id_1_1 #kpi_title').text(), "YARD TIME", "Title Test");
     equal(S('#id_1_1 #kpi_type').text(), "Minutes", "Type Test");
-    equal(S('#id_1_1 #kpi_units').text(), "885", "Units Test");
+    equal(S('#id_1_1 #kpi_units').text(), "14", "Units Test");
     equal(S('#id_1_1 #kpi_formatted_value').text(), "25", "formattedValue Test");
-    equal(S('#id_1_1 #kpi_formatted_text').text(), "10", "formattedText Test");
-    equal(S('#id_1_1 #kpi_firstWarn').text(), "740", "firstWarn Test");
-    equal(S('#id_1_1 #kpi_secondWarn').text(), "1110", "secondWarn Test");
+    equal(S('#id_1_1 #kpi_formatted_target').text(), "15", "formattedTarget Test");
+    equal(S('#id_1_1 #kpi_firstWarn').text(), "280", "firstWarn Test");
+    equal(S('#id_1_1 #kpi_secondWarn').text(), "350", "secondWarn Test");
 });
 
 

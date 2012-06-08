@@ -1,7 +1,7 @@
-﻿module("Dashboard tests against demo-jso-5-5_all.js", {
+﻿module("Dashboard tests against demo-json-5-5_3.js", {
     setup: function () {
         // opens the page you want to test
-        S.open("http://localhost:49331/demo.htm?userName=nmolesworth&debug=true&script=demo-json-5-5_all");
+        S.open("http://localhost:49331/demo.htm?userName=nmolesworth&debug=true&script=demo-json-5-5_3");
     }
     //,
 //    teardown: function () {
@@ -26,8 +26,8 @@ test("Displays correct role", function () {
 });
 
 //4.
-test("Location defaults to All", function () {
-    equal(S('#selLocations option:selected').val(), "All", "Dropdown did defaulted to All");
+test("Location defaults to 3", function () {
+    equal(S('#selLocations option:selected').val(), "3", "Dropdown did defaulted to All");
 });
 
 test("Location drop down contains correct locations", function () {
@@ -44,8 +44,8 @@ test("Location drop down contains correct locations", function () {
 
 
 //6.
-test("Location defaults to All", function () {
-    equal(S('#selLocations option:selected').val(), "All", "Dropdown did defaulted to All");
+test("Location defaults to 3", function () {
+    equal(S('#selLocations option:selected').val(), "3", "Dropdown did defaulted to 3");
 });
 
 //7.
@@ -70,11 +70,11 @@ test("5 KPIs under Bottom workspace", function () {
 test("Data correct in 1st KPI of top row", function () {
     equal(S('#id_1_1 #kpi_title').text(), "FIRST LOAD", "Title Test");
     equal(S('#id_1_1 #kpi_type').text(), "Minutes", "Type Test");
-    equal(S('#id_1_1 #kpi_units').text(), "885", "Units Test");
-    equal(S('#id_1_1 #kpi_formatted_value').text(), "25", "formattedValue Test");
-    equal(S('#id_1_1 #kpi_formatted_text').text(), "10", "formattedText Test");
-    equal(S('#id_1_1 #kpi_firstWarn').text(), "740", "firstWarn Test");
-    equal(S('#id_1_1 #kpi_secondWarn').text(), "1110", "secondWarn Test");
+    equal(S('#id_1_1 #kpi_units').text(), "16", "Units Test");
+    equal(S('#id_1_1 #kpi_formatted_value').text(), "15", "formattedValue Test");
+    equal(S('#id_1_1 #kpi_formatted_target').text(), "9", "formattedTarget Test");
+    equal(S('#id_1_1 #kpi_firstWarn').text(), "300", "firstWarn Test");
+    equal(S('#id_1_1 #kpi_secondWarn').text(), "450", "secondWarn Test");
 });
 
 
