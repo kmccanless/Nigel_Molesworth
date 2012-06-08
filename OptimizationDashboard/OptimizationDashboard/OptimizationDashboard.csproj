@@ -81,6 +81,12 @@
     <Content Include="Styles\Site.css" />
     <Content Include="DataService.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Tests\2-3-5-dashboard-tests.htm" />
+    <Content Include="Tests\2-3-5-dashboard-tests.js" />
+    <Content Include="Tests\5-5-3-dashboard-tests.htm" />
+    <Content Include="Tests\5-5-3-dashboard-tests.js" />
+    <Content Include="Tests\5-5-All-dashboard-tests.htm" />
+    <Content Include="Tests\5-5-All-dashboard-tests.js" />
     <Content Include="Tests\dashboard-tests.htm" />
     <Content Include="Tests\dashboard-tests.js" />
     <Content Include="Tests\Scripts\funcunit.js" />
