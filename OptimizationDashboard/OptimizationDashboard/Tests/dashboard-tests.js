@@ -10,11 +10,12 @@
 });
 
 //1.
+
 test("Page has content", function () {
     ok(S("body *").size(), "Page Loaded without elements")
 });
-
 //2.
+
 test("Displays correct user name", function () {
     equal(S('#userName').text(), "Joe User", "User name is correct")
 });
