@@ -17,12 +17,12 @@ test("Page has content", function () {
 //2.
 
 test("Displays correct user name", function () {
-    equal(S('#userName').text(), "Joe User", "User name is correct")
+    equal(S('#userName').text(), "John Doe", "User name is correct")
 });
 
 //3.
 test("Displays correct role", function () {
-    equal(S('#role').text(), "some role", "Role is correct")
+    equal(S('#role').text(), "Shipper", "Role is correct")
 });
 
 //4.
@@ -30,14 +30,18 @@ test("Location defaults to All", function () {
     equal(S('#selLocations option:selected').val(), "All", "Dropdown did defaulted to All");
 });
 
-//5.
 test("Location drop down contains correct locations", function () {
     var correct;
-    var options = S('#selLocations').children()(function () {
-        correct = correct + S(this).val();
-    });
-    equal(correct, "1356All", "Dropdown has correct locations");
+    var currNode;
+    var correct = S('#selLocations option').first().val();
+    currNode = S('#selLocations option').first()
+    for (var i = 1; i < S('#selLocations option').size(); i++) {
+        currNode = currNode.next();
+        correct = correct + currNode.val();
+    }
+    equal(correct, "3567All", "Testing dropdown has currect locations");
 });
+
 
 //6.
 test("Location defaults to All", function () {
@@ -64,13 +68,13 @@ test("5 KPIs under Bottom workspace", function () {
 
 //10.
 test("Data correct in 1st KPI of top row", function () {
-    equal(S('#id_1_1 #kpi_title').text(), "KPI1", "Title Test");
+    equal(S('#id_1_1 #kpi_title').text(), "FIRST LOAD", "Title Test");
     equal(S('#id_1_1 #kpi_type').text(), "Minutes", "Type Test");
-    equal(S('#id_1_1 #kpi_units').text(), "25", "Units Test");
-    equal(S('#id_1_1 #kpi_formattedValue').text(), "60", "formattedValue Test");
-    equal(S('#id_1_1 #kpi_formattedText').text(), "90", "formattedText Test");
-    equal(S('#id_1_1 #kpi_firstWarn').text(), "60", "firstWarn Test");
-    equal(S('#id_1_1 #kpi_secondWarn').text(), "90", "secondWarn Test");
+    equal(S('#id_1_1 #kpi_units').text(), "885", "Units Test");
+    equal(S('#id_1_1 #kpi_formatted_value').text(), "25", "formattedValue Test");
+    equal(S('#id_1_1 #kpi_formatted_text').text(), "10", "formattedText Test");
+    equal(S('#id_1_1 #kpi_firstWarn').text(), "740", "firstWarn Test");
+    equal(S('#id_1_1 #kpi_secondWarn').text(), "1110", "secondWarn Test");
 });
 
 
