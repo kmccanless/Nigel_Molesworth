@@ -61,6 +61,9 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Dashboard.htm" />
     <Content Include="Demo.htm" />
+    <Content Include="layout_1_5.htm" />
+    <Content Include="Layout_2_3.htm" />
+    <Content Include="Layout_4_2.htm" />
     <Content Include="MockData\demo-json-2-3_5.js" />
     <Content Include="MockData\demo-json-5-5_3.js" />
     <Content Include="MockData\demo-json-5-5_all.js" />
