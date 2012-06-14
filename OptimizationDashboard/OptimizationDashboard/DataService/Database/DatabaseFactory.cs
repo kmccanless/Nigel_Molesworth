@@ -71,24 +71,40 @@ namespace CAI.COMMANDoptimize.KPI.Database
         {
             get { return _IsFileProvider(_provider); }
         }
-		
+
+        /// <summary>
+        /// Database name
+        /// </summary>
+        public string DatabaseName 
+        {
+            get
+            {
+                if (IsSqlServerProvider)
+                {
+                    SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(_connectionString);
+                    return cs.InitialCatalog;
+                }
+                return string.Empty;
+            }
+        }
+
         /// <summary>
         /// Create a database connection
         /// </summary>
         /// <returns>IDbConnection reference to a specific provider connection object</returns>
         public IDbConnection Create()
-        {          
-            IDbConnection connection = null;
-			if (_IsSqlServerProvider(_provider))
-				connection = new SqlConnection(_connectionString);
-			else if (_IsOracleProvider(_provider))
-				connection = new OracleConnection(_connectionString);
-			else if (_IsOdbcProvider(_provider))
-				connection = new OdbcConnection(_connectionString);
-			else
-            	throw new Exception("Unknown Database Provider: " + _provider);
-				
-            return connection;
+        {
+            return MakeConnection(_connectionString);
+        }
+
+        /// <summary>
+        /// Create a database connection
+        /// </summary>
+        /// <param name="databasename"></param>
+        /// <returns>IDbConnection reference to a specific provider connection object</returns>
+        public IDbConnection Create(string databasename)
+        {
+            return MakeConnection(MakeConnectionString(_provider, _connectionString, databasename));
         }
 
         /// <summary>
@@ -119,10 +135,72 @@ namespace CAI.COMMANDoptimize.KPI.Database
 
             return param;
         }
-		
+
+        /// <summary>
+        /// Translate the parameter symbol
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public string TranslateCommandParamSymbol(string sql)
+        {
+            return (this.IsOracleProvider) ? sql.Replace('@', '&') : sql;
+        }
+
         #endregion
 
         #region Implementation
+        private IDbConnection MakeConnection(string connectionString)
+        {
+            IDbConnection connection = null;
+            if (_IsSqlServerProvider(_provider))
+                connection = new SqlConnection(connectionString);
+            else if (_IsOracleProvider(_provider))
+                connection = new OracleConnection(connectionString);
+            else if (_IsOdbcProvider(_provider))
+                connection = new OdbcConnection(connectionString);
+            else
+                throw new Exception("Unknown Database Provider: " + _provider);
+
+            return connection;
+        }
+
+        private string MakeConnectionString(string providerName, string connectionstring, string databasename)
+        {
+            if (_IsSqlServerProvider(providerName))
+            {
+                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(connectionstring);
+                cs.InitialCatalog = databasename;
+
+                return cs.ConnectionString;
+            }
+
+            else if (_IsOracleProvider(providerName))
+            {
+                return connectionstring;
+                /*
+                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(connectionstring);
+                //cs.InitialCatalog = databasename;
+
+                //return cs.ConnectionString;                
+
+                return string.Format("Data Source={0};user id={1};password={2}", cs.DataSource, cs.UserID, cs.Password);
+                */ 
+            }
+
+            else if (_IsOdbcProvider(providerName))
+            {
+                return connectionstring;
+                /*
+                OdbcConnectionStringBuilder cs = new OdbcConnectionStringBuilder(connectionstring);
+                cs .InitialCatalog = databasename;
+
+                return cs.ConnectionString;
+                */                
+            }
+
+            return null;
+        }
+
 		private string ParseAsnFile(string filepath)
 		{
 			if (!File.Exists(filepath))

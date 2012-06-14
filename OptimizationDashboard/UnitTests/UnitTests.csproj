@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseFactoryTest.cs" />
+    <Compile Include="DatabaseKPIRepositoryTest.cs" />
     <Compile Include="FileKPIRepositoryTest.cs" />
     <Compile Include="KPIDataServiceTest.cs" />
     <Compile Include="KPI_JSONTest.cs" />
@@ -62,6 +63,15 @@
       <Project>{C67778B4-38D5-4AEE-BE74-CAC97BF2FE31}</Project>
       <Name>OptimizationDashboard</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\KPICreateSchema.sql" />
+    <EmbeddedResource Include="Data\KPIDropSchema.sql" />
+    <EmbeddedResource Include="Data\KPIPopulateData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\KPICreateSchemaOracle.sql" />
+    <EmbeddedResource Include="Data\KPIDropSchemaOracle.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

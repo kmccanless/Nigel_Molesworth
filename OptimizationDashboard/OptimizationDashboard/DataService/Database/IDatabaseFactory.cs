@@ -16,12 +16,24 @@ namespace CAI.COMMANDoptimize.KPI.Database
         /// IsOracleProvider
         /// </summary>
 		bool IsOracleProvider {get;}
-	
+
+        /// <summary>
+        /// Database name
+        /// </summary>
+        string DatabaseName { get; }
+
         /// <summary>
         /// Create a database connection
         /// </summary>
         /// <returns>IDbConnection reference to a specific provider connection object</returns>
         IDbConnection Create();
+
+        /// <summary>
+        /// Create a database connection
+        /// </summary>
+        /// <param name="databasename">s</param>
+        /// <returns>IDbConnection reference to a specific provider connection object</returns>
+        IDbConnection Create(string databasename);
 
         /// <summary>
         /// Add a Parameter to a Command
@@ -33,5 +45,12 @@ namespace CAI.COMMANDoptimize.KPI.Database
         /// <param name="value">Value to assign to the parameter</param>
         /// <returns>Returns the parameter object</returns>
         IDbDataParameter AddCommandParameter(IDbCommand cmd, string name, DbType type, ParameterDirection direction, Object value);
+
+        /// <summary>
+        /// Translate the parameter symbol
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        string TranslateCommandParamSymbol(string sql);
 	}
 }

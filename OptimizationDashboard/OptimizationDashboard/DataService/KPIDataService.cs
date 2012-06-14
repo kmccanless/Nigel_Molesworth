@@ -25,7 +25,7 @@ namespace CAI.COMMANDoptimize.KPI.Dataservice
 
             User user = r.GetUser(username);
             user.ActiveLocation = location;
-            Workspace[] workspaces = r.GetKPIs(username, location);
+            Workspace[] workspaces = r.GetKPIs(user.Username, location, user.Locations);
 
             string json = JsonConverter.ToJSON<KPIDATA_JSON>(new KPIDATA_JSON(user, workspaces));
 

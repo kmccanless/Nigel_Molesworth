@@ -7,6 +7,6 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
     public interface IKPIRepository
     {
         User GetUser(string username);
-        Workspace[] GetKPIs(string username, string location);
+        Workspace[] GetKPIs(string rolename, string location, string[] locations);
     }
 }
