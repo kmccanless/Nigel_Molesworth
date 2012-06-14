@@ -18,8 +18,8 @@
                     target: 15,
                     value: 10,
                     units: 20,
-                    firstWarn: "20",
-                    secondWarn: "30"
+                    firstWarn: 20,
+                    secondWarn: 30
                 },
                 {
                     title: "KPI2",
@@ -27,8 +27,8 @@
                     target: 130,
                     value: 140,
                     units: 10,
-                    firstWarn: "120",
-                    secondWarn: "125"
+                    firstWarn: 120,
+                    secondWarn: 125
                 },
                 {
                     title: "KPI3",
@@ -36,8 +36,8 @@
                     target: 225,
                     value: 170,
                     units: 25,
-                    firstWarn: "250",
-                    secondWarn: "275"
+                    firstWarn: 250,
+                    secondWarn: 275
                 },
                  {
                      title: "KPI4",
@@ -45,8 +45,8 @@
                      target: 225,
                      value: 180,
                      units: 25,
-                     firstWarn: "250",
-                     secondWarn: "275"
+                     firstWarn: 250,
+                     secondWarn: 275
                  },
                   {
                       title: "KPI5",
@@ -54,8 +54,8 @@
                       target: 225,
                       value: 130,
                       units: 250,
-                      firstWarn: "250",
-                      secondWarn: "275"
+                      firstWarn: 250,
+                      secondWarn: 275
                   }
             ]
         },
@@ -68,8 +68,8 @@
                     target: 200,
                     value: 104,
                     units: 200,
-                    firstWarn: "180",
-                    secondWarn: "190"
+                    firstWarn: 200,
+                    secondWarn: 50
                 },
                 {
                     title: "KPI2",
@@ -77,8 +77,8 @@
                     target: 170,
                     value: 100,
                     units: 3,
-                    firstWarn: "150",
-                    secondWarn: "160"
+                    firstWarn: 150,
+                    secondWarn: 160
                 },
                 {
                     title: "KPI3",
@@ -86,8 +86,8 @@
                     target: 170,
                     value: 130,
                     units: 100,
-                    firstWarn: "150",
-                    secondWarn: "160"
+                    firstWarn: 150,
+                    secondWarn: 160
                 },
                 {
                     title: "KPI4",
@@ -95,8 +95,8 @@
                     target: 170,
                     value: 140,
                     units: 30,
-                    firstWarn: "150",
-                    secondWarn: "160"
+                    firstWarn: 150,
+                    secondWarn: 160
                 },
                 {
                     title: "KPI5",
@@ -104,8 +104,8 @@
                     target: 25,
                     value: 30,
                     units: 50,
-                    firstWarn: "30",
-                    secondWarn: "50"
+                    firstWarn: 30,
+                    secondWarn: 50
                 }
             ]
         }
