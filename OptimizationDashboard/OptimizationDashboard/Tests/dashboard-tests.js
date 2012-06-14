@@ -54,13 +54,13 @@ test("Two workspaces present", function () {
 });
 
 //8.
-test("5 KPIs under Top workspace", function () {
+test("2 KPIs under Top workspace", function () {
     var kpis = S('#workspace_1  .kpi').size();
     equal(kpis, 5, "Correct number of KPI");
 });
 
 //9.
-test("5 KPIs under Bottom workspace", function () {
+test("3 KPIs under Bottom workspace", function () {
     var kpis = S('#workspace_2  .kpi').size();
     equal(kpis, 5, "Correct number of KPI");
 });
@@ -70,9 +70,9 @@ test("5 KPIs under Bottom workspace", function () {
 test("Data correct in 1st KPI of top row", function () {
     equal(S('#id_1_1 #kpi_title').text(), "FIRST LOAD", "Title Test");
     equal(S('#id_1_1 #kpi_type').text(), "Minutes", "Type Test");
-    equal(S('#id_1_1 #kpi_units').text(), "885", "Units Test");
+    equal(S('#id_1_1 #kpi_units').text(), "36", "Units Test");
     equal(S('#id_1_1 #kpi_formatted_value').text(), "25", "formattedValue Test");
-    equal(S('#id_1_1 #kpi_formatted_text').text(), "10", "formattedText Test");
+    equal(S('#id_1_1 #kpi_formatted_target').text(), "10", "formattedTarget Test");
     equal(S('#id_1_1 #kpi_firstWarn').text(), "740", "firstWarn Test");
     equal(S('#id_1_1 #kpi_secondWarn').text(), "1110", "secondWarn Test");
 });

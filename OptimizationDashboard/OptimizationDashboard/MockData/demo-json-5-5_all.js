@@ -17,9 +17,9 @@ var KPI_JSON = {
 					type: "Minutes",
 					target: 370,
 					value: 885,
-					units: 25,
+					units: 36,
 					firstWarn: 740,
-					secondWarn: 1110,
+					secondWarn: 1110
                 },
                 {
                     title: "JOB WAIT",

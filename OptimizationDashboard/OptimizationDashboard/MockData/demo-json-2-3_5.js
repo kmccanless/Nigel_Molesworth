@@ -16,7 +16,7 @@ var KPI_JSON = {
                     type: "Minutes",
                     target: 210,
                     value: 350,
-                    units: 25,
+                    units: 14,
                     firstWarn: 280,
                     secondWarn: 350
                 },
@@ -25,7 +25,7 @@ var KPI_JSON = {
                      type: "Minutes",
                      target: 360,
                      value: 350,
-                     units: 19,
+                     units: 18,
                      firstWarn: 450,
                      secondWarn: 540
                  },
@@ -39,7 +39,7 @@ var KPI_JSON = {
                     type: "Minutes",
                     target: 123,
                     value: 250,
-                    units: 25,
+                    units: 10,
                     firstWarn: 240,
                     secondWarn: 360
                 },

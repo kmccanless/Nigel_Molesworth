@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+   <style type="text/css">
+	body 
+	{
+		 display : block;
+		 margin : 0;
+		 padding : 0;
+		 border: 0;
+	}
+	.kpi
+	{
+	    padding: 5px 5px; 
+		border: 2px solid #a1a1a1;
+		border-radius: 25px;
+		min-height: 200px;
+		vertical-align: top;
+	}
+	.kpi_one
+	{
+	    margin-top : 5%;
+		margin-left: auto;
+		margin-right: auto;
+		width: 15%;
+		
+	}
+	.kpi_two
+	{
+		display: inline-block;
+		margin: 5% 0 0 20.5%;
+		width: 15%;
+	}
+	.kpi_three
+	{
+		display: inline-block;
+		margin: 5% 0 0 9.75%;
+		width: 19%;
+
+	}
+	.kpi_four
+	{
+		display: inline-block;
+		margin: 5% 0 0 5.8%;
+		width: 15%;
+	}
+	.kpi_five
+	{
+		display: inline-block;
+		margin: 5% 0 0 2.8%;
+		width: 15%;
+	}
+.yellow
+	{
+	    background: #ccc000;
+        background: -moz-linear-gradient(top,  #ffffff 0%, #ccc000 50%, #000000 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#ccc000), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #ffffff 0%,#ccc000 50%,#000000 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #ffffff 0%,#ccc000 50%,#000000 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #ffffff 0%,#ccc000 50%,#000000 100%); /* IE10+ */
+        background: linear-gradient(top,  #ffffff 0%,#ccc000 50%,#000000 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8dd', endColorstr='#cccc00',GradientType=0 ); /* IE6-9 */
+
+	   /* background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #EDED00));*/
+	}
+.red
+	{
+	    background: #cc0000;
+        background: -moz-linear-gradient(top,  #ffffff 0%, #cc0000 50%, #000000 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#cc0000), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #ffffff 0%,#cc0000 50%,#000000 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #ffffff 0%,#cc0000 50%,#000000 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #ffffff 0%,#cc0000 50%,#000000 100%); /* IE10+ */
+        background: linear-gradient(top,  #ffffff 0%,#cc0000 50%,#000000 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fae4e4', endColorstr='#cc0000',GradientType=0 ); /* IE6-9 */
+
+	    /*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #A80000));*/
+	}
+	.green
+	{
+	    background: #33cc00;
+        background: -moz-linear-gradient(top,  #ffffff 0%, #33cc00 50%, #000000 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#33cc00), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #ffffff 0%,#33cc00 50%,#000000 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #ffffff 0%,#33cc00 50%,#000000 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #ffffff 0%,#33cc00 50%,#000000 100%); /* IE10+ */
+        background: linear-gradient(top,  #ffffff 0%,#33cc00 50%,#000000 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f9df', endColorstr='#33cc00',GradientType=0 ); /* IE6-9 */
+	    /*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #28A628));*/
+	}
+	.label
+	{
+		padding-right :1px;
+	}
+	.kpiTitle
+	{
+		text-align:center;
+		font-size: 160%;    
+		font-weight: bold;
+		font-family: Century Gothic, sans-serif;
+	}
+	.kpiValue
+	{
+		text-align:center;   
+		color:#FFFFFF;
+		font-size: 400%; 
+		font-weight: bolder;
+		font-family: Century Gothic, sans-serif;
+	}
+	.kpiTarget
+	{
+		text-align:right;    
+		color:#FFFFFF;
+		font-size: 200%;
+		font-weight:normal;
+		font-family: Century Gothic, sans-serif;
+	}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+
+	    });
+	</script>
+</head>
+<body>
+
+<div id="top">
+<!--	<div class="kpi_two yellow">
+		<div class="kpiTitle">TOTAL COMPLIANCE</div>
+		<div class="kpiValue">78%</div>
+		<p></p>
+		<div class="kpiTarget">90%</div>
+	</div>-->
+	<div class="kpi kpi_one green">
+		<div class="kpiTitle">Locked Loads</div>    
+		<div class="kpiValue">12%</div>
+		<p></p>
+		<div class="kpiTarget">10%</div>
+	</div>
+</div>
+<div id="bottom">
+    <div class="kpi kpi_five green">
+		<div class="kpiTitle">First Load</div>
+		<div class="kpiValue">0:16</div>
+		<p></p>
+		<div class="kpiTarget">0:10</div>
+	</div>
+
+	<div class="kpi kpi_five red">
+		<div class="kpiTitle">Job Wait</div>    
+		<div class="kpiValue">0:16</div>
+		<p></p>
+		<div class="kpiTarget">0:10</div>
+	</div>
+       <div class="kpi kpi_five green">
+		<div class="kpiTitle">Total Compliance</div>
+		<div class="kpiValue">0:16</div>
+		<p></p>
+		<div class="kpiTarget">0:10</div>
+	</div>
+
+	<div class="kpi kpi_five red">
+		<div class="kpiTitle">Job Wait</div>    
+		<div class="kpiValue">0:16</div>
+		<p></p>
+		<div class="kpiTarget">0:10</div>
+	</div>
+	<div class="kpi kpi_five red">
+		<div class="kpiTitle">Yard Time</div>    
+		<div class="kpiValue">0:18</div>
+		<p></p>
+		<div class="kpiTarget">0:15</div>
+	</div>
+</div>
+
+</body>
+</html>
