@@ -27,17 +27,17 @@
                     target: 130,
                     value: 140,
                     units: 10,
-                    firstWarn: 120,
-                    secondWarn: 125
+                    firstWarn: "120",
+                    secondWarn: "125"
                 },
                 {
                     title: "KPI3",
-                    type: "Amount",
-                    target: 225,
-                    value: 170,
-                    units: 25,
-                    firstWarn: 250,
-                    secondWarn: 275
+                    type: "Minutes",
+                    target: 600,
+                    value: 720,
+                    units: 10,
+                    firstWarn: 800,
+                    secondWarn: 900
                 },
                  {
                      title: "KPI4",

@@ -17,6 +17,8 @@
 	    var activeDataService;
 	    var params = $.deparam.querystring();
 	    var warnLevel;
+	    var targetTemp;
+	    var valueTemp;
 
 
 	    var viewModel = function () {
@@ -32,7 +34,6 @@
 
 	    var wigitColor = function(upperLimit, lowerLimit, compValue)
 	    {
-//	        if (workspace.secondWarn > workspace.firstWarn) {
 	            if (compValue >= upperLimit) {
 	                warnLevel = 'red';
 	            }
@@ -42,20 +43,42 @@
 	            else {
 	                warnLevel = 'yellow';
 	            }
-//	        }
-
-//	        else if (workspace.firstWarn > workspace.secondWarn) {
-//	            if (workspace.value >= workspace.firstWarn) {
-//	                colorTemp = 'red';
-//	            }
-//	            else if (workspace.value < workspace.secondWarn) {
-//	                colorTemp = 'green';
-//	            }
-//	            else {
-//	                colorTemp = 'yellow';
-//	            }
-//	        }
 	    };
+
+	    var formatWigit = function (calcType) {
+	        //round to integer value
+	        valueTemp = valueTemp.toFixed(0);
+	        targetTemp = targetTemp.toFixed(0);
+
+	        if (calcType === "Percentage") {
+	            formatPercent();
+	        }
+	        else if (calcType === "Minutes") {
+	            valueTemp = formatMinutes(valueTemp);
+	            targetTemp = formatMinutes(targetTemp);
+	        }
+
+	    };
+
+        var formatPercent = function(){
+            valueTemp = valueTemp + '%';
+	        targetTemp = targetTemp + '%';
+        };
+
+        var formatMinutes = function (totalMins) {
+            var mins = totalMins % 60;
+            var hours = 0;
+            if (totalMins > mins) {
+                hours = (totalMins - mins) / 60;
+            }
+            return hours + ':' + mins;
+
+        };
+
+        var getHours = function(convertVal){
+            hours = convertVal/60;
+        };
+
 
 	    var bindModel = function (data) {
 	        //clear this out or else the list will grow when updated from the server.
@@ -66,26 +89,33 @@
 	            for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
 
 	                var workspace = data.workspaces[i].KPIs[j];
-	                var targetTemp;
-	                var valueTemp;
-                    
-                    //set this null since it may have already been used to set the color value
+
+	                //set this null since it may have already been used to set the color value
 	                warnLevel = null;
+	                targetTemp = null;
+	                valueTemp = null;
 
 	                valueTemp = workspace.value / workspace.units;
 	                targetTemp = workspace.target / workspace.units;
+
 
 	                if (data.workspaces[i].KPIs[j].type === "Percentage") {
 	                    valueTemp = valueTemp * 100;
 	                    targetTemp = targetTemp * 100;
 	                }
 
-	                data.workspaces[i].KPIs[j]["formattedValue"] = valueTemp.toFixed(0);
-	                data.workspaces[i].KPIs[j]["formattedTarget"] = targetTemp.toFixed(0);
+                    formatWigit(data.workspaces[i].KPIs[j].type);
+
+	               // data.workspaces[i].KPIs[j]["formattedValue"] = valueTemp.toFixed(0);
+	                // data.workspaces[i].KPIs[j]["formattedTarget"] = targetTemp.toFixed(0);
+
+	                data.workspaces[i].KPIs[j]["formattedValue"] = valueTemp;
+	                data.workspaces[i].KPIs[j]["formattedTarget"] = targetTemp;
+
 
 
 	                if (workspace.secondWarn > workspace.firstWarn) {
-	                   wigitColor(workspace.secondWarn, workspace.firstWarn, workspace.value);
+	                    wigitColor(workspace.secondWarn, workspace.firstWarn, workspace.value);
 	                }
 
 	                else if (workspace.firstWarn > workspace.secondWarn) {
