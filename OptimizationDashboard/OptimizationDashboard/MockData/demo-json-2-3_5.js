@@ -12,7 +12,7 @@ var KPI_JSON = {
 			id: 1,
 			KPIs: [
                 {
-                    title: "YARD TIME",
+                    title: "Yard Time",
                     type: "Minutes",
                     target: 210,
                     value: 350,
@@ -21,7 +21,7 @@ var KPI_JSON = {
                     secondWarn: 350
                 },
                  {
-                     title: "EOD YARD",
+                     title: "EOD Yard",
                      type: "Minutes",
                      target: 360,
                      value: 350,
@@ -35,7 +35,7 @@ var KPI_JSON = {
             id: 2,
             KPIs: [
                 {
-                    title: "FIRST LOAD",
+                    title: "First Load",
                     type: "Minutes",
                     target: 123,
                     value: 250,
@@ -44,7 +44,7 @@ var KPI_JSON = {
                     secondWarn: 360
                 },
                 {
-                    title: "STARTUP",
+                    title: "Startup",
                     type: "Minutes",
                     target: 500,
                     value: 850,
@@ -53,7 +53,7 @@ var KPI_JSON = {
                     secondWarn: 900
                 },
                 {
-                    title: "WASH OUT",
+                    title: "Wash Out",
                     type: "Minutes",
                     target: 280,
                     value: 600,

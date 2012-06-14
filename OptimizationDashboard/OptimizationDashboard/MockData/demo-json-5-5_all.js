@@ -13,7 +13,7 @@ var KPI_JSON = {
 			id: 1,
 			KPIs: [
 				{
-					title: "FIRST LOAD",
+					title: "First Load",
 					type: "Minutes",
 					target: 370,
 					value: 885,
@@ -22,7 +22,7 @@ var KPI_JSON = {
 					secondWarn: 1110
                 },
                 {
-                    title: "JOB WAIT",
+                    title: "Job Wait",
                     type: "Minutes",
                     target: 416,
                     value: 835,
@@ -31,7 +31,7 @@ var KPI_JSON = {
                     secondWarn: 832
                 },
                 {
-                    title: "YARD TIME",
+                    title: "Yard Time",
                     type: "Minutes",
                     target: 600,
                     value: 860,
@@ -40,7 +40,7 @@ var KPI_JSON = {
                     secondWarn: 1000
                 },
                  {
-                     title: "EOD YARD",
+                     title: "EOD Yard",
                      type: "Minutes",
                      target: 864,
                      value: 1125,
@@ -49,7 +49,7 @@ var KPI_JSON = {
                      secondWarn: 1428
                  },
                   {
-                      title: "TOTAL COMPLIANCE",
+                      title: "Total Compliance",
                       type: "Percentage",
                       target: 207,
                       value: 181,
@@ -63,7 +63,7 @@ var KPI_JSON = {
             id: 2,
             KPIs: [
                 {
-                    title: "LOCKED LOADS",
+                    title: "Locked Loads",
                     type: "Percentage",
                     target: 11.4,
                     value: 22.0,
@@ -72,7 +72,7 @@ var KPI_JSON = {
                     secondWarn: 34.2
                 },
                 {
-                    title: "STARTUP",
+                    title: "Startup",
                     type: "Minutes",
                     target: 1660,
                     value: 2515,
@@ -81,7 +81,7 @@ var KPI_JSON = {
                     secondWarn: 3040
                 },
                 {
-                    title: "LOAD & MIX",
+                    title: "Load & Mix",
                     type: "Minutes",
                     target: 1041,
                     value: 1330,
@@ -90,7 +90,7 @@ var KPI_JSON = {
                     secondWarn: 1625
                 },
                 {
-                    title: "WASH OUT",
+                    title: "Wash Out",
                     type: "Minutes",
                     target: 860,
                     value: 1745,
@@ -99,7 +99,7 @@ var KPI_JSON = {
                     secondWarn: 1720
                 },
                 {
-                    title: "STATUS BOX UPDATES",
+                    title: "Status Box Updates",
                     type: "Percentage",
                     target: 218.5,
                     value: 210.0,

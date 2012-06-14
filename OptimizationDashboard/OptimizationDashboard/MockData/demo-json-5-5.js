@@ -27,8 +27,8 @@
                     target: 130,
                     value: 140,
                     units: 10,
-                    firstWarn: "120",
-                    secondWarn: "125"
+                    firstWarn: 120,
+                    secondWarn: 125
                 },
                 {
                     title: "KPI3",
