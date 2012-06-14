@@ -33,10 +33,10 @@
                 {
                     title: "KPI3",
                     type: "Minutes",
-                    target: 600,
+                    target: 300,
                     value: 720,
                     units: 10,
-                    firstWarn: 800,
+                    firstWarn: 450,
                     secondWarn: 900
                 },
                  {
