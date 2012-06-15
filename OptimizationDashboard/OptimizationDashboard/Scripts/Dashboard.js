@@ -10,10 +10,16 @@ var targetTemp = 0;
 //******
 var formatWigit = function (inKPI, calcType) {
     if (calcType === "Percentage") {
-        inKPI = formatPercent(inKPI);
+        inKPI = formatPercent(inKPI.toFixed(0));
     }
     else if (calcType === "Minutes") {
-        inKPI = formatMinutes(inKPI);
+        inKPI = formatMinutes(inKPI.toFixed(0));
+    }
+    else if (calcType === "Amount") {
+        inKPI = formatAmount(inKPI.toFixed(2));
+    }
+    else {
+        inKPI = inKPI.toFixed(2);
     }
     return inKPI;
 };
@@ -47,6 +53,15 @@ var formatPercent = function (inVal) {
  };
 
 //******
+// Fomat an amoun $nnn.nn
+//
+//******
+var formatAmount = function (inVal){
+    return '$' + inVal;
+};
+
+
+//******
 // Determine background color for the wigit warning level
 // red >= upperLimit, green < lowerLimit, yellow >= lowerLimt && < upperLimit
 //******
@@ -74,7 +89,7 @@ var formatPercent = function (inVal) {
      }
 
      //Now format the widget based on the calc type
-     kpi = formatWigit(kpi.toFixed(0), calcType);
+     kpi = formatWigit(kpi, calcType);
      return kpi;
  };
 

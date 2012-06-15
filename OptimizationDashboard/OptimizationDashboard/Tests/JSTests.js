@@ -14,7 +14,7 @@
 test("Calculate KPI", function () {
     equal(calcKPI(50, 100, "Percentage"), '50%', "percentage KPI");
     equal(calcKPI(50, 100, "Minutes"), '0:01', "minutes KPI");
-    equal(calcKPI(100, 50, "Amount"), 2, "other KPI");
+    equal(calcKPI(100, 50, "Amount"), '$2.00', "other KPI");
 });
 
 //2
@@ -35,6 +35,18 @@ test("Format Percent", function(){
 });
 
 //4
+test("Format Amount", function () {
+    var temp = 1;
+    equal(formatAmount(temp.toFixed(2)), '$1.00', 'format 1 into amount');
+    equal(formatAmount(10.00.toFixed(2)), '$10.00', 'foramt 10 into amount');
+    equal(formatAmount(15.01.toFixed(2)), '$15.01', 'format 15.01 into amount');
+    equal(formatAmount(200.99.toFixed(2)), '$200.99', 'format 200.99 into amount');
+    equal(formatAmount(200.999.toFixed(2)), '$201.00', 'format 200.999 into amount');
+    equal(formatAmount(151.711.toFixed(2)), '$151.71', 'format 151.711 into amount');
+
+});
+
+//5
 test("Format Warn Color", function () {
     equal(wigitColor(100, 50, 100), 'red', 'red warn level');
     equal(wigitColor(100, 50, 110), 'red', 'red warn level');
@@ -44,19 +56,25 @@ test("Format Warn Color", function () {
     equal(wigitColor(100, 50, 0), 'green', 'green warn level');
 });
 
-//5
+//6
 test('Format Widget', function () {
     equal(formatWigit(30, 'Percentage'), '30%', 'value percentage format');
     equal(formatWigit(25, 'Percentage'), '25%', 'targe percentage format');
 
-    equal(formatWigit(30,'Minutes'), '0:30', 'value minutes format');
-    equal(formatWigit(25,'Minutes'), '0:25', 'target minutes format');
+    equal(formatWigit(30, 'Minutes'), '0:30', 'value minutes format');
+    equal(formatWigit(25, 'Minutes'), '0:25', 'target minutes format');
 
-    equal(formatWigit(30,'Amount'), '30', 'value amount format');
-    equal(formatWigit(25,'Amount'), '25', 'target amount format');
+    equal(formatWigit(30, 'Amount'), '$30.00', 'value amount format');
+    equal(formatWigit(25, 'Amount'), '$25.00', 'target amount format');
+
+    equal(formatWigit(30, 'Quantity'), '30.00', 'value quantity format');
+    equal(formatWigit(30.1, 'Quantity'), '30.10', 'value quantity format');
+    equal(formatWigit(30.50, 'Quantity'), '30.50', 'value quantity format');
+    equal(formatWigit(30.999, 'Quantity'), '31.00', 'value quantity format');
+    equal(formatWigit(30.911, 'Quantity'), '30.91', 'value quantity format');
 });
 
-//6
+//7
 test('Warn Levels', function () {
     equal(getWarnLevel(25, 50, 10), 'green', 'green level');
     equal(getWarnLevel(25, 50, 25), 'yellow', 'yellow level');
