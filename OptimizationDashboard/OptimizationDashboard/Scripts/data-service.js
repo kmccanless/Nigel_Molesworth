@@ -29,7 +29,7 @@
 		})
 	},
 	callDataService: function (callback) {
-		console.log("calling data service");
+//		console.log("calling data service");
 		amplify.request("DataService",
 				self.values,
 				function (data) {
