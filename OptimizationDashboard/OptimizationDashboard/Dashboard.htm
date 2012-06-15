@@ -66,7 +66,7 @@
 
 	        $.getScript("MockData/" + params.script + ".js")
 				.done(function (script, textStatus) {
-				    console.log('Loaded test script');
+//				    console.log('Loaded test script');
 				    dataService.defineMockService(KPI_JSON);
 				    activeDataService = function () { dataService.callMockService.call(this, bindModel) };
 				    activeDataService();
@@ -91,7 +91,7 @@
 
 	        ko.applyBindings(vm);
 
-	        console.log("adding location to the param object");
+	 //       console.log("adding location to the param object");
 
 	        //do not actually call the service until you are sure the DOM is ready for binding
 	        if (!params.debug) {
@@ -116,7 +116,7 @@
 <header class="header">
 <div class="logo"><div class="command">Command</div><div style="float:left">&nbsp;</div><div class="alkon">Alkon</div></div>
 <div class="role"><span data-bind="text: roleName"></span><span> Scoreboard</span></div>
-<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><span>Plant(s): </span><span id="currentLocation" data-bind="text: activeLocation"></span></div></div>
+<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><span>Plant(s): </span><!--<span data-bind="template: {name: 'ActiveLocal'}"></span>--><span id="currentLocation" data-bind="text: activeLocation"></span></div></div>
 </header>
 <!--</div>-->
 
@@ -152,6 +152,9 @@
         <p></p>
         <div class="kpiTarget" data-bind="text: formattedTarget"></div>
 	</div>
+</script>
+<script type="text/html" id="ActiveLocal">
+    <span id="currentLocation" data-bind="text: {activeLocation : activeLocation === 'All'}">
 </script>
 </body>
 </html>
