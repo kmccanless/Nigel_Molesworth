@@ -10,16 +10,13 @@
 	<script type="text/javascript" src="./Scripts/knockout.mapping-latest.debug.js"></script>
 	<script type="text/javascript" src="./Scripts/amplify.min.js"></script>
 	<script type="text/javascript" src="./Scripts/data-service.js"></script>
+    <script type="text/javascript" src="./Scripts/Dashboard.js"></script>
 
 
 	<script type="text/javascript">
 	    var timer;
 	    var activeDataService;
 	    var params = $.deparam.querystring();
-	    var warnLevel;
-	    var targetTemp;
-	    var valueTemp;
-
 
 	    var viewModel = function () {
 	        var self = this;
@@ -32,54 +29,6 @@
 
 	    var vm = new viewModel();
 
-	    var wigitColor = function(upperLimit, lowerLimit, compValue)
-	    {
-	            if (compValue >= upperLimit) {
-	                warnLevel = 'red';
-	            }
-	            else if (compValue < lowerLimit) {
-	                warnLevel = 'green';
-	            }
-	            else {
-	                warnLevel = 'yellow';
-	            }
-	    };
-
-	    var formatWigit = function (calcType) {
-	        //round to integer value
-	        valueTemp = valueTemp.toFixed(0);
-	        targetTemp = targetTemp.toFixed(0);
-
-	        if (calcType === "Percentage") {
-	            formatPercent();
-	        }
-	        else if (calcType === "Minutes") {
-	            valueTemp = formatMinutes(valueTemp);
-	            targetTemp = formatMinutes(targetTemp);
-	        }
-
-	    };
-
-        var formatPercent = function(){
-            valueTemp = valueTemp + '%';
-	        targetTemp = targetTemp + '%';
-        };
-
-        var formatMinutes = function (totalMins) {
-            var mins = totalMins % 60;
-            var hours = 0;
-            if (totalMins > mins) {
-                hours = (totalMins - mins) / 60;
-            }
-            return hours + ':' + mins;
-
-        };
-
-        var getHours = function(convertVal){
-            hours = convertVal/60;
-        };
-
-
 	    var bindModel = function (data) {
 	        //clear this out or else the list will grow when updated from the server.
 	        if ($.inArray("All", data.locations) === -1) {
@@ -90,39 +39,10 @@
 
 	                var workspace = data.workspaces[i].KPIs[j];
 
-	                //set this null since it may have already been used to set the color value
-	                warnLevel = null;
-	                targetTemp = null;
-	                valueTemp = null;
+	                data.workspaces[i].KPIs[j]["formattedValue"] = calcKPI(workspace.value, workspace.units, data.workspaces[i].KPIs[j].type);
+	                data.workspaces[i].KPIs[j]["formattedTarget"] = calcKPI(workspace.target, workspace.units, data.workspaces[i].KPIs[j].type);
 
-	                valueTemp = workspace.value / workspace.units;
-	                targetTemp = workspace.target / workspace.units;
-
-
-	                if (data.workspaces[i].KPIs[j].type === "Percentage") {
-	                    valueTemp = valueTemp * 100;
-	                    targetTemp = targetTemp * 100;
-	                }
-
-                    formatWigit(data.workspaces[i].KPIs[j].type);
-
-	               // data.workspaces[i].KPIs[j]["formattedValue"] = valueTemp.toFixed(0);
-	                // data.workspaces[i].KPIs[j]["formattedTarget"] = targetTemp.toFixed(0);
-
-	                data.workspaces[i].KPIs[j]["formattedValue"] = valueTemp;
-	                data.workspaces[i].KPIs[j]["formattedTarget"] = targetTemp;
-
-
-
-	                if (workspace.secondWarn > workspace.firstWarn) {
-	                    wigitColor(workspace.secondWarn, workspace.firstWarn, workspace.value);
-	                }
-
-	                else if (workspace.firstWarn > workspace.secondWarn) {
-	                    wigitColor(workspace.firstWarn, workspace.secondWarn, workspace.value);
-	                }
-
-	                data.workspaces[i].KPIs[j]["Color"] = warnLevel;
+	                data.workspaces[i].KPIs[j]["Color"] = getWarnLevel(workspace.firstWarn, workspace.secondWarn, workspace.value);
 	            }
 	        }
 	        vm.userName(data.userName);

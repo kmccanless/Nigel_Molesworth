@@ -73,6 +73,7 @@
     <Content Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
+    <Content Include="Scripts\Dashboard.js" />
     <Content Include="Scripts\data-service.js" />
     <Content Include="MockData\demo-json-3-2.js" />
     <Content Include="MockData\demo-json-5-5.js" />
@@ -98,6 +99,8 @@
     <Content Include="Tests\CalcTest.js" />
     <Content Include="Tests\dashboard-tests.htm" />
     <Content Include="Tests\dashboard-tests.js" />
+    <Content Include="Tests\JSTests.htm" />
+    <Content Include="Tests\JSTests.js" />
     <Content Include="Tests\Scripts\funcunit.js" />
     <Content Include="Tests\Styles\qunit.css" />
     <Content Include="Web.config" />
