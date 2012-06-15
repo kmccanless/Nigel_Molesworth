@@ -45,7 +45,7 @@
                      target: 225,
                      value: 180,
                      units: 25,
-                     firstWarn: 250,
+                     firstWarn: 240,
                      secondWarn: 275
                  },
                   {
