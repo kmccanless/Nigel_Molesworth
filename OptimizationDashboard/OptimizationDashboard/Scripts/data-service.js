@@ -17,7 +17,7 @@
 		})
 	},
 	callMockService: function (callback) {
-		console.log("calling mock service");
+//		console.log("calling mock service");
 		amplify.request({
 			resourceId: "MockService",
 			success: function (data) {
