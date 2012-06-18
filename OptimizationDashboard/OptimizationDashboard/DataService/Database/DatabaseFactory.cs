@@ -25,6 +25,16 @@ namespace CAI.COMMANDoptimize.KPI.Database
                 connectionString = ParseAsnFile(connectionString);
             _connectionString = connectionString;
         }
+        public DatabaseFactory(string provider, string connectionString, string odbcprovider)
+            : this(provider, connectionString)
+        {
+            _odbcprovider = odbcprovider;
+        }
+        public DatabaseFactory(string provider, string connectionString, string odbcprovider, string databasename)
+            : this(provider, connectionString, odbcprovider)
+        {
+            _databasename = databasename;
+        }
 
         #endregion
 
@@ -79,7 +89,12 @@ namespace CAI.COMMANDoptimize.KPI.Database
         {
             get
             {
-                if (IsSqlServerProvider)
+                if (IsOdbcProvider)
+                {
+                    if (IsSqlServerProvider)
+                        return _databasename;
+                }
+                else if (IsSqlServerProvider)
                 {
                     SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(_connectionString);
                     return cs.InitialCatalog;
@@ -188,14 +203,14 @@ namespace CAI.COMMANDoptimize.KPI.Database
             }
 
             else if (_IsOdbcProvider(providerName))
-            {
-                return connectionstring;
-                /*
-                OdbcConnectionStringBuilder cs = new OdbcConnectionStringBuilder(connectionstring);
-                cs .InitialCatalog = databasename;
+            {                
+                OdbcConnectionStringBuilder ocs = new OdbcConnectionStringBuilder(connectionstring);
 
-                return cs.ConnectionString;
-                */                
+                return string.Format("DSN={0};Database={1};uid={2};pwd={3}",
+                    ocs.Dsn, databasename, ocs["uid"], ocs["pwd"]);
+
+
+                //return connectionstring;
             }
 
             return null;
@@ -266,7 +281,7 @@ namespace CAI.COMMANDoptimize.KPI.Database
         }
 				
         private bool _IsOdbcProvider(string providerName)
-        {
+        {                        
             return _IsProvider(cOdbcProviderName, providerName) ||
 				_IsProvider(cOdbcProviderNameAlt, providerName);
         }
@@ -297,6 +312,7 @@ namespace CAI.COMMANDoptimize.KPI.Database
         private string _provider;
 		private string _odbcprovider;
         private string _connectionString;
+        private string _databasename;
         #endregion
 	}
 }

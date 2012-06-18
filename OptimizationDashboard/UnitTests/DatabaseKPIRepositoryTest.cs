@@ -18,9 +18,18 @@ namespace Repositories
         private const string cOraProvider = "System.Data.OracleClient";
         private const string cOraConnectionString = "Data Source=ora11glab;user id=optkpi;password=kpi";
 
+        private const string cOdbcSqlProvider = "System.Data.Odbc";
+        private const string cOdbcSqlConnectionString = "DSN=sql2k8lab;Database=OptimizationKPI;uid=sa;pwd=mudbatch";
+
+        private const string cOdbcOraProvider = "System.Data.Odbc";
+        private const string cOdbcOraConnectionString = "DSN=ora11glab;user id=optkpi;password=kpi";
+
+
         private IDatabaseFactory _dbf = new DatabaseFactory(
                 cSqlProvider, cSqlConnectionString
                 //cOraProvider, cOraConnectionString
+                //cOdbcSqlProvider, cOdbcSqlConnectionString, cSqlProvider, "OptimizationKPI"
+                //cOdbcOraProvider, cOdbcOraConnectionString, cOraProvider
                 );
 
         [TestFixtureSetUp]

@@ -68,7 +68,7 @@ namespace Data
             }
         }
 		
-        //[Test]
+        [Test]
         public void Create_OdbcFromAsn_SqlServer()
         {
 			IDatabaseFactory f = new DatabaseFactory("System.IO.File",
@@ -88,7 +88,7 @@ namespace Data
             }
         }
 		
-        //[Test]
+        [Test]
         public void Create_OdbcFromAsn_Oracle()
         {
 		
