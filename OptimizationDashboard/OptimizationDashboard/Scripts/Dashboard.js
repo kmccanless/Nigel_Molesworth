@@ -82,7 +82,11 @@ var formatAmount = function (inVal){
  //
  //******
  var calcKPI = function (valIn, units, calcType) {
-     var kpi = valIn / units;
+     var kpi = 0;
+
+     if (valIn != 0) {
+         kpi = valIn / units;
+     }
 
      if (calcType === "Percentage") {
          kpi = kpi * 100;

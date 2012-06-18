@@ -14,7 +14,10 @@
 test("Calculate KPI", function () {
     equal(calcKPI(50, 100, "Percentage"), '50%', "percentage KPI");
     equal(calcKPI(50, 100, "Minutes"), '0:01', "minutes KPI");
-    equal(calcKPI(100, 50, "Amount"), '$2.00', "other KPI");
+    equal(calcKPI(100, 50, "Amount"), '$2.00', "amount KPI");
+    equal(calcKPI(0, 0, "Quantity"), '0.00', 'divide by zero');
+    equal(calcKPI(0, 0, "Minutes"), '0:00', 'divide by zero minutes');
+    equal(calcKPI(0, 0, "Amount"), '$0.00', 'divide by zero amount');
 });
 
 //2
