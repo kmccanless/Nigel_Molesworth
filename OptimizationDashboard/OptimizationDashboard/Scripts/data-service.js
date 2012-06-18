@@ -17,7 +17,7 @@
 		})
 	},
 	callMockService: function (callback) {
-		console.log("calling mock service");
+//		console.log("calling mock service");
 		amplify.request({
 			resourceId: "MockService",
 			success: function (data) {
@@ -29,7 +29,7 @@
 		})
 	},
 	callDataService: function (callback) {
-		console.log("calling data service");
+//		console.log("calling data service");
 		amplify.request("DataService",
 				self.values,
 				function (data) {

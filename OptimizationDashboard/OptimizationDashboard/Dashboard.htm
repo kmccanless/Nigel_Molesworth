@@ -1,9 +1,161 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>This is a Title</title>
+    <link rel="stylesheet" type="text/css" href="kpistyle.css" />
+	<title>Dashboard Demo</title>
+
+	<script type="text/javascript" src="./Scripts/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="./Scripts/jquery-bbq.js"></script>
+	<script type="text/javascript" src="./Scripts/knockout-2.1.0.debug.js"></script>
+	<script type="text/javascript" src="./Scripts/knockout.mapping-latest.debug.js"></script>
+	<script type="text/javascript" src="./Scripts/amplify.min.js"></script>
+	<script type="text/javascript" src="./Scripts/data-service.js"></script>
+    <script type="text/javascript" src="./Scripts/Dashboard.js"></script>
+
+
+	<script type="text/javascript">
+	    var timer;
+	    var activeDataService;
+	    var params = $.deparam.querystring();
+
+	    var viewModel = function () {
+	        var self = this;
+	        self.userName = ko.observable("");
+	        self.roleName = ko.observable("");
+	        self.locations = [];
+	        self.activeLocation = ko.observable("");
+	        self.workspaces = ko.observableArray([]);
+	    }
+
+	    var vm = new viewModel();
+
+	    var bindModel = function (data) {
+	        //clear this out or else the list will grow when updated from the server.
+	        if ($.inArray("All", data.locations) === -1) {
+	            data.locations.push("All");
+	        }
+	        for (var i = 0; i < data.workspaces.length; i++) {
+	            for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
+
+	                var workspace = data.workspaces[i].KPIs[j];
+
+	                data.workspaces[i].KPIs[j]["formattedValue"] = calcKPI(workspace.value, workspace.units, data.workspaces[i].KPIs[j].type);
+	                data.workspaces[i].KPIs[j]["formattedTarget"] = calcKPI(workspace.target, workspace.units, data.workspaces[i].KPIs[j].type);
+
+	                data.workspaces[i].KPIs[j]["Color"] = getWarnLevel(workspace.firstWarn, workspace.secondWarn, workspace.value);
+	            }
+	        }
+	        vm.userName(data.userName);
+	        vm.roleName(data.roleName);
+	        vm.locations = data.locations;
+	        vm.activeLocation(data.activeLocation);
+	        vm.workspaces(data.workspaces);
+	        refreshTimer();
+
+	    }
+
+	    var refreshTimer = function () {
+	        timer = setTimeout('refreshData()', 500000);
+	    }
+
+	    var refreshData = function () {
+	        activeDataService();
+	        refreshTimer()
+	    }
+	    if (params.debug === "true") {
+
+	        $.getScript("MockData/" + params.script + ".js")
+				.done(function (script, textStatus) {
+//				    console.log('Loaded test script');
+				    dataService.defineMockService(KPI_JSON);
+				    activeDataService = function () { dataService.callMockService.call(this, bindModel) };
+				    activeDataService();
+
+				})
+				.fail(function (jqxhr, settings, exception) {
+				    alert("Could not load the test data");
+				});
+
+	    }
+	    else {
+	        dataService.defineDataService();
+	        params.location = "All";
+	        dataService.setValues(params);
+	        activeDataService = function () {
+	            dataService.callDataService.call(this, bindModel);
+	        };
+	    }
+
+
+	    $(document).ready(function () {
+
+	        ko.applyBindings(vm);
+
+	 //       console.log("adding location to the param object");
+
+	        //do not actually call the service until you are sure the DOM is ready for binding
+	        if (!params.debug) {
+	            activeDataService();
+	        }
+
+	        $('#selLocations').change(function () {
+	            clearTimeout(timer);
+	            //add the location variable to the params object before making call to data service
+	            params.location = $('#selLocations').val();
+	            activeDataService();
+
+	        });
+
+	    });
+   </script>
 </head>
 <body>
 
+
+<!--<div id="header">-->
+<header class="header">
+<div class="logo"><div class="command">Command</div><div style="float:left">&nbsp;</div><div class="alkon">Alkon</div></div>
+<div class="role"><span data-bind="text: roleName"></span><span> Scoreboard</span></div>
+<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><span>Plant(s): </span><!--<span data-bind="template: {name: 'ActiveLocal'}"></span>--><span id="currentLocation" data-bind="text: activeLocation"></span></div></div>
+</header>
+<!--</div>-->
+
+<div class="containerOne">
+<div class="divider">&nbsp;</div>
+<div class="workspaceOne" data-bind="template: { name: 'workspace-1-template', foreach: workspaces }"></div>
+<div class="divider">&nbsp;</div>
+</div>
+<div class="containerTwo">
+<div class="divider">&nbsp;</div>
+<div class="workspace" data-bind="template: { name: 'workspace-2-template', foreach: workspaces }"></div>
+<div class="divider">&nbsp;</div>
+</div>
+
+<script type="text/html" id="workspace-1-template">
+	 <!-- ko if: id == 1 -->
+	 <div id="workspace_1">
+		<div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+	 </div>
+	 <!-- /ko -->
+</script>
+<script type="text/html" id="workspace-2-template">
+	 <!-- ko if: id == 2 -->
+	 <div id="workspace_2">
+		<div data-bind="template: { name: 'KPI-template', foreach: KPIs }"></div>
+	 </div>
+	 <!-- /ko -->
+</script>
+<script type="text/html" id="KPI-template">
+	<div data-bind="css: {kpi : true, Kpi_one : $parent.KPIs.length === 1, kpi_two : $parent.KPIs.length === 2, kpi_three : $parent.KPIs.length === 3, kpi_four : $parent.KPIs.length === 4,kpi_five : $parent.KPIs.length === 5, green : Color === 'green', red : Color === 'red', yellow: Color === 'yellow'}, attr : {id : 'id_' + ($parentContext.$index() + 1) + '_' + ($index() + 1)}">
+		<div class="kpiTitle" data-bind="text: title"></div>    
+        <div class="kpiValue" data-bind="text: formattedValue"></div>
+        <p></p>
+        <div class="kpiTarget" data-bind="text: formattedTarget"></div>
+	</div>
+</script>
+<script type="text/html" id="ActiveLocal">
+    <span id="currentLocation" data-bind="text: {activeLocation : activeLocation === 'All'}">
+</script>
 </body>
 </html>
+
