@@ -25,6 +25,16 @@ namespace CAI.COMMANDoptimize.KPI.Database
                 connectionString = ParseAsnFile(connectionString);
             _connectionString = connectionString;
         }
+        public DatabaseFactory(string provider, string connectionString, string odbcprovider)
+            : this(provider, connectionString)
+        {
+            _odbcprovider = odbcprovider;
+        }
+        public DatabaseFactory(string provider, string connectionString, string odbcprovider, string databasename)
+            : this(provider, connectionString, odbcprovider)
+        {
+            _databasename = databasename;
+        }
 
         #endregion
 
@@ -71,24 +81,45 @@ namespace CAI.COMMANDoptimize.KPI.Database
         {
             get { return _IsFileProvider(_provider); }
         }
-		
+
+        /// <summary>
+        /// Database name
+        /// </summary>
+        public string DatabaseName 
+        {
+            get
+            {
+                if (IsOdbcProvider)
+                {
+                    if (IsSqlServerProvider)
+                        return _databasename;
+                }
+                else if (IsSqlServerProvider)
+                {
+                    SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(_connectionString);
+                    return cs.InitialCatalog;
+                }
+                return string.Empty;
+            }
+        }
+
         /// <summary>
         /// Create a database connection
         /// </summary>
         /// <returns>IDbConnection reference to a specific provider connection object</returns>
         public IDbConnection Create()
-        {          
-            IDbConnection connection = null;
-			if (_IsSqlServerProvider(_provider))
-				connection = new SqlConnection(_connectionString);
-			else if (_IsOracleProvider(_provider))
-				connection = new OracleConnection(_connectionString);
-			else if (_IsOdbcProvider(_provider))
-				connection = new OdbcConnection(_connectionString);
-			else
-            	throw new Exception("Unknown Database Provider: " + _provider);
-				
-            return connection;
+        {
+            return MakeConnection(_connectionString);
+        }
+
+        /// <summary>
+        /// Create a database connection
+        /// </summary>
+        /// <param name="databasename"></param>
+        /// <returns>IDbConnection reference to a specific provider connection object</returns>
+        public IDbConnection Create(string databasename)
+        {
+            return MakeConnection(MakeConnectionString(_provider, _connectionString, databasename));
         }
 
         /// <summary>
@@ -119,10 +150,72 @@ namespace CAI.COMMANDoptimize.KPI.Database
 
             return param;
         }
-		
+
+        /// <summary>
+        /// Translate the parameter symbol
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public string TranslateCommandParamSymbol(string sql)
+        {
+            return (this.IsOracleProvider) ? sql.Replace('@', '&') : sql;
+        }
+
         #endregion
 
         #region Implementation
+        private IDbConnection MakeConnection(string connectionString)
+        {
+            IDbConnection connection = null;
+            if (_IsSqlServerProvider(_provider))
+                connection = new SqlConnection(connectionString);
+            else if (_IsOracleProvider(_provider))
+                connection = new OracleConnection(connectionString);
+            else if (_IsOdbcProvider(_provider))
+                connection = new OdbcConnection(connectionString);
+            else
+                throw new Exception("Unknown Database Provider: " + _provider);
+
+            return connection;
+        }
+
+        private string MakeConnectionString(string providerName, string connectionstring, string databasename)
+        {
+            if (_IsSqlServerProvider(providerName))
+            {
+                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(connectionstring);
+                cs.InitialCatalog = databasename;
+
+                return cs.ConnectionString;
+            }
+
+            else if (_IsOracleProvider(providerName))
+            {
+                return connectionstring;
+                /*
+                SqlConnectionStringBuilder cs = new SqlConnectionStringBuilder(connectionstring);
+                //cs.InitialCatalog = databasename;
+
+                //return cs.ConnectionString;                
+
+                return string.Format("Data Source={0};user id={1};password={2}", cs.DataSource, cs.UserID, cs.Password);
+                */ 
+            }
+
+            else if (_IsOdbcProvider(providerName))
+            {                
+                OdbcConnectionStringBuilder ocs = new OdbcConnectionStringBuilder(connectionstring);
+
+                return string.Format("DSN={0};Database={1};uid={2};pwd={3}",
+                    ocs.Dsn, databasename, ocs["uid"], ocs["pwd"]);
+
+
+                //return connectionstring;
+            }
+
+            return null;
+        }
+
 		private string ParseAsnFile(string filepath)
 		{
 			if (!File.Exists(filepath))
@@ -188,7 +281,7 @@ namespace CAI.COMMANDoptimize.KPI.Database
         }
 				
         private bool _IsOdbcProvider(string providerName)
-        {
+        {                        
             return _IsProvider(cOdbcProviderName, providerName) ||
 				_IsProvider(cOdbcProviderNameAlt, providerName);
         }
@@ -219,6 +312,7 @@ namespace CAI.COMMANDoptimize.KPI.Database
         private string _provider;
 		private string _odbcprovider;
         private string _connectionString;
+        private string _databasename;
         #endregion
 	}
 }

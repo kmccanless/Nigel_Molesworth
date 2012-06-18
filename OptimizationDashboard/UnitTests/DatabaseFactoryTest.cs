@@ -67,7 +67,8 @@ namespace Data
                 }
             }
         }
-		
+
+        // doesn't work on appharbor
         //[Test]
         public void Create_OdbcFromAsn_SqlServer()
         {
@@ -88,6 +89,7 @@ namespace Data
             }
         }
 		
+        // doesn't work on appharbor
         //[Test]
         public void Create_OdbcFromAsn_Oracle()
         {

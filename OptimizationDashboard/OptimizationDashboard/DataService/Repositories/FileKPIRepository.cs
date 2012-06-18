@@ -25,7 +25,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
             throw new NotImplementedException();
         }
 
-        public Workspace[] GetKPIs(string username, string location)
+        public Workspace[] GetKPIs(string rolename, string location, string[] locations)
         {
             throw new NotImplementedException();
         }

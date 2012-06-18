@@ -65,7 +65,7 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
             return user;
         }
 
-        public Workspace[] GetKPIs(string username, string location)
+        public Workspace[] GetKPIs(string rolename, string location, string[] locations)
         {            
             Workspace A = new Workspace {
                 Code = "A",
