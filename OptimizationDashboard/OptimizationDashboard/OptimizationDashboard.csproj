@@ -69,6 +69,7 @@
     <Content Include="MockData\demo-json-2-3_5.js" />
     <Content Include="MockData\demo-json-5-5_3.js" />
     <Content Include="MockData\demo-json-5-5_all.js" />
+    <Content Include="MockData\demo-json-6-5.js" />
     <Content Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
