@@ -36,8 +36,17 @@
 	        }
 	        for (var i = 0; i < data.workspaces.length; i++) {
 	            //for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
-                //Cap this at 5 widgets
-	            for (var j = 0; j < 5; j++) {
+	            
+                //Cap at 5 widgets
+	            var widgetCap;
+	            if (data.workspaces[i].KPIs.length > 5) {
+	                widgetCap = 5
+	            }
+	            else {
+	                widgetCap = data.workspaces[i].KPIs.length;
+	            }
+
+	            for (var j = 0; j < widgetCap; j++) {
 
 	                var workspace = data.workspaces[i].KPIs[j];
 
