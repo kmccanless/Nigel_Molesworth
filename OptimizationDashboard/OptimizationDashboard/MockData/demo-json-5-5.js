@@ -3,10 +3,10 @@
     roleName: "some role",
     activeLocation: "All",
     locations: [
-        1,
-        3,
-        5,
-        6
+        "1",
+        "3",
+        "5",
+        "6"
     ],
     workspaces: [
         {

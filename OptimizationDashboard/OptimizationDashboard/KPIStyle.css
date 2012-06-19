@@ -44,9 +44,12 @@
          }
          .locations
          {
- 
-                 float : none;
-                 
+            float : none; 
+         }
+         .locations a
+         {
+            text-decoration: none;
+            color: #fff;    
          }
          .command
          {
@@ -82,12 +85,11 @@
 	.divider
 	{
 		clear : both;
-		height : 15px;
+		height : 10px;
 	}
 	.kpi
 	{
 	    padding : 5px 5px; 
-		/*border: 2px solid #a1a1a1;*/
 		border : 2px solid #B3B4B7;
 		border-radius: 25px;
 		min-height: 200px;
@@ -198,6 +200,33 @@
 	    /*vertical-align:bottom;*/
 	}
 	
+	.menu
+	{
+	    height:1px;
+	    width : 100%;
+	}
+	
+	.floating-menu 
+	{
+	    position:absolute;
+	    right:5px;
+	    background:#dddddd;
+	    border:1px solid #dddddd;
+	    min-width: 150px;
+	    /*width:150px;*/
+	    z-index:100;
+	    float:right;
+	    display:none;
+    }
+    
+    .floating-menu a
+    {
+        display:block;
+        margin:0 0.5em;
+        text-decoration: none;
+        color: #000;}
+
+
 
 
 

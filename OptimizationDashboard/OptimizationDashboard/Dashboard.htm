@@ -22,7 +22,7 @@
 	        var self = this;
 	        self.userName = ko.observable("");
 	        self.roleName = ko.observable("");
-	        self.locations = [];
+	        self.locations = ko.observableArray([]);
 	        self.activeLocation = ko.observable("");
 	        self.workspaces = ko.observableArray([]);
 	    }
@@ -36,6 +36,7 @@
 	        }
 	        for (var i = 0; i < data.workspaces.length; i++) {
 	            //for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
+                //Cap this at 5 widgets
 	            for (var j = 0; j < 5; j++) {
 
 	                var workspace = data.workspaces[i].KPIs[j];
@@ -48,7 +49,7 @@
 	        }
 	        vm.userName(data.userName);
 	        vm.roleName(data.roleName);
-	        vm.locations = data.locations;
+	        vm.locations(data.locations);
 	        vm.activeLocation(data.activeLocation);
 	        vm.workspaces(data.workspaces);
 	        refreshTimer();
@@ -92,12 +93,23 @@
 
 	        ko.applyBindings(vm);
 
-	 //       console.log("adding location to the param object");
+	        //       console.log("adding location to the param object");
 
 	        //do not actually call the service until you are sure the DOM is ready for binding
 	        if (!params.debug) {
 	            activeDataService();
 	        }
+
+	        $("#plants").click(function () {
+	            var hidden = $("#locationMenu").is(":hidden");
+
+	            $("#locationMenu").hide();
+
+	            if (hidden) {
+	                $("#locationMenu")
+	            	    .toggle();
+	            }
+	        });
 
 	        $('#selLocations').change(function () {
 	            clearTimeout(timer);
@@ -108,18 +120,30 @@
 	        });
 
 	    });
+
+	    function locationChange(newLocation) {
+	        clearTimeout(timer);
+	        params.location = newLocation;
+	        activeDataService();
+        };
    </script>
 </head>
 <body>
 
-
-<!--<div id="header">-->
 <header class="header">
 <div class="logo"><div class="command">Command</div><div style="float:left">&nbsp;</div><div class="alkon">Alkon</div></div>
 <div class="role"><span data-bind="text: roleName"></span><span> Scoreboard</span></div>
-<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><span>Plant(s): </span><!--<span data-bind="template: {name: 'ActiveLocal'}"></span>--><span id="currentLocation" data-bind="text: activeLocation"></span></div></div>
+<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><a href="#"><span id="plants">Plant(s): </span></a><span id="currentLocation" data-bind="text: activeLocation"></span></div></div>
 </header>
-<!--</div>-->
+
+
+<div class="menu">
+    <div class="floating-menu" id="locationMenu" data-bind="foreach: locations">
+       <!--<a href="#" data-bind="text: $data"></a>-->
+       <a href="#"><span onclick="locationChange("1"); data-bind="text: $data"></span></a>
+       <!--<a href="#">testing</a>-->
+    </div>
+</div>
 
 <div class="containerOne">
 <div class="divider">&nbsp;</div>
@@ -154,9 +178,8 @@
         <div class="kpiTarget" data-bind="text: formattedTarget"></div>
 	</div>
 </script>
-<script type="text/html" id="ActiveLocal">
-    <span id="currentLocation" data-bind="text: {activeLocation : activeLocation === 'All'}">
-</script>
+
+
 </body>
 </html>
 
