@@ -136,12 +136,9 @@
 <div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><a href="#"><span id="plants">Plant(s): </span></a><span id="currentLocation" data-bind="text: activeLocation"></span></div></div>
 </header>
 
-
 <div class="menu">
     <div class="floating-menu" id="locationMenu" data-bind="foreach: locations">
-       <!--<a href="#" data-bind="text: $data"></a>-->
        <a href="#"><span onclick="locationChange("1"); data-bind="text: $data"></span></a>
-       <!--<a href="#">testing</a>-->
     </div>
 </div>
 
@@ -171,7 +168,7 @@
 	 <!-- /ko -->
 </script>
 <script type="text/html" id="KPI-template">
-	<div data-bind="css: {kpi : true, Kpi_one : $parent.KPIs.length === 1, kpi_two : $parent.KPIs.length === 2, kpi_three : $parent.KPIs.length === 3, kpi_four : $parent.KPIs.length === 4,kpi_five : $parent.KPIs.length === 5, green : Color === 'green', red : Color === 'red', yellow: Color === 'yellow'}, attr : {id : 'id_' + ($parentContext.$index() + 1) + '_' + ($index() + 1)}">
+	<div data-bind="css: {kpi : true, kpi_one : $parent.KPIs.length === 1, kpi_two : $parent.KPIs.length === 2, kpi_three : $parent.KPIs.length === 3, kpi_four : $parent.KPIs.length === 4,kpi_five : $parent.KPIs.length === 5, green : Color === 'green', red : Color === 'red', yellow: Color === 'yellow'}, attr : {id : 'id_' + ($parentContext.$index() + 1) + '_' + ($index() + 1)}">
 		<div class="kpiTitle" data-bind="text: title"></div>    
         <div class="kpiValue" data-bind="text: formattedValue"></div>
         <p></p>

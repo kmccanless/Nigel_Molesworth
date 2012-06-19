@@ -211,7 +211,7 @@
 	    position:absolute;
 	    right:5px;
 	    background:#dddddd;
-	    border:1px solid #dddddd;
+	    /*border:1px solid #dddddd;*/
 	    min-width: 150px;
 	    /*width:150px;*/
 	    z-index:100;

@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
-    <Content Include="BarTemp.htm" />
     <Content Include="Dashboard.htm" />
     <Content Include="Demo.htm" />
     <Content Include="KPIStyle.css" />
