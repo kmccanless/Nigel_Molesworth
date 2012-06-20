@@ -87,6 +87,7 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Square_Layout_4_2.htm" />
+    <Content Include="Styles\qunit.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="DataService.aspx" />
     <Content Include="Global.asax" />
@@ -103,6 +104,7 @@
     <Content Include="Tests\JSTests.htm" />
     <Content Include="Tests\JSTests.js" />
     <Content Include="Tests\Scripts\funcunit.js" />
+    <Content Include="Tests\Scripts\qunit.js" />
     <Content Include="Tests\Styles\qunit.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

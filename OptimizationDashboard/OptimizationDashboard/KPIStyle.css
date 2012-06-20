@@ -219,6 +219,24 @@
 	    display:none;
     }
     
+    /*.floating-menu span*/
+    .menuItem
+    {
+        cursor : pointer;  
+        display : block;  
+        color : #000;
+        min-width: 150px;
+        background:#dddddd;
+    }
+    .menuItemHighlight
+    {
+        cursor : pointer;  
+        display : block;  
+        color : #000;
+        min-width: 150px;
+        background:#ABABAB;
+   }
+    
     .floating-menu a
     {
         display:block;

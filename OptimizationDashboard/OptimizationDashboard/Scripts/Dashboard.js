@@ -81,6 +81,23 @@ var formatAmount = function (inVal){
      }
  };
 
+
+ //******
+ // 
+ //
+ //******
+ var wigitColorReverse = function (lowerLimit, upperLimit, compValue) {
+     if (compValue > lowerLimit) {
+         return 'green';
+     }
+     else if (compValue <= upperLimit){
+        return 'red';
+     }
+     else{
+        return 'yellow';
+     }
+ };
+
  //******
  // Calculate KPI value
  //
@@ -112,6 +129,7 @@ var formatAmount = function (inVal){
      }
 
      else if (firstWarn > secondWarn) {
-         return wigitColor(firstWarn, secondWarn, compVal);
+         //return wigitColor(firstWarn, secondWarn, compVal);
+         return wigitColorReverse(firstWarn, secondWarn, compVal);
      }
  };

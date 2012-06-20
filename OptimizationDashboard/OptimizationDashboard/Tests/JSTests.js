@@ -9,6 +9,11 @@
     //    }
 });
 
+test("a basic test example", function () {
+    ok(true, "this test is fine");
+    var value = "hello";
+    equal(value, "hello", "We expect value to be hello");
+});
 
 //1
 test("Calculate KPI", function () {
@@ -86,10 +91,10 @@ test('Warn Levels', function () {
     equal(getWarnLevel(25, 50, 50), 'red', 'red level');
     equal(getWarnLevel(25, 50, 60), 'red', 'red level');
 
-    equal(getWarnLevel(10, 5, 15), 'red', 'red level');
-    equal(getWarnLevel(10, 5, 10), 'red', 'red level');
+    equal(getWarnLevel(10, 5, 15), 'green', 'red level');
+    equal(getWarnLevel(10, 5, 10), 'yellow', 'red level');
     equal(getWarnLevel(10, 5, 7), 'yellow', 'yellow level');
-    equal(getWarnLevel(10, 5, 5), 'yellow', 'yellow level');
-    equal(getWarnLevel(10, 5, 2), 'green', 'green level');
+    equal(getWarnLevel(10, 5, 5), 'red', 'yellow level');
+    equal(getWarnLevel(10, 5, 2), 'red', 'green level');
     
 });

@@ -127,21 +127,26 @@
 	            }
 	        });
 
-	        $('#selLocations').change(function () {
+
+	        $('#locationMenu').click(function (event) {
+	            var temp = event.target.id;
+
 	            clearTimeout(timer);
-	            //add the location variable to the params object before making call to data service
-	            params.location = $('#selLocations').val();
+	            params.location = event.target.id;
+
 	            activeDataService();
+
+	            $("#locationMenu").hide();
 
 	        });
 
 	    });
 
-	    function locationChange(newLocation) {
-	        clearTimeout(timer);
-	        params.location = newLocation;
-	        activeDataService();
-        };
+//	    function locationChange(newLocation) {
+//	        clearTimeout(timer);
+//	        params.location = newLocation;
+//	        activeDataService();
+//        };
    </script>
 </head>
 <body>
@@ -154,7 +159,8 @@
 
 <div class="menu">
     <div class="floating-menu" id="locationMenu" data-bind="foreach: locations">
-       <a href="#"><span onclick="locationChange('1')"; data-bind="text: $data"></span></a>
+       <!--<a href="#"><span onclick="locationChange('1')"; data-bind="text: $data"></span></a>-->
+       <span class="menuItem" data-bind="text: $data, attr: {id: $data}" onmouseover="this.className='menuItemHighlight';" onmouseout="this.className='menuItem'";>item</span>
     </div>
 </div>
 
