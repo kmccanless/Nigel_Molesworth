@@ -383,7 +383,7 @@ where
                         string[] locations = locations_packed.Split(cDelimitter);                        
                         user.Locations = new string[locations.Length - 1];
                         for (int i = 0; i<locations.Length -1; i++)
-                            user.Locations[i] = locations[i];
+                            user.Locations[i] = locations[i].Trim();
                     }
                     return user;
                 }

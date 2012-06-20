@@ -97,6 +97,10 @@ namespace CAI.COMMANDoptimize.KPI.Models
         {
             get { return _kpi.Category; }
         }
+        public decimal value
+        {
+            get { return _kpi.Actual; }
+        }
         public decimal target
         {
             get { return _kpi.Target; }

@@ -9,15 +9,19 @@ var targetTemp = 0;
 // Sets the values for the report value and the target value to be displayed in the widget
 //******
 var formatWigit = function (inKPI, calcType) {
-    if (calcType === "Percentage") {
+    //Code: 02 = Percentage type
+    if (calcType === "02") {
         inKPI = formatPercent(inKPI.toFixed(0));
     }
-    else if (calcType === "Minutes") {
+    //Code: )1 = Minutes type
+    else if (calcType === "01") {
         inKPI = formatMinutes(inKPI.toFixed(0));
     }
-    else if (calcType === "Amount") {
+    //Code: 03 = Amount type
+    else if (calcType === "03") {
         inKPI = formatAmount(inKPI.toFixed(2));
     }
+    //Code: 04 = Quantity type
     else {
         inKPI = inKPI.toFixed(2);
     }
@@ -88,7 +92,8 @@ var formatAmount = function (inVal){
          kpi = valIn / units;
      }
 
-     if (calcType === "Percentage") {
+     //Check for percentage type to multiple by 100 (code: 02)
+     if (calcType === "02") {
          kpi = kpi * 100;
      }
 

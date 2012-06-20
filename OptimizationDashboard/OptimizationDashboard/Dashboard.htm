@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
     <link rel="stylesheet" type="text/css" href="kpistyle.css" />
 	<title>Dashboard Demo</title>
 
@@ -10,6 +12,7 @@
 	<script type="text/javascript" src="./Scripts/knockout.mapping-latest.debug.js"></script>
 	<script type="text/javascript" src="./Scripts/amplify.min.js"></script>
 	<script type="text/javascript" src="./Scripts/data-service.js"></script>
+    <script type="text/javascript" src="./Scripts/json2.js"></script>
     <script type="text/javascript" src="./Scripts/Dashboard.js"></script>
 
 
@@ -29,7 +32,10 @@
 
 	    var vm = new viewModel();
 
-	    var bindModel = function (data) {
+	    var bindModel = function (dataIn) {
+	        //See what we are working with
+	        var data = (typeof dataIn == "string") ? JSON.parse(dataIn) : dataIn;
+
 	        //clear this out or else the list will grow when updated from the server.
 	        if ($.inArray("All", data.locations) === -1) {
 	            data.locations.push("All");

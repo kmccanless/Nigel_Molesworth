@@ -12,12 +12,13 @@
 
 //1
 test("Calculate KPI", function () {
-    equal(calcKPI(50, 100, "Percentage"), '50%', "percentage KPI");
-    equal(calcKPI(50, 100, "Minutes"), '0:01', "minutes KPI");
-    equal(calcKPI(100, 50, "Amount"), '$2.00', "amount KPI");
-    equal(calcKPI(0, 0, "Quantity"), '0.00', 'divide by zero');
-    equal(calcKPI(0, 0, "Minutes"), '0:00', 'divide by zero minutes');
-    equal(calcKPI(0, 0, "Amount"), '$0.00', 'divide by zero amount');
+    equal(calcKPI(50, 100, "02"), '50%', "percentage KPI");
+    equal(calcKPI(50, 100, "01"), '0:01', "minutes KPI");
+    equal(calcKPI(100, 50, "03"), '$2.00', "amount KPI");
+    equal(calcKPI(0, 0, "04"), '0.00', 'divide by zero');
+    equal(calcKPI(0, 0, "01"), '0:00', 'divide by zero minutes');
+    equal(calcKPI(0, 0, "03"), '$0.00', 'divide by zero amount');
+    equal(calcKPI(10, 20, "02"), '50%', "percentage KPI");
 });
 
 //2
@@ -61,20 +62,20 @@ test("Format Warn Color", function () {
 
 //6
 test('Format Widget', function () {
-    equal(formatWigit(30, 'Percentage'), '30%', 'value percentage format');
-    equal(formatWigit(25, 'Percentage'), '25%', 'targe percentage format');
+    equal(formatWigit(30, '02'), '30%', 'value percentage format');
+    equal(formatWigit(25, '02'), '25%', 'targe percentage format');
 
-    equal(formatWigit(30, 'Minutes'), '0:30', 'value minutes format');
-    equal(formatWigit(25, 'Minutes'), '0:25', 'target minutes format');
+    equal(formatWigit(30, '01'), '0:30', 'value minutes format');
+    equal(formatWigit(25, '01'), '0:25', 'target minutes format');
 
-    equal(formatWigit(30, 'Amount'), '$30.00', 'value amount format');
-    equal(formatWigit(25, 'Amount'), '$25.00', 'target amount format');
+    equal(formatWigit(30, '03'), '$30.00', 'value amount format');
+    equal(formatWigit(25, '03'), '$25.00', 'target amount format');
 
-    equal(formatWigit(30, 'Quantity'), '30.00', 'value quantity format');
-    equal(formatWigit(30.1, 'Quantity'), '30.10', 'value quantity format');
-    equal(formatWigit(30.50, 'Quantity'), '30.50', 'value quantity format');
-    equal(formatWigit(30.999, 'Quantity'), '31.00', 'value quantity format');
-    equal(formatWigit(30.911, 'Quantity'), '30.91', 'value quantity format');
+    equal(formatWigit(30, '04'), '30.00', 'value quantity format');
+    equal(formatWigit(30.1, '04'), '30.10', 'value quantity format');
+    equal(formatWigit(30.50, '04'), '30.50', 'value quantity format');
+    equal(formatWigit(30.999, '04'), '31.00', 'value quantity format');
+    equal(formatWigit(30.911, '04'), '30.91', 'value quantity format');
 });
 
 //7
