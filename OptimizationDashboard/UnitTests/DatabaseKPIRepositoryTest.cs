@@ -24,12 +24,16 @@ namespace Repositories
         private const string cOdbcOraProvider = "System.Data.Odbc";
         private const string cOdbcOraConnectionString = "DSN=ora11glab;user id=optkpi;password=kpi";
 
+        private const string cAppHarborSqlProvider = "System.Data.SqlClient";
+        private const string cAppHarborSqlConnectionString = "Server=233d4c10-e551-4711-b80b-a07600e292af.sqlserver.sequelizer.com;Database=db233d4c10e5514711b80ba07600e292af;User ID=zeticekeiwdciore;Password=F8yVd4WJz5XZMSdaNfV8F3EPrLN7ocuXDVgrXrU8wk3iuGEJXiynURLLBRDzoXuw;";
+
 
         private IDatabaseFactory _dbf = new DatabaseFactory(
-                cSqlProvider, cSqlConnectionString
+                //cSqlProvider, cSqlConnectionString
                 //cOraProvider, cOraConnectionString
                 //cOdbcSqlProvider, cOdbcSqlConnectionString, cSqlProvider, "OptimizationKPI"
                 //cOdbcOraProvider, cOdbcOraConnectionString, cOraProvider
+                cAppHarborSqlProvider, cAppHarborSqlConnectionString 
                 );
 
         [TestFixtureSetUp]
