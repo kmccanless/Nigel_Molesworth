@@ -28,6 +28,7 @@
 	        self.locations = ko.observableArray([]);
 	        self.activeLocation = ko.observable("");
 	        self.workspaces = ko.observableArray([]);
+	        self.activeLocDisplay = ko.observable("");
 	    }
 
 	    var vm = new viewModel();
@@ -40,18 +41,43 @@
 	        if ($.inArray("All", data.locations) === -1) {
 	            data.locations.push("All");
 	        }
+
+	        //Build a string for the display tag to show active locations
+	        if (data.activeLocation === 'All') {
+
+	            //set the first one
+	            var strDisplay = data.locations[0];
+
+	            for (var q = 1; q < data.locations.length; q++) {
+
+	                if (data.locations[q] != 'All') {
+	                    if ((strDisplay.length + data.locations[q].length + 2) < 15) {
+	                        //append each location as long as addition doesn't max the length
+	                        strDisplay = strDisplay + ', ' + data.locations[q];
+	                    }
+	                    else {
+	                        //Cap it off.  string is too long
+	                        strDisplay = strDisplay + '...';
+	                        break;
+	                    }
+	                }
+	            }
+	            vm.activeLocDisplay(strDisplay)
+	        }
+	        else {
+	            //only one location is actively selected.  Set the display value
+	            vm.activeLocDisplay(data.activeLocation);
+	        }
+
 	        for (var i = 0; i < data.workspaces.length; i++) {
-	            //for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
 
 	            //Cap at 5 widgets
 	            if (data.workspaces[i].KPIs.length > 5) {
 	                //remove the element in position 5 to the length
 	                for (var y = data.workspaces[i].KPIs.length - 1; y >= 5; y--) {
-	                    //data.workspaces[i].KPIs.remove(data.workspaces[i].KPIs[y]);
 	                    data.workspaces[i].KPIs.splice(y, 1);
 	                }
 	            }
-
 
 	            for (var j = 0; j < data.workspaces[i].KPIs.length; j++) {
 
@@ -141,12 +167,6 @@
 	        });
 
 	    });
-
-//	    function locationChange(newLocation) {
-//	        clearTimeout(timer);
-//	        params.location = newLocation;
-//	        activeDataService();
-//        };
    </script>
 </head>
 <body>
@@ -154,7 +174,7 @@
 <header class="header">
 <div class="logo"><div class="command">Command</div><div style="float:left">&nbsp;</div><div class="alkon">Alkon</div></div>
 <div class="role"><span data-bind="text: roleName"></span><span> Scoreboard</span></div>
-<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><a href="#"><span id="plants">Plant(s): </span></a><span id="currentLocation" data-bind="text: activeLocation"></span></div></div>
+<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><a href="#"><span id="plants">Plant(s): </span></a><span id="currentLocation" data-bind="text: activeLocDisplay"></span></div></div>
 </header>
 
 <div class="menu">

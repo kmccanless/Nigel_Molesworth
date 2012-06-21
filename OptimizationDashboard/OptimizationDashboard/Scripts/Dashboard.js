@@ -83,8 +83,8 @@ var formatAmount = function (inVal){
 
 
  //******
- // 
- //
+ // For use when the 'good' target values are higher than target
+ // Warn2 is less than warn1 value
  //******
  var wigitColorReverse = function (lowerLimit, upperLimit, compValue) {
      if (compValue > lowerLimit) {
