@@ -70,13 +70,13 @@ namespace Repositories
             Assert.AreEqual("Role1", user.Role, "failed to retrieve user role");
             Assert.IsNotNull(user.Locations, "failed to retrieve user locations");
             Assert.AreEqual(7, user.Locations.Length, "failed to retrieve user locations");
-            Assert.AreEqual("  1", user.Locations[0], "failed to retrieve user location");
-            Assert.AreEqual("  2", user.Locations[1], "failed to retrieve user location");
-            Assert.AreEqual("  3", user.Locations[2], "failed to retrieve user location");
-            Assert.AreEqual("  5", user.Locations[3], "failed to retrieve user location");
-            Assert.AreEqual("  6", user.Locations[4], "failed to retrieve user location");
-            Assert.AreEqual("  7", user.Locations[5], "failed to retrieve user location");
-            Assert.AreEqual("  8", user.Locations[6], "failed to retrieve user location");
+            Assert.AreEqual("1", user.Locations[0], "failed to retrieve user location");
+            Assert.AreEqual("2", user.Locations[1], "failed to retrieve user location");
+            Assert.AreEqual("3", user.Locations[2], "failed to retrieve user location");
+            Assert.AreEqual("5", user.Locations[3], "failed to retrieve user location");
+            Assert.AreEqual("6", user.Locations[4], "failed to retrieve user location");
+            Assert.AreEqual("7", user.Locations[5], "failed to retrieve user location");
+            Assert.AreEqual("8", user.Locations[6], "failed to retrieve user location");
         }
 
         [Test]
@@ -91,10 +91,10 @@ namespace Repositories
             Assert.AreEqual("Role2", user.Role, "failed to retrieve user role");
             Assert.IsNotNull(user.Locations, "failed to retrieve user locations");
             Assert.AreEqual(4, user.Locations.Length, "failed to retrieve user locations");
-            Assert.AreEqual("  3", user.Locations[0], "failed to retrieve user location");            
-            Assert.AreEqual("  5", user.Locations[1], "failed to retrieve user location");
-            Assert.AreEqual("  6", user.Locations[2], "failed to retrieve user location");            
-            Assert.AreEqual("  7", user.Locations[3], "failed to retrieve user location");            
+            Assert.AreEqual("3", user.Locations[0], "failed to retrieve user location");            
+            Assert.AreEqual("5", user.Locations[1], "failed to retrieve user location");
+            Assert.AreEqual("6", user.Locations[2], "failed to retrieve user location");            
+            Assert.AreEqual("7", user.Locations[3], "failed to retrieve user location");            
         }
 		
         [Test]
