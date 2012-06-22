@@ -60,8 +60,7 @@
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Dashboard.htm" />
-    <Content Include="Demo.htm" />
-    <Content Include="KPIStyle.css" />
+    <Content Include="Images\downArrow.jpg" />
     <Content Include="KPI_Div.htm" />
     <Content Include="layout_1_5.htm" />
     <Content Include="Layout_2_3.htm" />
@@ -87,6 +86,7 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Square_Layout_4_2.htm" />
+    <Content Include="Styles\KPIStyle.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="DataService.aspx" />
     <Content Include="Global.asax" />

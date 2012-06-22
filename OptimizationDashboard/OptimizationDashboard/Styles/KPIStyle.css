@@ -6,7 +6,7 @@
 		 border: 0;
 		 background: #000000
 	}
-	
+
 	/* Header and logo styles*/
 	.header
     {
@@ -76,7 +76,7 @@
 	    height:1px;
 	    width : 100%;
 	}
-	
+
 	.floating-menu 
 	{
 	    position:absolute;
@@ -117,27 +117,27 @@
 		width : 100%;
 		/*border: 1px solid red;*/
 	}
-	
+
 	.containerOne
 	{
 		width : 100%;
 	    background : #323332
 		/*border: 1px solid red;*/
 	}
-	
+
     .containerTwo
 	{
 		width : 100%;
 	    background : #000000
 		/*border: 1px solid red;*/
 	}
-	
+
 	.divider
 	{
 		clear : both;
 		height : 10px;
 	}
-	
+
 	.kpi
 	{
 	    padding : 5px 5px; 
@@ -146,7 +146,7 @@
 		min-height: 200px;
 		vertical-align: top;
 	}
-	
+
 	/* Style for a single widget in a workspace */
 	.kpi_one
 	{
@@ -154,9 +154,9 @@
 		margin-left: auto;
 		margin-right: auto;
 		width: 19%;
-		
+
 	}
-	
+
 	/* applied style for two widgets in a workspace */
 	.kpi_two
 	{
@@ -164,7 +164,7 @@
 		margin: 5% 0 0 20.5%;
 		width: 19%;
 	}
-	
+
 	/* Style applied when three widgets are in a workspace */
 	.kpi_three
 	{
@@ -173,7 +173,7 @@
 		width: 19%;
 
 	}
-	
+
 	/* Style applied when four widgets are in a workspace */
 	.kpi_four
 	{
@@ -181,7 +181,7 @@
 		margin: 5% 0 0 4.5%;
 		width: 17%;
 	}
-	
+
 	/* Style applied when five widgets are in a workspace */
 	.kpi_five
 	{
@@ -189,7 +189,7 @@
 		margin: 5% 0 0 2.8%;
 		width: 15%;
 	}
-	
+
 
 	/*  IE 8 does not render rounded corner and gradient background properly.  */
 	/*  Each style seperately renders properly in IE, they are not compatible together. */
@@ -207,7 +207,7 @@
         /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8dd', endColorstr='#cccc00',GradientType=0 ); */ /* IE6-9 */
 	   /* background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #EDED00));*/
 	}
-	
+
     /* Style for warn color red.  Browser dependent  */
 	.red
 	{
@@ -221,7 +221,7 @@
         /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fae4e4', endColorstr='#cc0000',GradientType=0 );*/ /* IE6-9 */
 	    /*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #A80000));*/
 	}
-	
+
     /* Style for warn color green.  Browser dependent  */
 	.green
 	{
@@ -235,12 +235,12 @@
         /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f9df', endColorstr='#33cc00',GradientType=0 ); *//* IE6-9 */
 	    /*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #28A628));*/
 	}
-	
+
 	.label
 	{
 		padding-right :1px;
 	}
-	
+
 	.kpiTitle
 	{
 	    text-align:center;
@@ -249,7 +249,7 @@
 	    font-family: Century Gothic, sans-serif;
 	    /*border:2px solid #000000;*/
 	}
-	
+
 	.kpiValue
 	{
 	    text-align:center;   
@@ -259,7 +259,7 @@
 	    font-family: Century Gothic, sans-serif;
 	    /*border:2px solid #000000;*/
 	}
-	
+
     .kpiTarget
 	{
 	    text-align:right;    
@@ -269,13 +269,3 @@
 	    font-family: Century Gothic, sans-serif;
 	    /*border:2px solid #000000;*/
 	}
-	
-	
-    
-
-
-
-
-
-
-
