@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
     <link rel="stylesheet" type="text/css" href="./Styles/KPIStyle.css" />
-	<title>Dashboard Demo</title>
+	<title>CAI Optimization KPI Dashboard</title>
 
 	<script type="text/javascript" src="./Scripts/jquery-1.7.2.js"></script>
 	<script type="text/javascript" src="./Scripts/jquery-bbq.js"></script>
@@ -34,7 +34,7 @@
 	    var vm = new viewModel();
 
 	    var bindModel = function (dataIn) {
-	        //See what we are working with
+	        //See what we are working with JSON from mock data or from the dataservice
 	        var data = (typeof dataIn == "string") ? JSON.parse(dataIn) : dataIn;
 
 	        //clear this out or else the list will grow when updated from the server.
@@ -85,7 +85,6 @@
 
 	                data.workspaces[i].KPIs[j]["formattedValue"] = calcKPI(workspace.value, workspace.units, data.workspaces[i].KPIs[j].type);
 	                data.workspaces[i].KPIs[j]["formattedTarget"] = calcKPI(workspace.target, workspace.units, data.workspaces[i].KPIs[j].type);
-
 	                data.workspaces[i].KPIs[j]["Color"] = getWarnLevel(workspace.firstWarn, workspace.secondWarn, workspace.value);
 	            }
 	        }
@@ -99,7 +98,8 @@
 	    }
 
 	    var refreshTimer = function () {
-	        timer = setTimeout('refreshData()', 500000);
+            //Set for 5 min or 300 seconds
+	        timer = setTimeout('refreshData()', 300000);
 	    }
 
 	    var refreshData = function () {
@@ -174,7 +174,7 @@
 <header class="header">
 <div class="logo"><div class="command">Command</div><div style="float:left">&nbsp;</div><div class="alkon">Alkon</div></div>
 <div class="role"><span data-bind="text: roleName"></span><span> Scoreboard</span></div>
-<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><a href="#"><span id="plants"><img src="images/downArrow.jpg" alt="click to change location" height="12px" width="15px"/>Plant(s): </span></a><span id="currentLocation" data-bind="text: activeLocDisplay"></span></div></div>
+<div class="user"><div class="title" data-bind="text: userName"></div><div class="locations"><span id="plants" class="clickItem"><img src="images/downArrow.jpg" alt="click to change location" height="12px" width="15px"/>Plant(s): </span><span id="currentLocation" data-bind="text: activeLocDisplay"></span></div></div>
 </header>
 
 <div class="menu">

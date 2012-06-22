@@ -65,9 +65,10 @@ body
         float : none; 
     }
     
-    .locations a
+    .clickItem
     {
-        text-decoration: none;
+        /*text-decoration: none;*/
+        cursor : pointer;
         color: #fff;    
     }
     

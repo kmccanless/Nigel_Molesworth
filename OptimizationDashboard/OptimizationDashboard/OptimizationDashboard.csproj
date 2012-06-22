@@ -62,7 +62,6 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Dashboard.htm" />
     <Content Include="Images\downArrow.jpg" />
-    <Content Include="KPI_Div.htm" />
     <Content Include="layout_1_5.htm" />
     <Content Include="Layout_2_3.htm" />
     <Content Include="Layout_4_2.htm" />
