@@ -1,10 +1,4 @@
 ﻿//******
-//Globals
-//******
-var valueTemp = 0;
-var targetTemp = 0;
-
-//******
 // Overal format of the widget.  Calls appropriate format method based on type
 // Sets the values for the report value and the target value to be displayed in the widget
 //******
