@@ -58,7 +58,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1KPIStyle.css" />
+    <Content Include="Styles\KPIStyle.css" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Dashboard.htm" />
     <Content Include="Images\downArrow.jpg" />
@@ -87,7 +87,6 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Square_Layout_4_2.htm" />
-    <Content Include="Styles\1KPIStyle.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="DataService.aspx" />
     <Content Include="Global.asax" />
