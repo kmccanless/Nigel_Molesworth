@@ -87,6 +87,7 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Square_Layout_4_2.htm" />
+    <Content Include="StyleSheet1.css" />
     <Content Include="Styles\1KPIStyle.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="DataService.aspx" />

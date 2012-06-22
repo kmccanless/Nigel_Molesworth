@@ -5,5 +5,106 @@ body
 		 margin : 0;
 		 padding : 0;
 		 border: 0;
-		 background-color:Aqua
+		 background-color:black
 	}
+
+/* Header and logo styles*/
+	.header
+    {
+        background-color : #000;
+        width : 100%;
+        height : 45px;
+    }
+    
+    .logo
+    {
+        font-family: Lucida Sans;
+        font-size : 2em;
+        font-weight : bold;
+        float : left;
+        width : 40%;
+    }
+    
+    .command
+    {
+        color : #5998C8;
+        float : inherit;
+    }
+    
+    .alkon
+    {
+        color : #EA0437;
+        float : inherit;
+    }
+    
+    .role
+    {
+        color : #FFFFFF;
+        font-family: Lucida Sans;
+        font-size : 2em;
+        float: left;
+        text-align : center;
+    }
+    
+    .user
+    {
+        color : #FFF;
+        font-family: Lucida Sans;
+        font-size : 1em;
+        float : right;
+        margin : 5px;
+    }
+        
+    .title
+    {
+        float : none;   
+    }
+    
+    .locations
+    {
+        float : none; 
+    }
+    
+    .locations a
+    {
+        text-decoration: none;
+        color: #fff;    
+    }
+    
+    /* menu popup styles */
+    .menu
+	{
+	    height:1px;
+	    width : 100%;
+	}
+
+	.floating-menu 
+	{
+	    position:absolute;
+	    right:5px;
+	    background:#dddddd;
+	    /*border:1px solid #dddddd;*/
+	    min-width: 150px;
+	    /*width:150px;*/
+	    z-index:100;
+	    float:right;
+	    display:none;
+    }
+    
+    .menuItem
+    {
+        cursor : pointer;  
+        display : block;  
+        color : #000;
+        min-width: 150px;
+        background:#dddddd;
+    }
+    
+    .menuItemHighlight
+    {
+        cursor : pointer;  
+        display : block;  
+        color : #000;
+        min-width: 150px;
+        background:#ABABAB;
+   }
