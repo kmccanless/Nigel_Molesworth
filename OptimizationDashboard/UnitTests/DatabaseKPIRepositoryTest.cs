@@ -97,147 +97,147 @@ namespace Repositories
             Assert.AreEqual("7", user.Locations[3], "failed to retrieve user location");            
         }
 		
-        [Test]
-        public void GetKPIs_User2_LocationAll()
-        {
-            IKPIRepository r = new DatabaseKPIRepository(_dbf);
-            Assert.IsNotNull(r, "failed to create repository");
+        //[Test]
+        //public void GetKPIs_User2_LocationAll()
+        //{
+        //    IKPIRepository r = new DatabaseKPIRepository(_dbf);
+        //    Assert.IsNotNull(r, "failed to create repository");
 			
-			Workspace[] workspaces = r.GetKPIs("Role2", "all", new string[]{"3","5","6","7"});
-            Assert.IsNotNull(workspaces, "failed to retrieve KPIs");
-            Assert.AreEqual(2, workspaces.Length, "failed to retrieve KPIs");
+        //    Workspace[] workspaces = r.GetKPIs("Role2", "all", new string[]{"3","5","6","7"});
+        //    Assert.IsNotNull(workspaces, "failed to retrieve KPIs");
+        //    Assert.AreEqual(2, workspaces.Length, "failed to retrieve KPIs");
 			
-            Assert.AreEqual("A", workspaces[0].Code, "failed to retrieve KPI");
-            Assert.AreEqual("Operational KPIs", workspaces[0].Description, "failed to retrieve KPI");
-            Assert.IsNotNull(workspaces[0].KPIs, "failed to retrieve KPI");
-            Assert.AreEqual(2, workspaces[0].KPIs.Length, "failed to retrieve KPI");
+        //    Assert.AreEqual("A", workspaces[0].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("Operational KPIs", workspaces[0].Description, "failed to retrieve KPI");
+        //    Assert.IsNotNull(workspaces[0].KPIs, "failed to retrieve KPI");
+        //    Assert.AreEqual(2, workspaces[0].KPIs.Length, "failed to retrieve KPI");
 			
-			int i=0;
-        	Assert.AreEqual("005", workspaces[0].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("TOTAL COMPLIANCE", workspaces[0].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("02", workspaces[0].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(181M, workspaces[0].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(230M, workspaces[0].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(208M, workspaces[0].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(195M, workspaces[0].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(184M, workspaces[0].KPIs[i].Level2, "failed to retrieve KPI");
-			i++;
+        //    int i=0;
+        //    Assert.AreEqual("005", workspaces[0].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("TOTAL COMPLIANCE", workspaces[0].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("02", workspaces[0].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(181M, workspaces[0].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(230M, workspaces[0].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(208M, workspaces[0].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(195M, workspaces[0].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(184M, workspaces[0].KPIs[i].Level2, "failed to retrieve KPI");
+        //    i++;
 			
-        	Assert.AreEqual("006", workspaces[0].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("LOCKED LOADS", workspaces[0].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("02", workspaces[0].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(22M, workspaces[0].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(228M, workspaces[0].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(12M, workspaces[0].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(24M, workspaces[0].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(34M, workspaces[0].KPIs[i].Level2, "failed to retrieve KPI");
+        //    Assert.AreEqual("006", workspaces[0].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("LOCKED LOADS", workspaces[0].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("02", workspaces[0].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(22M, workspaces[0].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(228M, workspaces[0].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(12M, workspaces[0].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(24M, workspaces[0].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(34M, workspaces[0].KPIs[i].Level2, "failed to retrieve KPI");
 			
-            Assert.AreEqual("B", workspaces[1].Code, "failed to retrieve KPI");
-            Assert.AreEqual("Truck Cycle KPIs", workspaces[1].Description, "failed to retrieve KPI");
-            Assert.IsNotNull(workspaces[1].KPIs, "failed to retrieve KPI");
-            Assert.AreEqual(3, workspaces[1].KPIs.Length, "failed to retrieve KPI");
+        //    Assert.AreEqual("B", workspaces[1].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("Truck Cycle KPIs", workspaces[1].Description, "failed to retrieve KPI");
+        //    Assert.IsNotNull(workspaces[1].KPIs, "failed to retrieve KPI");
+        //    Assert.AreEqual(3, workspaces[1].KPIs.Length, "failed to retrieve KPI");
 			
-			i = 0;
-        	Assert.AreEqual("001", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("FIRST LOAD", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(885M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(36M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(370M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(740M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(1110M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
+        //    i = 0;
+        //    Assert.AreEqual("001", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("FIRST LOAD", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(885M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(36M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(370M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(740M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(1110M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
 			
-			i++;
-        	Assert.AreEqual("002", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("JOB WAIT", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(835M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(40M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(416M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(624M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(832M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
+        //    i++;
+        //    Assert.AreEqual("002", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("JOB WAIT", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(835M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(40M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(416M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(624M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(832M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
 			
-			i++;
-        	Assert.AreEqual("003", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("YARD TIME", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(860M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(40M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(600M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(800M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(1000M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
-		}
+        //    i++;
+        //    Assert.AreEqual("003", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("YARD TIME", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(860M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(40M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(600M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(800M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(1000M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
+        //}
 				
         [Test]
-        public void GetKPIs_User2_Location6()
-        {
-            IKPIRepository r = new DatabaseKPIRepository(_dbf);
-            Assert.IsNotNull(r, "failed to create repository");
+        //public void GetKPIs_User2_Location6()
+        //{
+        //    IKPIRepository r = new DatabaseKPIRepository(_dbf);
+        //    Assert.IsNotNull(r, "failed to create repository");
 			
-			Workspace[] workspaces = r.GetKPIs("Role2", "all", new string[]{"6"});
-            Assert.IsNotNull(workspaces, "failed to retrieve KPIs");
-            Assert.AreEqual(2, workspaces.Length, "failed to retrieve KPIs");
+        //    Workspace[] workspaces = r.GetKPIs("Role2", "all", new string[]{"6"});
+        //    Assert.IsNotNull(workspaces, "failed to retrieve KPIs");
+        //    Assert.AreEqual(2, workspaces.Length, "failed to retrieve KPIs");
 			
-            Assert.AreEqual("A", workspaces[0].Code, "failed to retrieve KPI");
-            Assert.AreEqual("Operational KPIs", workspaces[0].Description, "failed to retrieve KPI");
-            Assert.IsNotNull(workspaces[0].KPIs, "failed to retrieve KPI");
-            Assert.AreEqual(2, workspaces[0].KPIs.Length, "failed to retrieve KPI");
+        //    Assert.AreEqual("A", workspaces[0].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("Operational KPIs", workspaces[0].Description, "failed to retrieve KPI");
+        //    Assert.IsNotNull(workspaces[0].KPIs, "failed to retrieve KPI");
+        //    Assert.AreEqual(2, workspaces[0].KPIs.Length, "failed to retrieve KPI");
 			
-			int i=0;
-        	Assert.AreEqual("005", workspaces[0].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("TOTAL COMPLIANCE", workspaces[0].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("02", workspaces[0].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(41M, workspaces[0].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(55M, workspaces[0].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(50M, workspaces[0].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(47M, workspaces[0].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(44M, workspaces[0].KPIs[i].Level2, "failed to retrieve KPI");
-			i++;
+        //    int i=0;
+        //    Assert.AreEqual("005", workspaces[0].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("TOTAL COMPLIANCE", workspaces[0].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("02", workspaces[0].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(41M, workspaces[0].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(55M, workspaces[0].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(50M, workspaces[0].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(47M, workspaces[0].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(44M, workspaces[0].KPIs[i].Level2, "failed to retrieve KPI");
+        //    i++;
 			
-        	Assert.AreEqual("006", workspaces[0].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("LOCKED LOADS", workspaces[0].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("02", workspaces[0].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(9M, workspaces[0].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(55M, workspaces[0].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(3M, workspaces[0].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(6M, workspaces[0].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(8M, workspaces[0].KPIs[i].Level2, "failed to retrieve KPI");
+        //    Assert.AreEqual("006", workspaces[0].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("LOCKED LOADS", workspaces[0].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("02", workspaces[0].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(9M, workspaces[0].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(55M, workspaces[0].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(3M, workspaces[0].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(6M, workspaces[0].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(8M, workspaces[0].KPIs[i].Level2, "failed to retrieve KPI");
 			
-            Assert.AreEqual("B", workspaces[1].Code, "failed to retrieve KPI");
-            Assert.AreEqual("Truck Cycle KPIs", workspaces[1].Description, "failed to retrieve KPI");
-            Assert.IsNotNull(workspaces[1].KPIs, "failed to retrieve KPI");
-            Assert.AreEqual(3, workspaces[1].KPIs.Length, "failed to retrieve KPI");
+        //    Assert.AreEqual("B", workspaces[1].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("Truck Cycle KPIs", workspaces[1].Description, "failed to retrieve KPI");
+        //    Assert.IsNotNull(workspaces[1].KPIs, "failed to retrieve KPI");
+        //    Assert.AreEqual(3, workspaces[1].KPIs.Length, "failed to retrieve KPI");
 			
-			i = 0;
-        	Assert.AreEqual("001", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("FIRST LOAD", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(300M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(6M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(60M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(120M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(180M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
+        //    i = 0;
+        //    Assert.AreEqual("001", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("FIRST LOAD", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(300M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(6M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(60M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(120M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(180M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
 			
-			i++;
-        	Assert.AreEqual("002", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("JOB WAIT", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(300M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(8M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(80M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(120M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(160M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
+        //    i++;
+        //    Assert.AreEqual("002", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("JOB WAIT", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(300M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(8M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(80M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(120M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(160M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
 			
-			i++;
-        	Assert.AreEqual("003", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
-        	Assert.AreEqual("YARD TIME", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
-        	Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
-            Assert.AreEqual(120M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
-            Assert.AreEqual(8M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
-            Assert.AreEqual(120M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
-            Assert.AreEqual(160M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
-            Assert.AreEqual(200M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
-		}
+        //    i++;
+        //    Assert.AreEqual("003", workspaces[1].KPIs[i].Code, "failed to retrieve KPI");
+        //    Assert.AreEqual("YARD TIME", workspaces[1].KPIs[i].Description, "failed to retrieve KPI");
+        //    Assert.AreEqual("01", workspaces[1].KPIs[i].Category, "failed to retrieve KPI");
+        //    Assert.AreEqual(120M, workspaces[1].KPIs[i].Actual, "failed to retrieve KPI");
+        //    Assert.AreEqual(8M, workspaces[1].KPIs[i].Units, "failed to retrieve KPI");
+        //    Assert.AreEqual(120M, workspaces[1].KPIs[i].Target, "failed to retrieve KPI");
+        //    Assert.AreEqual(160M, workspaces[1].KPIs[i].Level1, "failed to retrieve KPI");
+        //    Assert.AreEqual(200M, workspaces[1].KPIs[i].Level2, "failed to retrieve KPI");
+        //}
 		
         #region Test Data
 
