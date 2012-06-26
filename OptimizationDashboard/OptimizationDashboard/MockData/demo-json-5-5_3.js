@@ -1,8 +1,8 @@
 var KPI_JSON = {
-    "userName": "John Doe",
-    "roleName": "Shipper",
-    activeLocation: "3",
-    "locations": [
+    userName: "John Doe",
+    roleName: "Shipper",
+    activeLocation: "All",
+    locations: [
         3,
         5,
         6,
@@ -14,7 +14,7 @@ var KPI_JSON = {
 			KPIs: [
 				{
 					title: "First Load",
-					type: "Minutes",
+					type: "01",
 					target: 150,
 					value: 245,
 					units: 16,
@@ -23,7 +23,7 @@ var KPI_JSON = {
                 },
                 {
                     title: "Job Wait",
-                    type: "Minutes",
+                    type: "01",
                     target: 120,
                     value: 185,
 		            units: 12,
@@ -32,7 +32,7 @@ var KPI_JSON = {
                 },
                 {
                     title: "Yard Time",
-                    type: "Minutes",
+                    type: "01",
                     target: 180,
                     value: 240,
 		            units: 20,
@@ -41,7 +41,7 @@ var KPI_JSON = {
                 },
                  {
                      title: "EOD Yard",
-                     type: "Minutes",
+                     type: "01",
                      target: 210,
                      value: 355,
 		             units: 25,
@@ -50,7 +50,7 @@ var KPI_JSON = {
                  },
                   {
                       title: "Total Compliance",
-                      type: "Percentage",
+                      type: "02",
                       target: 54.0,
                       value: 51.0,
 		              units: 85,
@@ -64,7 +64,7 @@ var KPI_JSON = {
             KPIs: [
                 {
                     title: "Locked Loads",
-                    type: "Percentage",
+                    type: "02",
                     target: 3.0,
                     value: 7.0,
 		            units: 12,
@@ -73,7 +73,7 @@ var KPI_JSON = {
                 },
                 {
                     title: "Startup",
-                    type: "Minutes",
+                    type: "01",
                     target: 320,
                     value: 470,
 		            units: 29,
@@ -82,7 +82,7 @@ var KPI_JSON = {
                 },
                 {
                     title: "Load & Mix",
-                    type: "Minutes",
+                    type: "01",
                     target: 252,
                     value: 350,
 		            units: 19,
@@ -91,7 +91,7 @@ var KPI_JSON = {
                 },
                 {
                     title: "Wash Out",
-                    type: "Minutes",
+                    type: "01",
                     target: 240,
                     value: 390,
 		            units: 33,
@@ -100,7 +100,7 @@ var KPI_JSON = {
                 },
                 {
                     title: "Status Box Updates",
-                    type: "Percentage",
+                    type: "02",
                     target: 57.0,
                     value: 56.0,
 		            units: 93,

@@ -1,18 +1,34 @@
-var KPI_JSON = {
+﻿var KPI_JSON = {
     userName: "Jane Doe",
     roleName: "Plant Manager",
-    activeLocation: "5",
+    activeLocation: "South",
     locations: [
-        3,
-        5,
-        6
+        "Elk Lake",
+        "South",
+        "1",
+        "2",
+        "3",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19"
     ],
-	workspaces: [
+    workspaces: [
 		{
-			id: 1,
-			KPIs: [
+		    id: 1,
+		    KPIs: [
                 {
-                    title: "Yard Time",
+                    title: "YARD TIME",
                     type: "01",
                     target: 210,
                     value: 350,
@@ -20,17 +36,8 @@ var KPI_JSON = {
                     firstWarn: 280,
                     secondWarn: 350
                 },
-                 {
-                     title: "EOD Yard",
-                     type: "01",
-                     target: 360,
-                     value: 350,
-                     units: 18,
-                     firstWarn: 450,
-                     secondWarn: 540
-                 },
             ]
-},
+		},
         {
             id: 2,
             KPIs: [
@@ -61,6 +68,24 @@ var KPI_JSON = {
                     firstWarn: 420,
                     secondWarn: 560
                 },
+                 {
+                     title: "KPI4",
+                     type: "04",
+                     target: 225,
+                     value: 180,
+                     units: 25,
+                     firstWarn: 240,
+                     secondWarn: 275
+                 },
+                  {
+                      title: "KPI5",
+                      type: "02",
+                      target: 225,
+                      value: 130,
+                      units: 250,
+                      firstWarn: 250,
+                      secondWarn: 275
+                  }
             ]
         }
     ]

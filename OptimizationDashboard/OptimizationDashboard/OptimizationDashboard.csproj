@@ -58,6 +58,29 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MockData\demo-json-0-2.js" />
+    <Content Include="MockData\demo-json-1-2.js" />
+    <Content Include="MockData\demo-json-1-5.js" />
+    <Content Include="MockData\demo-json-1-5_6.js" />
+    <Content Include="MockData\demo-json-1-6.js" />
+    <Content Include="MockData\demo-json-2-3_5.js" />
+    <Content Include="MockData\demo-json-2-4.js" />
+    <Content Include="MockData\demo-json-3-0.js" />
+    <Content Include="MockData\demo-json-3-2-KPI1.js" />
+    <Content Include="MockData\demo-json-3-2-KPI2.js" />
+    <Content Include="MockData\demo-json-3-2-KPI3.js" />
+    <Content Include="MockData\demo-json-3-2-KPI5.js" />
+    <Content Include="MockData\demo-json-3-2.js" />
+    <Content Include="MockData\demo-json-4-1.js" />
+    <Content Include="MockData\demo-json-4-4_all.js" />
+    <Content Include="MockData\demo-json-4-5.js" />
+    <Content Include="MockData\demo-json-5-3.js" />
+    <Content Include="MockData\demo-json-5-4.js" />
+    <Content Include="MockData\demo-json-5-5.js" />
+    <Content Include="MockData\demo-json-5-5_3.js" />
+    <Content Include="MockData\demo-json-5-5_all.js" />
+    <Content Include="MockData\demo-json-6-2.js" />
+    <Content Include="MockData\demo-json-6-2_6.js" />
     <Content Include="Styles\KPIStyle.css" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Dashboard.htm" />
@@ -65,17 +88,12 @@
     <Content Include="layout_1_5.htm" />
     <Content Include="Layout_2_3.htm" />
     <Content Include="Layout_4_2.htm" />
-    <Content Include="MockData\demo-json-2-3_5.js" />
-    <Content Include="MockData\demo-json-5-5_3.js" />
-    <Content Include="MockData\demo-json-5-5_all.js" />
     <Content Include="MockData\demo-json-6-5.js" />
     <Content Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
     <Content Include="Scripts\Dashboard.js" />
     <Content Include="Scripts\data-service.js" />
-    <Content Include="MockData\demo-json-3-2.js" />
-    <Content Include="MockData\demo-json-5-5.js" />
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
@@ -101,9 +119,15 @@
     <Content Include="Tests\dashboard-tests.js" />
     <Content Include="Tests\JSTests.htm" />
     <Content Include="Tests\JSTests.js" />
+    <Content Include="Tests\PlantMenu.htm" />
+    <Content Include="Tests\PlantMenu.js" />
     <Content Include="Tests\Scripts\funcunit.js" />
     <Content Include="Tests\Scripts\qunit.js" />
     <Content Include="Tests\Styles\qunit.css" />
+    <Content Include="Tests\WarningCodes.htm" />
+    <Content Include="Tests\WarningCodes.js" />
+    <Content Include="Tests\WidgetsTest.htm" />
+    <Content Include="Tests\WidgetsTest.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -151,8 +175,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49331</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>54661</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -1,46 +1,39 @@
 var KPI_JSON = {
-    userName: "John Doe",
-    roleName: "Shipper",
+    userName: "Rumplestiltskin Hamiloffinkator",
+    roleName: "Icon Of Some Childrens Stories",
     activeLocation: "All",
     locations: [
-        3,
-        5,
-        6,
-        7
+        "1",
+        "2",
+        "3",
+        "5",
+        "6",
+        "7"
     ],
 	workspaces: [
 		{
 			id: 1,
 			KPIs: [
-				{
-					title: "First Load",
-					type: "01",
-					target: 370,
-					value: 885,
-					units: 36,
-					firstWarn: 740,
-					secondWarn: 1110
-                },
                 {
-                    title: "Job Wait",
+                    title: "JOB WAIT",
                     type: "01",
                     target: 416,
                     value: 835,
-		            units: 23.19,
+                    units: 40,
                     firstWarn: 624,
                     secondWarn: 832
                 },
                 {
-                    title: "Yard Time",
-                    type: "01",
-                    target: 600,
-                    value: 860,
-		            units: 21.5,
-                    firstWarn: 800,
-                    secondWarn: 1000
+					title: "FIRST LOAD",
+					type: "01",
+					target: 416,
+					value: 885,
+					units: 40,
+					firstWarn: 624,
+					secondWarn: 832
                 },
-                 {
-                     title: "EOD Yard",
+                {
+                     title: "EOD YARD",
                      type: "01",
                      target: 864,
                      value: 1125,
@@ -48,22 +41,22 @@ var KPI_JSON = {
                      firstWarn: 1146,
                      secondWarn: 1428
                  },
-                  {
-                      title: "Total Compliance",
-                      type: "02",
-                      target: 207,
-                      value: 181,
-		              units: 90,
-                      firstWarn: 195.5,
-                      secondWarn: 184.0
-                  }
+                 {
+                    title: "YARD TIME",
+                    type: "01",
+                    target: 600,
+                    value: 860,
+		            units: 21.5,
+                    firstWarn: 800,
+                    secondWarn: 1000
+                }
             ]
         },
         {
             id: 2,
             KPIs: [
                 {
-                    title: "Locked Loads",
+                    title: "LOCKED LOADS",
                     type: "02",
                     target: 11.4,
                     value: 22.0,
@@ -72,7 +65,7 @@ var KPI_JSON = {
                     secondWarn: 34.2
                 },
                 {
-                    title: "Startup",
+                    title: "STARTUP",
                     type: "01",
                     target: 1660,
                     value: 2515,
@@ -81,7 +74,7 @@ var KPI_JSON = {
                     secondWarn: 3040
                 },
                 {
-                    title: "Load & Mix",
+                    title: "LOAD & MIX",
                     type: "01",
                     target: 1041,
                     value: 1330,
@@ -90,22 +83,13 @@ var KPI_JSON = {
                     secondWarn: 1625
                 },
                 {
-                    title: "Wash Out",
+                    title: "WASH OUT",
                     type: "01",
                     target: 860,
                     value: 1745,
 		            units: 41,
                     firstWarn: 1290,
                     secondWarn: 1720
-                },
-                {
-                    title: "Status Box Updates",
-                    type: "02",
-                    target: 218.5,
-                    value: 210.0,
-		            units: 91,
-                    firstWarn: 207.0,
-                    secondWarn: 195.5
                 }
             ]
         }

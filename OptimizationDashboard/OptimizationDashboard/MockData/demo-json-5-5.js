@@ -75,8 +75,8 @@
                     title: "KPI2",
                     type: "01",
                     target: 170,
-                    value: 100,
-                    units: 3,
+                    value: 160,
+                    units: 2,
                     firstWarn: 150,
                     secondWarn: 160
                 },

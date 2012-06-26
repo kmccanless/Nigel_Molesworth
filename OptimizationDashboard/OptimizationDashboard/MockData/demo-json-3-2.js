@@ -14,7 +14,7 @@
             KPIs: [
                 {
                     title: "KPI1",
-                    type: "Percentage",
+                    type: "02",
                     target: 80,
                     value: 170,
                     units: 15,
@@ -23,7 +23,7 @@
                 },
                 {
                     title: "KPI2",
-                    type: "Minutes",
+                    type: "01",
                     target: 150,
                     value: 245,
                     units: 15,
@@ -32,7 +32,7 @@
                 },
                 {
                     title: "KPI3",
-                    type: "Amount",
+                    type: "03",
                     target: 225,
                     value: 120,
                     units: 25,
@@ -46,7 +46,7 @@
             KPIs: [
                 {
                     title: "KPI4",
-                    type: "Quantity",
+                    type: "04",
                     target: 200,
                     value: 180,
                     units: 20,
@@ -55,7 +55,7 @@
                 },
                 {
                     title: "KPI5",
-                    type: "division",
+                    type: "03",
                     target: 170,
                     value: 105,
                     units: 30,
@@ -66,6 +66,4 @@
         }
     ]
  }
-    
-
-﻿
+   
