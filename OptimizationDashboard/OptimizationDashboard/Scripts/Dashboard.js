@@ -1,4 +1,29 @@
-﻿//******
+﻿//*****
+// Build locations string when 'All' is selected
+//
+//*****
+var formatLocationString = function(data){
+    //set the first one
+	var strDisplay = data.locations[0];
+
+	for (var q = 1; q < data.locations.length; q++) {
+
+	    if (data.locations[q] != 'All') {
+	        if ((strDisplay.length + data.locations[q].length + 2) < 15) {
+	            //append each location as long as addition doesn't max the length
+	            strDisplay = strDisplay + ', ' + data.locations[q];
+	        }
+	        else {
+	            //Cap it off.  string is too long
+	            strDisplay = strDisplay + '...';
+	            break;
+	        }
+	    }
+	}
+    return strDisplay;
+};
+
+//******
 // Overal format of the widget.  Calls appropriate format method based on type
 // Sets the values for the report value and the target value to be displayed in the widget
 //******

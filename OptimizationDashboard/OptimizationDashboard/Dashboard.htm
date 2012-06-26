@@ -46,25 +46,8 @@
 
 	        //Build a string for the display tag to show active locations
 	        if (data.activeLocation === 'All') {
-
-	            //set the first one
-	            var strDisplay = data.locations[0];
-
-	            for (var q = 1; q < data.locations.length; q++) {
-
-	                if (data.locations[q] != 'All') {
-	                    if ((strDisplay.length + data.locations[q].length + 2) < 15) {
-	                        //append each location as long as addition doesn't max the length
-	                        strDisplay = strDisplay + ', ' + data.locations[q];
-	                    }
-	                    else {
-	                        //Cap it off.  string is too long
-	                        strDisplay = strDisplay + '...';
-	                        break;
-	                    }
-	                }
-	            }
-	            vm.activeLocDisplay(strDisplay)
+                //Build a string to show which plants are included in 'All'
+	            vm.activeLocDisplay(formatLocationString(data));
 	        }
 	        else {
 	            //only one location is actively selected.  Set the display value
