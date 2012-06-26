@@ -36,6 +36,11 @@ namespace CAI.COMMANDoptimize.KPI.Models
             get { return _user.ActiveLocation; }
         }
 
+        public string pollTime
+        {
+            get { return _user.PollTime; }
+        }
+
         public string[] locations
         {
             get { return _user.Locations; }

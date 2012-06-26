@@ -20,6 +20,8 @@
 	    var timer;
 	    var activeDataService;
 	    var params = $.deparam.querystring();
+        //set default for 5 min
+	    var pollTime = 300000;
 
 	    var viewModel = function () {
 	        var self = this;
@@ -93,13 +95,14 @@
 	        vm.locations(data.locations);
 	        vm.activeLocation(data.activeLocation);
 	        vm.workspaces(data.workspaces);
+
+	        pollTime = data.pollTime;
 	        refreshTimer();
 
 	    }
 
 	    var refreshTimer = function () {
-            //Set for 5 min or 300 seconds
-	        timer = setTimeout('refreshData()', 300000);
+	        timer = setTimeout('refreshData()', pollTime);
 	    }
 
 	    var refreshData = function () {

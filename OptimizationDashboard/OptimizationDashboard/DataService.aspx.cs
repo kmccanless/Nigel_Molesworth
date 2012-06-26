@@ -16,6 +16,15 @@ namespace OptimizationDashboard
         {
             string username = Request["userName"];
             string location = Request["location"];
+            string pollTime = Request["pollTime"];
+
+            //Set a default poll time
+            if (string.IsNullOrEmpty(pollTime))
+            {
+                //None supplied; default to 5 minutes
+                pollTime = "300000";
+            }
+
             if (!string.IsNullOrEmpty(username))
             {
 
@@ -23,7 +32,7 @@ namespace OptimizationDashboard
                 IRepositoryFactory f = new RepositoryFactory(c);
                 IKPIDataService ds = new KPIDataService(f);
 
-                string json = ds.GetKPI(username, location);
+                string json = ds.GetKPI(username, location, pollTime);
 
                 //Response.ContentType = "text/json";
                 Response.Write(json);
