@@ -14,35 +14,48 @@ namespace OptimizationDashboard
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string username = Request["userName"];
-            string location = Request["location"];
-            string pollTime = Request["pollTime"];
-
-            //Set a default poll time
-            if (string.IsNullOrEmpty(pollTime))
+            try
             {
-                //None supplied; default to 5 minutes
-                pollTime = "300000";
-            }
+                string username = Request["userName"];
+                string location = Request["location"];
+                string pollTime = Request["pollTime"];
 
-            if (!string.IsNullOrEmpty(username))
+                //Set a default poll time
+                if (string.IsNullOrEmpty(pollTime))
+                {
+                    //None supplied; default to 5 minutes
+                    pollTime = "300000";
+                }
+
+                if (string.IsNullOrEmpty(location))
+                {
+                    location = "All";
+                }
+
+                if (!string.IsNullOrEmpty(username))
+                {
+
+                    IRepositoryConfiguration c = new RepositoryConfiguration();
+                    IRepositoryFactory f = new RepositoryFactory(c);
+                    IKPIDataService ds = new KPIDataService(f);
+
+                    string json = ds.GetKPI(username, location, pollTime);
+
+                    //Response.ContentType = "text/json";
+                    Response.Write(json);
+                }
+                else
+                {
+                    Response.StatusCode = 400;
+                    Response.Write("Invalid username specified");
+                }
+
+            }
+            catch (Exception ex)
             {
-
-                IRepositoryConfiguration c = new RepositoryConfiguration();
-                IRepositoryFactory f = new RepositoryFactory(c);
-                IKPIDataService ds = new KPIDataService(f);
-
-                string json = ds.GetKPI(username, location, pollTime);
-
-                //Response.ContentType = "text/json";
-                Response.Write(json);
+                Response.StatusCode = 500;
+                Response.Write("{error: " + ex.Message + "}");
             }
-            else
-            {
-                Response.StatusCode = 400;   
-                Response.Write("Invalid username specified");
-            }
-
         }
     }
 }

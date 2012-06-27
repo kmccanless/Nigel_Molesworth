@@ -24,13 +24,20 @@ namespace CAI.COMMANDoptimize.KPI.Dataservice
             IKPIRepository r = _rf.GetRepository();
 
             User user = r.GetUser(username);
-            user.ActiveLocation = location;
-            user.PollTime = pollTime;
-            Workspace[] workspaces = r.GetKPIs(user.Role, location, user.Locations);
+            if (user != null)
+            {
+                user.ActiveLocation = location;
+                user.PollTime = pollTime;
+                Workspace[] workspaces = r.GetKPIs(user.Role, location, user.Locations);
 
-            string json = JsonConverter.ToJSON<KPIDATA_JSON>(new KPIDATA_JSON(user, workspaces));
+                string json = JsonConverter.ToJSON<KPIDATA_JSON>(new KPIDATA_JSON(user, workspaces));
 
-            return json;
+                return json;
+            }
+            else
+            {
+                return "{error: No user found for " + username + "}";
+            }
         }
 
         #endregion

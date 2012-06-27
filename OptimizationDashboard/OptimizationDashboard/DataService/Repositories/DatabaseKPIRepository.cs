@@ -426,9 +426,9 @@ where
 							{
 								string[] tparts = timers[i].Split('-');
                                 if (tparts.Length > 0)
-                                    starttime = DateTime.Parse(tparts[0]);
+                                    starttime = DateTime.Parse(DateTime.Today.ToShortDateString() + " " + tparts[0]);
                                 if (tparts.Length > 1)
-                                    endtime = DateTime.Parse(tparts[1]);
+                                    endtime = DateTime.Parse(DateTime.Today.ToShortDateString() + " " + tparts[1]);
 							}
 
                             role.KPIs[i] = new KPIDisplay
