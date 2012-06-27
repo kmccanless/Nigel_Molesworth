@@ -21,7 +21,7 @@
 	    var activeDataService;
 	    var params = $.deparam.querystring();
         //set default for 5 min
-	    var pollTime;
+	    var pollTime = params.pollTime;
 
 	    var viewModel = function () {
 	        var self = this;
@@ -79,7 +79,6 @@
 	        vm.activeLocation(data.activeLocation);
 	        vm.workspaces(data.workspaces);
 
-	        pollTime = data.pollTime;
 	        refreshTimer();
 
 	    }
