@@ -85,9 +85,9 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Dashboard.htm" />
     <Content Include="Images\downArrow.jpg" />
-    <Content Include="layout_1_5.htm" />
-    <Content Include="Layout_2_3.htm" />
-    <Content Include="Layout_4_2.htm" />
+    <Content Include="Deprecated Examples\layout_1_5.htm" />
+    <Content Include="Deprecated Examples\Layout_2_3.htm" />
+    <Content Include="Deprecated Examples\Layout_4_2.htm" />
     <Content Include="MockData\demo-json-6-5.js" />
     <Content Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
@@ -103,8 +103,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
-    <Content Include="Square_Layout_4_2.htm" />
-    <Content Include="Styles\Site.css" />
+    <Content Include="Deprecated Examples\Square_Layout_4_2.htm" />
     <Content Include="DataService.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Tests\2-3-5-dashboard-tests.htm" />
