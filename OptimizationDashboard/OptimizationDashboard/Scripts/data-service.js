@@ -12,7 +12,7 @@
 	},
 	defineDataService: function () {
 		amplify.request.define("DataService", "ajax", {
-			url: "/DataService.aspx?userName={userName}&location={location}",
+			url: "/DataService.aspx?userName={userName}&location={location}&pollTime={pollTime}",
 			type: "GET"
 		})
 	},

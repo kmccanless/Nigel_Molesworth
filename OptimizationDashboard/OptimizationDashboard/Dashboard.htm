@@ -21,7 +21,7 @@
 	    var activeDataService;
 	    var params = $.deparam.querystring();
         //set default for 5 min
-	    var pollTime = 300000;
+	    var pollTime;
 
 	    var viewModel = function () {
 	        var self = this;
@@ -109,7 +109,12 @@
 	    }
 	    else {
 	        dataService.defineDataService();
-	        params.location = "All";
+	        if (typeof params.location === "undefined") {
+	            params.location = "All";
+	        }
+	        if (typeof params.pollTime === "undefined") {
+	            params.pollTime = "300000";
+            }
 	        dataService.setValues(params);
 	        activeDataService = function () {
 	            dataService.callDataService.call(this, bindModel);
