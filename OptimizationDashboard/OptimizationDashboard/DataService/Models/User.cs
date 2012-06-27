@@ -10,7 +10,6 @@ namespace CAI.COMMANDoptimize.KPI.Models
         public string Username { get; set; }
         public string Role { get; set; }
         public string ActiveLocation { get; set; }
-        public string PollTime { get; set; }
         public string[] Locations { get; set; }
         //public Workspace[] Workspaces { get; set; }
     }
