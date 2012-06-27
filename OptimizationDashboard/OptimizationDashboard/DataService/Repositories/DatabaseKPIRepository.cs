@@ -27,6 +27,9 @@ namespace CAI.COMMANDoptimize.KPI.Repositories
 
         public Workspace[] GetKPIs(string rolename, string location, string[] locations)
         {
+            if (string.IsNullOrEmpty(rolename))
+                throw new Exception("No role assigned for user");
+
 			Workspace A = new Workspace {
 	                Code = "A",
 	                Description = "Operational KPIs"
