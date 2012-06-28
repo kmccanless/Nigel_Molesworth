@@ -35,7 +35,7 @@ namespace CAI.COMMANDoptimize.KPI.Dataservice
             }
             else
             {
-                return "{error: No user found for " + username + "}";
+                return "{\"error\": \"No user found for " + username + "\"}";
             }
         }
 

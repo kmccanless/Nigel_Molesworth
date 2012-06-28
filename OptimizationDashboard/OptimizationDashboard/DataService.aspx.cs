@@ -41,12 +41,11 @@ namespace OptimizationDashboard
                     Response.StatusCode = 400;
                     Response.Write("Invalid username specified");
                 }
-
-                }
+            }
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                Response.Write("{error: " + ex.Message + "}");
+                Response.Write("{\"error\": \"" + ex.Message + "\"}");
             }
         }
     }
