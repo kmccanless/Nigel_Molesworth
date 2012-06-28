@@ -416,18 +416,19 @@ where
                     if (!string.IsNullOrEmpty(kpis_packed))
                     {						
                         string[] kpis = kpis_packed.Split(cDelimitter);
-                        string[] displays = displays_packed.Split(cDelimitter);
-                        string[] timers = timers_packed.Split(cDelimitter);
+                        string[] displays = !string.IsNullOrEmpty(displays_packed) ? displays_packed.Split(cDelimitter) : new string[] {};
+                        string[] timers = !string.IsNullOrEmpty(timers_packed) ? timers_packed.Split(cDelimitter) : new string[] {};
 						
                         role.KPIs = new KPIDisplay[kpis.Length];
-						
-                        for (int i = 0; i<kpis.Length && i<displays.Length && i<timers.Length; i++)
+
+                        int t = 0;
+                        for (int i = 0; i<kpis.Length && i<displays.Length; i++)
 						{
 							DateTime? starttime = null;
 							DateTime? endtime = null;
-							if (!string.IsNullOrEmpty(timers[i]))
+                            if (t < timers.Length && !string.IsNullOrEmpty(timers[t]))
 							{
-								string[] tparts = timers[i].Split('-');
+								string[] tparts = timers[t++].Split('-');
                                 if (tparts.Length > 0)
                                     starttime = DateTime.Parse(DateTime.Today.ToShortDateString() + " " + tparts[0]);
                                 if (tparts.Length > 1)
