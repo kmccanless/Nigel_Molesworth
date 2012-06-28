@@ -20,7 +20,6 @@
 	    var timer;
 	    var activeDataService;
 	    var params = $.deparam.querystring();
-        //set default for 5 min
 	    var pollTime = params.pollTime;
 
 	    var viewModel = function () {
@@ -36,6 +35,7 @@
 	    var vm = new viewModel();
 
 	    var bindModel = function (dataIn) {
+
 	        //See what we are working with JSON from mock data or from the dataservice
 	        var data = (typeof dataIn == "string") ? JSON.parse(dataIn) : dataIn;
 
@@ -46,7 +46,7 @@
 
 	        //Build a string for the display tag to show active locations
 	        if (data.activeLocation === 'All') {
-                //Build a string to show which plants are included in 'All'
+	            //Build a string to show which plants are included in 'All'
 	            vm.activeLocDisplay(formatLocationString(data));
 	        }
 	        else {
@@ -73,6 +73,7 @@
 	                data.workspaces[i].KPIs[j]["Color"] = getWarnLevel(workspace.firstWarn, workspace.secondWarn, workspace.value);
 	            }
 	        }
+
 	        vm.userName(data.userName);
 	        vm.roleName(data.roleName);
 	        vm.locations(data.locations);
@@ -84,13 +85,14 @@
 	    }
 
 	    var refreshTimer = function () {
-	        timer = setTimeout('refreshData()', pollTime);
+	        timer = setTimeout(refreshData, pollTime);
+	      //  timer = setInterval('refreshData()', pollTime);
 	    }
 
 	    var refreshData = function () {
 	        activeDataService();
-	        refreshTimer()
 	    }
+
 	    if (params.debug === "true") {
 
 	        $.getScript("MockData/" + params.script + ".js")
@@ -111,9 +113,12 @@
 	        if (typeof params.location === "undefined") {
 	            params.location = "All";
 	        }
+
+	        //Set default
 	        if (typeof params.pollTime === "undefined") {
-	            params.pollTime = "300000";
-            }
+	            pollTime = "300000";
+	        }
+
 	        dataService.setValues(params);
 	        activeDataService = function () {
 	            dataService.callDataService.call(this, bindModel);
@@ -159,7 +164,7 @@
 	    });
    </script>
 </head>
-<body>
+<body id="body">
 
 <header class="header">
 <div class="logo"><div class="command">Command</div><div style="float:left">&nbsp;</div><div class="alkon">Alkon</div></div>
